@@ -1,16 +1,23 @@
 import React from 'react'
 import './styles.css'
+import { Inter, Merriweather } from 'next/font/google'
+
+const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
+const merriweather = Merriweather({
+  subsets: ['latin', 'cyrillic'],
+  variable: '--font-merriweather',
+})
 
 export const metadata = {
-  description: 'A blank template using Payload in a Next.js app.',
-  title: 'Payload Blank Template',
+  description: 'Сайт нутрициолога.',
+  title: 'Нутрициолог',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
 
   return (
-    <html lang="en">
+    <html lang="ru" className={`${inter.variable} ${merriweather.variable} antialiased`}>
       <body>
         <main>{children}</main>
       </body>
