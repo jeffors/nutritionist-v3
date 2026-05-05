@@ -40,6 +40,29 @@ export function Footer() {
             </div>
           </div>
         </div>
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-500 text-xs">© 2026 Лариса Галимова. Все права защищены.</p>
+          <div className="flex items-center gap-5">
+            <Link
+              href="/privacy"
+              className="text-gray-500 hover:text-gray-300 text-xs transition-colors"
+            >
+              Политика конфиденциальности
+            </Link>
+            <Link
+              href="/offer"
+              className="text-gray-500 hover:text-gray-300 text-xs transition-colors"
+            >
+              Публичная оферта
+            </Link>
+            <Link
+              href="/consent"
+              className="text-gray-500 hover:text-gray-300 text-xs transition-colors"
+            >
+              Согласие на обработку данных
+            </Link>
+          </div>
+        </div>
       </div>
     </footer>
   )
