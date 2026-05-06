@@ -5,7 +5,7 @@ import Link from 'next/link'
 export function Footer() {
   return (
     <footer className="bg-black text-white">
-      <div className="max-w7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           <div className="lg:col-span-1">
             <div className="flex items-center gap-2 mb-4">
@@ -21,7 +21,7 @@ export function Footer() {
               Помогаю людям улучшить здоровье и качество жизни через правильное питание и образ
               жизни.
             </p>
-            <div className="flex items-center gap-3">
+            {/* <div className="flex items-center gap-3">
               <Link
                 href="https://t.me/_"
                 target="_blank"
@@ -38,7 +38,7 @@ export function Footer() {
               >
                 <Phone className="w-4 h-4" />
               </Link>
-            </div>
+            </div> */}
           </div>
           <div>
             <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
@@ -153,24 +153,14 @@ export function Footer() {
             </ul>
 
             <div className="mt-5 flex gap-2">
-              <Button size="sm" className="bg-blue-500 hover:bg-blue-600">
-                <Link
-                  href="https://t.me/_"
-                  target="_blank"
-                  className="flex items-center gap-1.5 px-3 py-2 text-xs transition-colors"
-                  aria-label="Telegram"
-                >
+              <Button asChild size="sm" className="bg-blue-500 hover:bg-blue-600 text-xs">
+                <Link href="https://t.me/_" target="_blank" aria-label="Telegram">
                   <Send className="w-3.5 h-3.5" />
                   Telegram
                 </Link>
               </Button>
-              <Button size="sm" className="bg-green-500 hover:bg-green-600">
-                <Link
-                  href="https://wa.me/_"
-                  target="_blank"
-                  className="flex items-center gap-1.5 px-3 py-2 text-xs transition-colors"
-                  aria-label="WhatsApp"
-                >
+              <Button asChild size="sm" className="bg-green-500 hover:bg-green-600 text-xs">
+                <Link href="https://wa.me/_" target="_blank" aria-label="WhatsApp">
                   <Phone className="w-3.5 h-3.5" />
                   WhatsApp
                 </Link>
@@ -179,7 +169,9 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-500 text-xs">© 2026 Лариса Галимова. Все права защищены.</p>
+          <p className="text-gray-500 text-xs">
+            © {new Date().getFullYear()} Лариса Галимова. Все права защищены.
+          </p>
           <div className="flex items-center gap-5">
             <Link
               href="/privacy"
