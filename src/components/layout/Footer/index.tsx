@@ -21,24 +21,6 @@ export function Footer() {
               Помогаю людям улучшить здоровье и качество жизни через правильное питание и образ
               жизни.
             </p>
-            {/* <div className="flex items-center gap-3">
-              <Link
-                href="https://t.me/_"
-                target="_blank"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-gray-50/40 flex items-center justify-center transition-colors"
-                aria-label="Telegram"
-              >
-                <Send className="w-4 h-4" />
-              </Link>
-              <Link
-                href="https://wa.me/_"
-                target="_blank"
-                className="w-9 h-9 rounded-full bg-white/10 hover:bg-gray-50/40 flex items-center justify-center transition-colors"
-                aria-label="WhatsApp"
-              >
-                <Phone className="w-4 h-4" />
-              </Link>
-            </div> */}
           </div>
           <div>
             <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
@@ -154,13 +136,23 @@ export function Footer() {
 
             <div className="mt-5 flex gap-2">
               <Button asChild size="sm" className="bg-blue-500 hover:bg-blue-600 text-xs">
-                <Link href="https://t.me/_" target="_blank" aria-label="Telegram">
+                <Link
+                  href="https://t.me/_"
+                  target="_blank"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer"
+                >
                   <Send className="w-3.5 h-3.5" />
                   Telegram
                 </Link>
               </Button>
               <Button asChild size="sm" className="bg-green-500 hover:bg-green-600 text-xs">
-                <Link href="https://wa.me/_" target="_blank" aria-label="WhatsApp">
+                <Link
+                  href="https://wa.me/_"
+                  target="_blank"
+                  aria-label="WhatsApp"
+                  rel="noopener noreferrer"
+                >
                   <Phone className="w-3.5 h-3.5" />
                   WhatsApp
                 </Link>
