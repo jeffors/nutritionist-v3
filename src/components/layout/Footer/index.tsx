@@ -1,4 +1,5 @@
-import { Leaf, Send, Phone } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import { Leaf, Send, Phone, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
 
 export function Footer() {
@@ -37,6 +38,143 @@ export function Footer() {
               >
                 <Phone className="w-4 h-4" />
               </Link>
+            </div>
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
+              Навигация
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link href="/" className="text-gray-400 hover:text-white text-sm transition-colors">
+                  Главная
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Обо мне
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Услуги
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/shop"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Магазин
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/reviews"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Отзывы
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contacts"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Контакты
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
+              Услуги
+            </h3>
+            <ul className="space-y-2.5">
+              <li>
+                <Link
+                  href="/services/nutrition"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Консультация
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/coaching"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Разбор анализов
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/services/weight-loss"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Снижение веса
+                </Link>
+              </li>
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
+              Контакты
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href="tel:+79001234567"
+                  className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-gray-400 shrink-0" />
+                  +7 (900) 123-45-67
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="mailto:larisa.galimova@example.com"
+                  className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  <Mail className="w-4 h-4 text-gray-400 shrink-0" />
+                  larisa.galimova@example.com
+                </Link>
+              </li>
+              <li className="flex items-start gap-2.5 text-gray-400 text-sm">
+                <MapPin className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
+                Магнитогорск, онлайн по всему миру
+              </li>
+            </ul>
+
+            <div className="mt-5 flex gap-2">
+              <Button size="sm" className="bg-blue-500 hover:bg-blue-600">
+                <Link
+                  href="https://t.me/_"
+                  target="_blank"
+                  className="flex items-center gap-1.5 px-3 py-2 text-xs transition-colors"
+                  aria-label="Telegram"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  Telegram
+                </Link>
+              </Button>
+              <Button size="sm" className="bg-green-500 hover:bg-green-600">
+                <Link
+                  href="https://wa.me/_"
+                  target="_blank"
+                  className="flex items-center gap-1.5 px-3 py-2 text-xs transition-colors"
+                  aria-label="WhatsApp"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  WhatsApp
+                </Link>
+              </Button>
             </div>
           </div>
         </div>
