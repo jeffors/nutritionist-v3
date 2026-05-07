@@ -1,6 +1,7 @@
 'use client'
 import { Logo } from '@/components/sections/Logo'
 import { Button } from '@/components/ui/button'
+import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
@@ -52,8 +53,39 @@ export default function Header() {
               <Link href="/contacts">Записаться</Link>
             </Button>
           </div>
+
+          <Button
+            onClick={() => setIsOpen(!isOpen)}
+            variant="ghost"
+            size="icon"
+            className="lg:hidden"
+          >
+            {isOpen ? <X /> : <Menu />}
+          </Button>
         </div>
       </nav>
+
+      {isOpen && (
+        <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
+          <div className="px-4 py-4 space-y-1">
+            {navigation.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`block px-4 py-3 rounded-xl text-sm font-medium transition-colors ${pathname === item.href ? 'bg-green-100 text-green-500' : 'text-gray-700 hover:bg-gray-100'}`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <div className="pt-3 pb-1">
+              <Button variant="default" size="lg" className="w-full">
+                <Link href="/contacts">Записаться на консультацию</Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
