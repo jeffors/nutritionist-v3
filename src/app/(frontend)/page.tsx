@@ -13,18 +13,18 @@ export default async function HomePage() {
   const { user } = await payload.auth({ headers })
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <div className="flex min-h-screen flex-col items-center justify-between p-24">
       <h1 className="text-4xl font-bold font-heading">
         {!user && 'Сайт нутрициолога.'}
         {user && `Привет, ${user.email}`}
       </h1>
-      <div className="flex min-h-svh items-center justify-center w-150">
+      <div className="flex min-h-svh items-center justify-center">
         <Button className="font-bold w-full" size={'lg'}>
           <Link href={payloadConfig.routes.admin} target="_blank">
             Перейти в админ панель
           </Link>
         </Button>
       </div>
-    </main>
+    </div>
   )
 }
