@@ -2,6 +2,7 @@ import React from 'react'
 import './styles.css'
 import { Inter, Merriweather } from 'next/font/google'
 import { Footer } from '@/components/layout/Footer'
+import Header from '@/components/layout/Header'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
 const merriweather = Merriweather({
@@ -20,6 +21,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
   return (
     <html lang="ru" className={`${inter.variable} ${merriweather.variable} antialiased`}>
       <body>
+        <Header />
         <main>{children}</main>
         <Footer />
       </body>
