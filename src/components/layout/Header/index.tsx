@@ -26,6 +26,11 @@ export default function Header() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  useEffect(() => {
+    setIsOpen(false)
+    window.scrollTo(0, 0)
+  }, [pathname])
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-white/95 backdrop-blur-sm shadow-sm' : 'bg-white/80 backdrop-blur-sm'}`}
@@ -49,7 +54,7 @@ export default function Header() {
           </div>
 
           <div className="hidden lg:block">
-            <Button variant="default" size="lg">
+            <Button asChild variant="default" size="lg">
               <Link href="/contacts">Записаться</Link>
             </Button>
           </div>
@@ -79,8 +84,8 @@ export default function Header() {
               </Link>
             ))}
             <div className="pt-3 pb-1">
-              <Button variant="default" size="lg" className="w-full">
-                <Link href="/contacts">Записаться на консультацию</Link>
+              <Button asChild variant="default" size="lg" className="w-full">
+                <Link href="/contacts">Записаться</Link>
               </Button>
             </div>
           </div>
