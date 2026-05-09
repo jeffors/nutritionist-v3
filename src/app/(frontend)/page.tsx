@@ -7,7 +7,7 @@ import './styles.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import BackgroundImage from './../../../public/images/hero-bg.png'
-import { Leaf } from 'lucide-react'
+import { ArrowRight, ChevronDown, Leaf } from 'lucide-react'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -38,7 +38,37 @@ export default async function HomePage() {
               Помогаю улучшить самочувствие, нормализовать вес и восстановить здоровье через
               индивидуальный подход к питанию и образу жизни.
             </p>
+
+            <div className="flex items-center gap-6 mb-10">
+              <div>
+                <div className="font-heading text-2xl font-semibold text-black">500+</div>
+                <div className="text-xs text-black/70 uppercase tracking-wider">клиентов</div>
+              </div>
+              <div>
+                <div className="font-heading text-2xl font-semibold text-black">5 лет</div>
+                <div className="text-xs text-black/70 uppercase tracking-wider">практики</div>
+              </div>
+              <div>
+                <div className="font-heading text-2xl font-semibold text-black">97%</div>
+                <div className="text-xs text-black/70 uppercase tracking-wider">
+                  довольны результатом
+                </div>
+              </div>
+            </div>
+
+            <div className="flex flex-wrap gap-4">
+              <Button asChild variant="default" size="lg">
+                <Link href="#consultation">
+                  Записаться на консультацию
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+          <ChevronDown className="w-6 h-6 text-green-700" />
         </div>
       </section>
     </div>
