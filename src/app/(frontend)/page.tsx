@@ -7,7 +7,8 @@ import './styles.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import BackgroundImage from './../../../public/images/hero-bg.png'
-import { ArrowRight, ChevronDown, Leaf } from 'lucide-react'
+import Portrait from './../../../public/images/portrait.jpg'
+import { ArrowRight, Award, CheckCircle, ChevronDown, Leaf } from 'lucide-react'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -69,6 +70,64 @@ export default async function HomePage() {
 
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
           <ChevronDown className="w-6 h-6 text-green-700" />
+        </div>
+      </section>
+
+      <section className="bg-white p-5">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0">
+                <Image src={Portrait} alt="Портрет" className="w-full h-full object-cover" />
+                <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                      <Award className="w-5 h-5 text-green-500" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-sm text-black">Лариса Галимова</p>
+                      <p className="text-xs text-black/70">Сертифицированный нутрициолог</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <div className="w-60 h-1 bg-green-500 mb-4"></div>
+              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+                Обо мне
+              </h2>
+              <p className="text-black/80 leading-relaxed mb-4">
+                Меня зовут Лариса Галимова. Я — сертифицированный нутрициолог с 5-летним опытом
+                практики. Помогаю людям по всему миру улучшить здоровье через осознанное и
+                сбалансированное питание.
+              </p>
+              <p className="text-black/80 leading-relaxed mb-6">
+                Моя цель — помочь вам достичь оптимального здоровья и благополучия через правильное
+                питание и образ жизни.
+              </p>
+
+              <ul className="space-y-3 mb-8">
+                {[
+                  'Индивидуальный подход к каждому клиенту',
+                  'Научно обоснованные рекомендации',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-green-500 shrink-0 mt-0.5" />
+                    <p className="text-sm text-black/80">{item}</p>
+                  </li>
+                ))}
+              </ul>
+
+              <Button asChild variant="outline" size="lg">
+                <Link href="/about">
+                  Подробнее обо мне
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
         </div>
       </section>
     </div>
