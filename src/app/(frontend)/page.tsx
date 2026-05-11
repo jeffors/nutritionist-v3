@@ -9,6 +9,14 @@ import Image from 'next/image'
 import BackgroundImage from './../../../public/images/hero-bg.png'
 import Portrait from './../../../public/images/portrait.jpg'
 import { ArrowRight, Award, CheckCircle, ChevronDown, Leaf } from 'lucide-react'
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '@/components/ui/card'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -73,7 +81,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white p-5">
+      <section className="bg-white py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
@@ -127,6 +135,36 @@ export default async function HomePage() {
                 </Link>
               </Button>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="p-5 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">Услуги</h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              Индивидуальный подход к каждому клиенту. Работаю онлайн со всем миром/
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <Card>
+              <CardHeader>
+                <CardTitle>Индивидуальная консультация</CardTitle>
+                <CardDescription>
+                  Разбор текущего питания, составление рекомендаций и плана питания под ваши цели
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex justify-between">
+                <p>от 3500 ₽</p>
+                <p>60 минут</p>
+              </CardContent>
+              <CardFooter>
+                <Button className="w-full">Записаться</Button>
+              </CardFooter>
+            </Card>
           </div>
         </div>
       </section>
