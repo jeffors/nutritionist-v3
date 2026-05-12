@@ -17,6 +17,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -145,7 +146,7 @@ export default async function HomePage() {
             <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
             <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">Услуги</h2>
             <p className="text-black/80 max-w-xl mx-auto">
-              Индивидуальный подход к каждому клиенту. Работаю онлайн со всем миром/
+              Индивидуальный подход к каждому клиенту. Работаю онлайн со всем миром.
             </p>
           </div>
 
@@ -158,13 +159,61 @@ export default async function HomePage() {
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex justify-between">
-                <p>от 3500 ₽</p>
-                <p>60 минут</p>
+                <p className="text-lg font-bold">от 3500 ₽</p>
+                <Badge variant="secondary">65 мин</Badge>
               </CardContent>
               <CardFooter>
-                <Button className="w-full">Записаться</Button>
+                <Button variant="outline" className="w-full">
+                  Записаться
+                </Button>
               </CardFooter>
             </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle>Сопровождение</CardTitle>
+                <CardDescription>
+                  Персональная работа 1–3 месяца: контроль, корректировка плана, поддержка в чате
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex justify-between">
+                <p className="text-lg font-bold">от 18 000 ₽</p>
+                <Badge variant="secondary">1–3 месяца</Badge>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  Записаться
+                </Button>
+              </CardFooter>
+            </Card>
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex justify-between">
+                  <p>Разбор анализов</p>
+                  <Badge className="font-sans">Популярно</Badge>
+                </CardTitle>
+                <CardDescription>
+                  Анализ результатов лабораторных исследований, выявление дефицитов и нарушений
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="flex justify-between">
+                <p className="text-lg font-bold">от 4 000 ₽</p>
+                <Badge variant="secondary">75 мин</Badge>
+              </CardContent>
+              <CardFooter>
+                <Button variant="outline" className="w-full">
+                  Записаться
+                </Button>
+              </CardFooter>
+            </Card>
+          </div>
+
+          <div className="text-center mt-8">
+            <Button asChild variant="default" size="lg">
+              <Link href="/services">
+                Все услуги
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
           </div>
         </div>
       </section>
