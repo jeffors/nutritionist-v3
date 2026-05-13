@@ -278,6 +278,67 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      <section className="bg-gray-50 py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              Как проходит работа
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              Простой и понятный процесс на пути к вашему здоровью
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card>
+              <CardHeader>
+                <div className="font-heading text-4xl md:text-5xl text-gray-200 font-light mb-4">
+                  01
+                </div>
+                <CardTitle>Оставляете заявку</CardTitle>
+                <CardDescription>
+                  Заполняете форму или пишете в мессенджер. Я отвечаю в течение 2 часов.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className="font-heading text-4xl md:text-5xl text-gray-200 font-light mb-4">
+                  02
+                </div>
+                <CardTitle>Первичная консультация</CardTitle>
+                <CardDescription>
+                  Разбираем ваш запрос, анализы, образ жизни и формулируем цели.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className="font-heading text-4xl md:text-5xl text-gray-200 font-light mb-4">
+                  03
+                </div>
+                <CardTitle>Получаете план</CardTitle>
+                <CardDescription>
+                  Индивидуальный план питания, рекомендации по нутриентам и образу жизни.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className="font-heading text-4xl md:text-5xl text-gray-200 font-light mb-4">
+                  04
+                </div>
+                <CardTitle>Результат</CardTitle>
+                <CardDescription>
+                  Наблюдаете изменения, получаете поддержку и корректировки на каждом этапе.
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
+        </div>
+      </section>
     </div>
   )
 }
