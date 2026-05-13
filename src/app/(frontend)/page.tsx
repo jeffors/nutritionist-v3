@@ -8,6 +8,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import BackgroundImage from './../../../public/images/hero-bg.png'
 import Portrait from './../../../public/images/portrait.jpg'
+import Guide from './../../../public/images/guide-cover-1.jpg'
 import {
   ArrowRight,
   Award,
@@ -17,6 +18,7 @@ import {
   Heart,
   Leaf,
   MessageCircle,
+  ShoppingBag,
 } from 'lucide-react'
 import {
   Card,
@@ -230,6 +232,47 @@ export default async function HomePage() {
               <Link href="/services">
                 Все услуги
                 <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              Гайды и лекции
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              Авторские цифровые продукты — скачайте и начните улучшать своё здоровье прямо сейчас.
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <Card className="relative">
+              <Image src={Guide} alt="Гайд по питанию" />
+              <Badge variant="secondary" className="absolute top-4 left-4">
+                Новинка
+              </Badge>
+              <CardHeader>
+                <CardTitle>Гайд по сбалансированному питанию</CardTitle>
+                <CardDescription>
+                  50 страниц практических рекомендаций, меню на неделю, списки продуктов.
+                </CardDescription>
+              </CardHeader>
+              <CardFooter className="flex justify-between">
+                <p className="text-lg font-bold">500 ₽</p>
+                <Button variant="default">Купить</Button>
+              </CardFooter>
+            </Card>
+          </div>
+
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/services">
+                <ShoppingBag className="w-4 h-4" />
+                Все продукты в магазине
               </Link>
             </Button>
           </div>
