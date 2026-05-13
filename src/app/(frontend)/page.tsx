@@ -8,7 +8,16 @@ import Link from 'next/link'
 import Image from 'next/image'
 import BackgroundImage from './../../../public/images/hero-bg.png'
 import Portrait from './../../../public/images/portrait.jpg'
-import { ArrowRight, Award, CheckCircle, ChevronDown, Leaf } from 'lucide-react'
+import {
+  ArrowRight,
+  Award,
+  BookOpen,
+  CheckCircle,
+  ChevronDown,
+  Heart,
+  Leaf,
+  MessageCircle,
+} from 'lucide-react'
 import {
   Card,
   CardContent,
@@ -153,6 +162,9 @@ export default async function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <Card>
               <CardHeader>
+                <div className="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mb-4">
+                  <MessageCircle className="w-6 h-6" />
+                </div>
                 <CardTitle>Индивидуальная консультация</CardTitle>
                 <CardDescription>
                   Разбор текущего питания, составление рекомендаций и плана питания под ваши цели
@@ -170,6 +182,9 @@ export default async function HomePage() {
             </Card>
             <Card>
               <CardHeader>
+                <div className="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mb-4">
+                  <Heart className="w-6 h-6" />
+                </div>
                 <CardTitle>Сопровождение</CardTitle>
                 <CardDescription>
                   Персональная работа 1–3 месяца: контроль, корректировка плана, поддержка в чате
@@ -187,6 +202,9 @@ export default async function HomePage() {
             </Card>
             <Card>
               <CardHeader>
+                <div className="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mb-4">
+                  <BookOpen className="w-6 h-6" />
+                </div>
                 <CardTitle className="flex justify-between">
                   <p>Разбор анализов</p>
                   <Badge className="font-sans">Популярно</Badge>
