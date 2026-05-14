@@ -19,6 +19,7 @@ import {
   Leaf,
   MessageCircle,
   ShoppingBag,
+  Star,
 } from 'lucide-react'
 import {
   Card,
@@ -151,7 +152,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="p-5 bg-gray-50">
+      <section className="py-15 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
@@ -336,6 +337,92 @@ export default async function HomePage() {
                 </CardDescription>
               </CardHeader>
             </Card>
+          </div>
+        </div>
+      </section>
+      <section className="bg-white py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              Отзывы клиентов
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              Более 500 довольных клиентов по всему миру
+            </p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Мария К.</CardTitle>
+                    <CardDescription>34 года</CardDescription>
+                  </div>
+                  <div className="flex gap-0.5">
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-black/80">
+                  "За 2 месяца работы с Анной я наконец-то разобралась со своим здоровьем. Ушло 6
+                  кг, нормализовался сон и уровень энергии. Очень рекомендую!"
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Badge variant={'secondary'}>Программа снижения веса</Badge>
+              </CardFooter>
+            </Card>
+            <Card>
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div>
+                    <CardTitle>Елена В.</CardTitle>
+                    <CardDescription>29 лет</CardDescription>
+                  </div>
+                  <div className="flex gap-0.5">
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-black/80">
+                  "Разбор анализов помог понять, откуда берётся постоянная усталость. Оказалось —
+                  дефицит железа и В12. Уже через месяц почувствовала себя намного лучше."
+                </p>
+              </CardContent>
+              <CardFooter>
+                <Badge variant={'secondary'}>Разбор анализов</Badge>
+              </CardFooter>
+            </Card>
+          </div>
+          <div className="text-center mt-8">
+            <Button asChild variant="outline" size="lg">
+              <Link href="/about">
+                Все отзывы
+                <ArrowRight className="w-4 h-4" />
+              </Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              Часто задаваемые вопросы
+            </h2>
           </div>
         </div>
       </section>
