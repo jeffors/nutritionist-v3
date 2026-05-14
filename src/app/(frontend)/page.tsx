@@ -30,6 +30,12 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -417,13 +423,36 @@ export default async function HomePage() {
       </section>
 
       <section className="bg-gray-50 py-15">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
             <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
               Часто задаваемые вопросы
             </h2>
           </div>
+          <Accordion type="multiple">
+            <AccordionItem value="item-1">
+              <AccordionTrigger>Как проходит консультация?</AccordionTrigger>
+              <AccordionContent>
+                Консультация проходит онлайн — через Zoom, WhatsApp или Telegram. После записи я
+                пришлю анкету для заполнения, чтобы подготовиться к встрече.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-2">
+              <AccordionTrigger>Нужно ли сдавать анализы перед консультацией?</AccordionTrigger>
+              <AccordionContent>
+                Не обязательно. Если у вас есть результаты анализов — отлично, мы их разберём. Если
+                нет — я помогу определить, какие анализы стоит сдать.
+              </AccordionContent>
+            </AccordionItem>
+            <AccordionItem value="item-3">
+              <AccordionTrigger>Сколько длится сопровождение?</AccordionTrigger>
+              <AccordionContent>
+                Минимальный срок — 1 месяц. Оптимально — 2–3 месяца. За это время успевают
+                проявиться устойчивые изменения и формируются новые привычки.
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </section>
     </div>
