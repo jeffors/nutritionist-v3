@@ -17,7 +17,10 @@ import {
   ChevronDown,
   Heart,
   Leaf,
+  Mail,
   MessageCircle,
+  Phone,
+  Send,
   ShoppingBag,
   Star,
 } from 'lucide-react'
@@ -36,6 +39,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion'
+import ConsultationForm from '@/components/forms/ConsultationForm'
 
 export default async function HomePage() {
   const headers = await getHeaders()
@@ -453,6 +457,75 @@ export default async function HomePage() {
               </AccordionContent>
             </AccordionItem>
           </Accordion>
+        </div>
+      </section>
+
+      <section id="consultation" className="bg-white py-15">
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              Записаться на консультацию
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              Оставьте заявку, и я свяжусь с вами в течение 2 часов
+            </p>
+          </div>
+          <ConsultationForm></ConsultationForm>
+        </div>
+      </section>
+
+      <section className="bg-gray-50 py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              Контакты
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">Выберите удобный способ связи</p>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+            <Card>
+              <CardHeader className="">
+                <div className="flex justify-center">
+                  <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-3">
+                    <Phone className="w-6 h-6 text-green-600" />
+                  </div>
+                </div>
+
+                <CardTitle className="flex font-sans justify-center">WhatsApp</CardTitle>
+                <CardDescription className="flex justify-center">
+                  +7 (900) 123-45-67
+                </CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader className="">
+                <div className="flex justify-center">
+                  <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-green-600 mb-3">
+                    <Send className="w-6 h-6 text-blue-600" />
+                  </div>
+                </div>
+
+                <CardTitle className="flex font-sans justify-center">Telegram</CardTitle>
+                <CardDescription className="flex justify-center">@samplename</CardDescription>
+              </CardHeader>
+            </Card>
+            <Card>
+              <CardHeader className="">
+                <div className="flex justify-center">
+                  <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-green-600 mb-3">
+                    <Mail className="w-6 h-6 text-gray-600" />
+                  </div>
+                </div>
+
+                <CardTitle className="flex font-sans justify-center">Mail</CardTitle>
+                <CardDescription className="flex justify-center">
+                  larisa.galimova@example.com
+                </CardDescription>
+              </CardHeader>
+            </Card>
+          </div>
         </div>
       </section>
     </div>
