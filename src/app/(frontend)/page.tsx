@@ -173,7 +173,7 @@ export default async function HomePage() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            <Card>
+            <Card className="justify-between">
               <CardHeader>
                 <div className="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mb-4">
                   <MessageCircle className="w-6 h-6" />
@@ -187,13 +187,13 @@ export default async function HomePage() {
                 <p className="text-lg font-bold">от 3500 ₽</p>
                 <Badge variant="secondary">65 мин</Badge>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="">
                 <Button variant="outline" className="w-full">
                   Записаться
                 </Button>
               </CardFooter>
             </Card>
-            <Card>
+            <Card className="justify-between">
               <CardHeader>
                 <div className="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mb-4">
                   <Heart className="w-6 h-6" />
@@ -203,17 +203,18 @@ export default async function HomePage() {
                   Персональная работа 1–3 месяца: контроль, корректировка плана, поддержка в чате
                 </CardDescription>
               </CardHeader>
-              <CardContent className="flex justify-between">
-                <p className="text-lg font-bold">от 18 000 ₽</p>
-                <Badge variant="secondary">1–3 месяца</Badge>
-              </CardContent>
-              <CardFooter>
+              <CardContent className="flex justify-between"></CardContent>
+              <CardFooter className="flex flex-col gap-5">
+                <div className="w-full flex justify-between">
+                  <p className="text-lg font-bold">от 18 000 ₽</p>
+                  <Badge variant="secondary">1–3 месяца</Badge>
+                </div>
                 <Button variant="outline" className="w-full">
                   Записаться
                 </Button>
               </CardFooter>
             </Card>
-            <Card>
+            <Card className="justify-between">
               <CardHeader>
                 <div className="w-12 h-12 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mb-4">
                   <BookOpen className="w-6 h-6" />
