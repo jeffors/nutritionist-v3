@@ -125,7 +125,12 @@
   body {
     @apply bg-background text-foreground;
     }
+  body[data-scroll-locked] {
+    margin-right: 0 !important;
+    overflow: visible !important;
+  }
   html {
     @apply font-sans;
+    scrollbar-gutter: stable;
     }
 }
