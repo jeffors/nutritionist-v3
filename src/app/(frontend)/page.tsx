@@ -183,11 +183,12 @@ export default async function HomePage() {
                   Разбор текущего питания, составление рекомендаций и плана питания под ваши цели
                 </CardDescription>
               </CardHeader>
-              <CardContent className="flex justify-between">
-                <p className="text-lg font-bold">от 3500 ₽</p>
-                <Badge variant="secondary">65 мин</Badge>
-              </CardContent>
-              <CardFooter className="">
+              <CardContent className="flex justify-between"></CardContent>
+              <CardFooter className="flex flex-col gap-5">
+                <div className="w-full flex justify-between">
+                  <p className="text-lg font-bold">от 3500 ₽</p>
+                  <Badge variant="secondary">65 мин</Badge>
+                </div>
                 <Button variant="outline" className="w-full">
                   Записаться
                 </Button>
@@ -203,7 +204,7 @@ export default async function HomePage() {
                   Персональная работа 1–3 месяца: контроль, корректировка плана, поддержка в чате
                 </CardDescription>
               </CardHeader>
-              <CardContent className="flex justify-between"></CardContent>
+
               <CardFooter className="flex flex-col gap-5">
                 <div className="w-full flex justify-between">
                   <p className="text-lg font-bold">от 18 000 ₽</p>
@@ -227,11 +228,12 @@ export default async function HomePage() {
                   Анализ результатов лабораторных исследований, выявление дефицитов и нарушений
                 </CardDescription>
               </CardHeader>
-              <CardContent className="flex justify-between">
-                <p className="text-lg font-bold">от 4 000 ₽</p>
-                <Badge variant="secondary">75 мин</Badge>
-              </CardContent>
-              <CardFooter>
+              <CardContent className="flex justify-between"></CardContent>
+              <CardFooter className="flex flex-col gap-5">
+                <div className="w-full flex justify-between">
+                  <p className="text-lg font-bold">от 4 000 ₽</p>
+                  <Badge variant="secondary">75 мин</Badge>
+                </div>
                 <Button variant="outline" className="w-full">
                   Записаться
                 </Button>
