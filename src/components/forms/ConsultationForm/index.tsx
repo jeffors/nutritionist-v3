@@ -18,8 +18,8 @@ import Link from 'next/link'
 
 export default function ConsultationForm() {
   return (
-    <Form action={''}>
-      <FieldGroup>
+    <Form action={''} className="space-y-4">
+      <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field>
           <FieldLabel htmlFor="input-name">Имя</FieldLabel>
           <Input id="input-name" type="text" placeholder="Ваше имя"></Input>
@@ -47,6 +47,8 @@ export default function ConsultationForm() {
             </SelectContent>
           </Select>
         </Field>
+      </FieldGroup>
+      <FieldGroup>
         <Field>
           <FieldLabel htmlFor="request-input">Краткий запрос</FieldLabel>
           <Textarea
