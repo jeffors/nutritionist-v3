@@ -8,8 +8,8 @@ const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' }
 const merriweather = Merriweather({
   subsets: ['latin', 'cyrillic'],
   variable: '--font-merriweather',
+  style: ['normal', 'italic'],
 })
-
 export const metadata = {
   description: 'Сайт нутрициолога.',
   title: 'Нутрициолог',
