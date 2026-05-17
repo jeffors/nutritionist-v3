@@ -89,7 +89,7 @@ export default async function HomePage() {
             </div>
 
             <div className="flex flex-wrap gap-4">
-              <Button asChild variant="default" size="lg">
+              <Button asChild variant="default" size="xl">
                 <Link href="#consultation">
                   Записаться на консультацию
                   <ArrowRight className="w-4 h-4" />
@@ -151,7 +151,7 @@ export default async function HomePage() {
                 ))}
               </ul>
 
-              <Button asChild variant="outline" size="lg">
+              <Button asChild variant="outline" size="xl">
                 <Link href="/about">
                   Подробнее обо мне
                   <ArrowRight className="w-4 h-4" />
@@ -242,7 +242,7 @@ export default async function HomePage() {
           </div>
 
           <div className="text-center mt-8">
-            <Button asChild variant="default" size="lg">
+            <Button asChild variant="default" size="xl">
               <Link href="/services">
                 Все услуги
                 <ArrowRight className="w-4 h-4" />
@@ -283,7 +283,7 @@ export default async function HomePage() {
           </div>
 
           <div className="text-center mt-8">
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="xl">
               <Link href="/services">
                 <ShoppingBag className="w-4 h-4" />
                 Все продукты в магазине
@@ -419,7 +419,7 @@ export default async function HomePage() {
             </Card>
           </div>
           <div className="text-center mt-8">
-            <Button asChild variant="outline" size="lg">
+            <Button asChild variant="outline" size="xl">
               <Link href="/about">
                 Все отзывы
                 <ArrowRight className="w-4 h-4" />

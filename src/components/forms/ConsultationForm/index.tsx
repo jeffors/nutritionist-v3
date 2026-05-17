@@ -72,7 +72,7 @@ export default function ConsultationForm() {
           </FieldLabel>
         </Field>
         <Field>
-          <Button type="submit">
+          <Button type="submit" size={'xl'}>
             <Send></Send>Записаться на консультацию
           </Button>
         </Field>
