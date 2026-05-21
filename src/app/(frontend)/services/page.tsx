@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { ArrowRight, BookOpen, CheckCircle, Heart, MessageCircle } from 'lucide-react'
+import { ArrowRight, BookOpen, CheckCircle, Heart, Leaf, MessageCircle } from 'lucide-react'
 import Link from 'next/link'
 
 export default async function Services() {
@@ -178,7 +178,7 @@ export default async function Services() {
               <CardHeader className="flex items-start gap-4 relative">
                 <Badge className="absolute top-2 right-6">Хит</Badge>
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-green-500/10 text-green-900">
-                  <MessageCircle className="w-8 h-8" />
+                  <Leaf className="w-8 h-8" />
                 </div>
                 <div className="">
                   <CardTitle className="text-2xl">Программа снижения веса</CardTitle>
