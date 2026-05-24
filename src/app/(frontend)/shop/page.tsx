@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Star } from 'lucide-react'
+import { ShoppingCart, Star } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import Guide from './../../../../public/images/guide-cover-1.jpg'
@@ -28,9 +28,9 @@ export default async function Shop() {
           </div>
         </div>
       </section>
-      <section className="bg-white sticky top-16 md:yop-20 z-30 border-b border-gray-100 shadow-sm">
+      <section className="bg-white sticky top-16 md:top-20 z-30 border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ButtonGroup className="py-4">
+          <ButtonGroup className="py-4 overflow-x-auto scrollbar-hide">
             <Button>Все</Button>
             <Button variant="outline">Гайды</Button>
             <Button variant="outline">Лекции</Button>
@@ -64,7 +64,10 @@ export default async function Shop() {
               <CardContent className="text-xs text-black/60">50 страниц · PDF</CardContent>
               <CardFooter className="flex justify-between">
                 <p className="text-lg font-bold">500 ₽</p>
-                <Button variant="default">Купить</Button>
+                <Button variant="default">
+                  <ShoppingCart className="w-4 h-4" />
+                  Купить
+                </Button>
               </CardFooter>
             </Card>
           </div>
