@@ -395,7 +395,7 @@ export default async function HomePage() {
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Елена В.</CardTitle>
+                    <CardTitle>Елена М.</CardTitle>
                     <CardDescription>29 лет</CardDescription>
                   </div>
                   <div className="flex gap-0.5">
