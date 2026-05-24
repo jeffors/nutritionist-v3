@@ -53,7 +53,7 @@ export default async function Reviews() {
                 <div className="flex items-center justify-between">
                   <div>
                     <CardTitle>Мария К.</CardTitle>
-                    <CardDescription>34 года</CardDescription>
+                    <CardDescription>34 года · Москва</CardDescription>
                   </div>
                   <div className="flex gap-0.5">
                     <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
@@ -70,16 +70,17 @@ export default async function Reviews() {
                   кг, нормализовался сон и уровень энергии. Очень рекомендую!"
                 </p>
               </CardContent>
-              <CardFooter>
+              <CardFooter className="justify-between">
                 <Badge variant={'secondary'}>Программа снижения веса</Badge>
+                <span className="text-xs text-black/80">Март 2026</span>
               </CardFooter>
             </Card>
             <Card className="justify-between">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div>
-                    <CardTitle>Елена В.</CardTitle>
-                    <CardDescription>29 лет</CardDescription>
+                    <CardTitle>Елена М.</CardTitle>
+                    <CardDescription>29 лет · Санкт-Петербург</CardDescription>
                   </div>
                   <div className="flex gap-0.5">
                     <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
@@ -96,8 +97,10 @@ export default async function Reviews() {
                   дефицит железа и В12. Уже через месяц почувствовала себя намного лучше."
                 </p>
               </CardContent>
-              <CardFooter>
+
+              <CardFooter className="justify-between">
                 <Badge variant={'secondary'}>Разбор анализов</Badge>
+                <span className="text-xs text-black/80">Февраль 2026</span>
               </CardFooter>
             </Card>
           </div>
