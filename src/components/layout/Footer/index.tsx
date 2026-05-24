@@ -48,7 +48,7 @@ export function Footer() {
                   href="/shop"
                   className="text-gray-400 hover:text-white text-sm transition-colors"
                 >
-                  Магазин
+                  Гайды и лекции
                 </Link>
               </li>
               <li>
