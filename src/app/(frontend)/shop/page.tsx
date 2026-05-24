@@ -13,6 +13,20 @@ import Link from 'next/link'
 import Image from 'next/image'
 import Guide from './../../../../public/images/guide-cover-1.jpg'
 import { ButtonGroup } from '@/components/ui/button-group'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import Form from 'next/form'
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Checkbox } from '@/components/ui/checkbox'
+import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
 
 export default async function Shop() {
   return (
@@ -64,10 +78,68 @@ export default async function Shop() {
               <CardContent className="text-xs text-black/60">50 страниц · PDF</CardContent>
               <CardFooter className="flex justify-between">
                 <p className="text-lg font-bold">500 ₽</p>
-                <Button variant="default">
-                  <ShoppingCart className="w-4 h-4" />
-                  Купить
-                </Button>
+                <Dialog>
+                  <DialogTrigger>
+                    <Button variant="default">
+                      <ShoppingCart className="w-4 h-4" />
+                      Купить
+                    </Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Оформить покупку</DialogTitle>
+                      <DialogDescription>Гайд по сбалансированному питанию</DialogDescription>
+                    </DialogHeader>
+                    <Item variant={'outline'}>
+                      <ItemContent>
+                        <ItemTitle className="text-sm font-medium">К оплате:</ItemTitle>
+                      </ItemContent>
+                      <ItemActions className="font-bold text-2xl">500 ₽</ItemActions>
+                    </Item>
+                    <Form action={''}>
+                      <FieldGroup>
+                        <Field>
+                          <FieldLabel htmlFor="input-name">Имя</FieldLabel>
+                          <Input id="input-name" type="text" placeholder="Ваше имя"></Input>
+                        </Field>
+                        <Field>
+                          <FieldLabel htmlFor="input-email">Email</FieldLabel>
+                          <Input id="input-email" type="email" placeholder="your@email.com"></Input>
+                        </Field>
+                        <Field orientation={'horizontal'}>
+                          <Checkbox id="terms-checkbox" name="terms-checkbox"></Checkbox>
+                          <FieldLabel htmlFor="terms-checkbox">
+                            <span>
+                              Я согласен(а) c{' '}
+                              <Link
+                                href="/offer"
+                                className="text-green-600 underline hover:no-underline"
+                              >
+                                Публичной офертой
+                              </Link>{' '}
+                              и даю{' '}
+                              <Link
+                                href="/privacy"
+                                className="text-green-600 underline hover:no-underline"
+                              >
+                                Политикой конфиденциальности
+                              </Link>
+                            </span>
+                          </FieldLabel>
+                        </Field>
+                      </FieldGroup>
+                    </Form>
+                    <p className="text-center text-xs text-black/60 mt-4">
+                      🔒 Безопасная оплата. После оплаты материал придёт на email.
+                    </p>
+                    <DialogFooter>
+                      <Button className="w-full" size={'xl'}>
+                        <ShoppingCart className="w-4 h-4" />
+                        Оплатить 500 ₽
+                      </Button>
+                    </DialogFooter>
+                  </DialogContent>
+                </Dialog>
               </CardFooter>
             </Card>
           </div>
