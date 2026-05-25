@@ -1,3 +1,5 @@
+'use client'
+
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -27,8 +29,10 @@ import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
+import { useState } from 'react'
 
-export default async function Shop() {
+export default function Shop() {
+  const [activeCategory, setActiveCategory] = useState('Все')
   return (
     <div className="pt-20">
       <section className="py-15 bg-gray-50">
@@ -45,11 +49,36 @@ export default async function Shop() {
       <section className="bg-white sticky top-16 md:top-20 z-30 border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <ButtonGroup className="py-4 overflow-x-auto scrollbar-hide">
-            <Button>Все</Button>
-            <Button variant="outline">Гайды</Button>
-            <Button variant="outline">Лекции</Button>
-            <Button variant="outline">Чек-листы</Button>
-            <Button variant="outline">Мини-курсы</Button>
+            <Button
+              variant={`${activeCategory === 'Все' ? 'default' : 'outline'}`}
+              onClick={() => setActiveCategory('Все')}
+            >
+              Все
+            </Button>
+            <Button
+              variant={`${activeCategory === 'Гайды' ? 'default' : 'outline'}`}
+              onClick={() => setActiveCategory('Гайды')}
+            >
+              Гайды
+            </Button>
+            <Button
+              variant={`${activeCategory === 'Лекции' ? 'default' : 'outline'}`}
+              onClick={() => setActiveCategory('Лекции')}
+            >
+              Лекции
+            </Button>
+            <Button
+              variant={`${activeCategory === 'Чек-листы' ? 'default' : 'outline'}`}
+              onClick={() => setActiveCategory('Чек-листы')}
+            >
+              Чек-листы
+            </Button>
+            <Button
+              variant={`${activeCategory === 'Мини-курсы' ? 'default' : 'outline'}`}
+              onClick={() => setActiveCategory('Мини-курсы')}
+            >
+              Мини-курсы
+            </Button>
           </ButtonGroup>
         </div>
       </section>
@@ -79,7 +108,7 @@ export default async function Shop() {
               <CardFooter className="flex justify-between">
                 <p className="text-lg font-bold">500 ₽</p>
                 <Dialog>
-                  <DialogTrigger>
+                  <DialogTrigger asChild>
                     <Button variant="default">
                       <ShoppingCart className="w-4 h-4" />
                       Купить
