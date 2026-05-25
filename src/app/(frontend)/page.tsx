@@ -264,6 +264,7 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className=""></div>
             <Card className="relative">
               <Image src={Guide} alt="Гайд по питанию" />
               <Badge variant="secondary" className="absolute top-4 left-4">
