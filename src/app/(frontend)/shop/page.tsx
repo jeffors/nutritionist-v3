@@ -68,12 +68,6 @@ export default function Shop() {
               Лекции
             </Button>
             <Button
-              variant={`${activeCategory === 'Чек-листы' ? 'default' : 'outline'}`}
-              onClick={() => setActiveCategory('Чек-листы')}
-            >
-              Чек-листы
-            </Button>
-            <Button
               variant={`${activeCategory === 'Мини-курсы' ? 'default' : 'outline'}`}
               onClick={() => setActiveCategory('Мини-курсы')}
             >
@@ -180,7 +174,7 @@ export default function Shop() {
           ) : (
             <div className="flex flex-col items-center gap-8">
               <PackageX className="w-24 h-24"></PackageX>
-              <p>Не найдено цифровых продуктов по выбранным фильтрам</p>
+              <p className="text-center">Не найдено цифровых продуктов по выбранным фильтрам</p>
             </div>
           )}
         </div>
