@@ -284,7 +284,7 @@ export default async function HomePage() {
 
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="xl">
-              <Link href="/services">
+              <Link href="/shop">
                 <ShoppingBag className="w-4 h-4" />
                 Все продукты в магазине
               </Link>
@@ -383,8 +383,8 @@ export default async function HomePage() {
               </CardHeader>
               <CardContent>
                 <p className="text-black/80">
-                  "За 2 месяца работы с Анной я наконец-то разобралась со своим здоровьем. Ушло 6
-                  кг, нормализовался сон и уровень энергии. Очень рекомендую!"
+                  "За 2 месяца работы я наконец-то разобралась со своим здоровьем. Ушло 6 кг,
+                  нормализовался сон и уровень энергии. Очень рекомендую!"
                 </p>
               </CardContent>
               <CardFooter>
@@ -420,7 +420,7 @@ export default async function HomePage() {
           </div>
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="xl">
-              <Link href="/about">
+              <Link href="/reviews">
                 Все отзывы
                 <ArrowRight className="w-4 h-4" />
               </Link>
@@ -441,8 +441,8 @@ export default async function HomePage() {
             <AccordionItem value="item-1">
               <AccordionTrigger>Как проходит консультация?</AccordionTrigger>
               <AccordionContent>
-                Консультация проходит онлайн — через Zoom, WhatsApp или Telegram. После записи я
-                пришлю анкету для заполнения, чтобы подготовиться к встрече.
+                Консультация проходит онлайн — через WhatsApp или Telegram. После записи я пришлю
+                анкету для заполнения, чтобы подготовиться к встрече.
               </AccordionContent>
             </AccordionItem>
             <AccordionItem value="item-2">

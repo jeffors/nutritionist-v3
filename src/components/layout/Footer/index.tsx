@@ -76,7 +76,7 @@ export function Footer() {
             <ul className="space-y-2.5">
               <li>
                 <Link
-                  href="/services/nutrition"
+                  href="/services/"
                   className="text-gray-400 hover:text-white text-sm transition-colors"
                 >
                   Консультация
@@ -84,7 +84,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/coaching"
+                  href="/services/"
                   className="text-gray-400 hover:text-white text-sm transition-colors"
                 >
                   Разбор анализов
@@ -92,7 +92,7 @@ export function Footer() {
               </li>
               <li>
                 <Link
-                  href="/services/weight-loss"
+                  href="/services/"
                   className="text-gray-400 hover:text-white text-sm transition-colors"
                 >
                   Снижение веса

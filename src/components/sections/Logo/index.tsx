@@ -3,7 +3,7 @@ import { Leaf } from 'lucide-react'
 export function Logo() {
   return (
     <>
-      <div className="w-8 h-8 rounded-full bg-gray-50/30 flex items-center justify-center">
+      <div className="w-8 h-8 rounded-full bg-green-300/30 flex items-center justify-center">
         <Leaf className="w-4 h-4" />
       </div>
       <div>
