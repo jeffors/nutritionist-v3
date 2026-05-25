@@ -79,7 +79,7 @@ export default async function Services() {
             </Card>
             <Card className="justify-between">
               <CardHeader className="flex items-start gap-4 relative">
-                <Badge className="absolute top-2 right-6">Популярно</Badge>
+                <Badge className="absolute top-2 right-6 hidden lg:block">Популярно</Badge>
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-yellow-500/10 text-yellow-900">
                   <BookOpen className="w-8 h-8" />
                 </div>
@@ -176,7 +176,7 @@ export default async function Services() {
             </Card>
             <Card className="justify-between">
               <CardHeader className="flex items-start gap-4 relative">
-                <Badge className="absolute top-2 right-6">Хит</Badge>
+                <Badge className="absolute top-2 right-6 hidden lg:block">Хит</Badge>
                 <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-green-500/10 text-green-900">
                   <Leaf className="w-8 h-8" />
                 </div>

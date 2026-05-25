@@ -52,7 +52,7 @@ export default async function HomePage() {
       <section className="relative min-h-screen flex items-center pt-20">
         <div className="absolute inset-0 z-0">
           <Image src={BackgroundImage} alt="Hero" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-white opacity-60" />
+          <div className="absolute inset-0 bg-white opacity-75" />
         </div>
 
         <div className="relative z-10  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
