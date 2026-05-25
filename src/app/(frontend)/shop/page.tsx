@@ -145,7 +145,7 @@ export default function Shop() {
                                 >
                                   Публичной офертой
                                 </Link>{' '}
-                                и даю{' '}
+                                и{' '}
                                 <Link
                                   href="/privacy"
                                   className="text-green-600 underline hover:no-underline"
