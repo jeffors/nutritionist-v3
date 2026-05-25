@@ -115,7 +115,7 @@ export default async function Reviews() {
             Запишитесь на консультацию и начните свой путь к здоровью уже сегодня.
           </p>
           <Button asChild variant="default" size="xl">
-            <Link href="/consultation">Записаться на консультацию</Link>
+            <Link href="/contacts">Записаться на консультацию</Link>
           </Button>
         </div>
       </section>

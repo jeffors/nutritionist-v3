@@ -235,7 +235,7 @@ export default async function Services() {
             Напишите мне — вместе разберёмся, какая услуга подойдёт лучше всего для вашей ситуации.
           </p>
           <Button asChild variant="default" size="xl">
-            <Link href="/consultation">
+            <Link href="/contacts">
               Оставить заявку
               <ArrowRight className="w-4 h-4" />
             </Link>

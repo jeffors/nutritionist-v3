@@ -27,7 +27,7 @@ export default async function About() {
                 из любой точки мира.
               </p>
               <Button asChild variant="default" size="xl">
-                <Link href="/consultation">
+                <Link href="/contacts">
                   Записаться на консультацию
                   <ArrowRight className="w-4 h-4" />
                 </Link>
@@ -142,7 +142,7 @@ export default async function About() {
             здоровья.
           </p>
           <Button asChild variant="secondary" size="xl">
-            <Link href="/consultation">
+            <Link href="/contacts">
               Записаться на консультацию
               <ArrowRight className="w-4 h-4" />
             </Link>
