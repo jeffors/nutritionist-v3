@@ -117,7 +117,7 @@ export default async function HomePage() {
                     </div>
                     <div>
                       <p className="font-semibold text-sm text-black">Лариса Галимова</p>
-                      <p className="text-xs text-black/70">Сертифицированный нутрициолог</p>
+                      <p className="text-xs text-black/70">Rлинический нутрициолог</p>
                     </div>
                   </div>
                 </div>
@@ -130,8 +130,8 @@ export default async function HomePage() {
                 Обо мне
               </h2>
               <p className="text-black/80 leading-relaxed mb-4">
-                Меня зовут Лариса Галимова. Я — сертифицированный нутрициолог с 5-летним опытом
-                практики. Помогаю людям по всему миру улучшить здоровье через осознанное и
+                Меня зовут Лариса Галимова. Я — клинический нутрициолог с высшем медицинским
+                образованием. Помогаю людям по всему миру улучшить здоровье через осознанное и
                 сбалансированное питание.
               </p>
               <p className="text-black/80 leading-relaxed mb-6">
