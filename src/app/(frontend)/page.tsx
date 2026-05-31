@@ -475,7 +475,7 @@ export default async function HomePage() {
               </ul>
 
               <Button asChild variant="outline" size="xl">
-                <Link href="/about">
+                <Link href="/services">
                   Записаться к врачу
                   <ArrowRight className="w-4 h-4" />
                 </Link>
