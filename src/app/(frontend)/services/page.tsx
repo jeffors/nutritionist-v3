@@ -8,7 +8,15 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { ArrowRight, BookOpen, CheckCircle, Heart, Leaf, MessageCircle } from 'lucide-react'
+import {
+  ArrowRight,
+  BookOpen,
+  CheckCircle,
+  Heart,
+  Leaf,
+  MessageCircle,
+  Stethoscope,
+} from 'lucide-react'
 import Link from 'next/link'
 
 export default async function Services() {
@@ -213,6 +221,55 @@ export default async function Services() {
                     <li className="flex items-start gap-2">
                       <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
                       <span>Рекомендации по добавкам</span>
+                    </li>
+                  </ul>
+                </div>
+              </CardContent>
+              <CardFooter>
+                <Button size={'xl'} className="w-full">
+                  Записаться
+                </Button>
+              </CardFooter>
+            </Card>
+            <Card className="justify-between">
+              <CardHeader className="flex items-start gap-4 relative">
+                <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-indigo-500/10 text-indigo-900">
+                  <Stethoscope className="w-8 h-8" />
+                </div>
+                <div className="">
+                  <CardTitle className="text-2xl">Консультация проктолога</CardTitle>
+                  <CardDescription className="flex items-center gap-3">
+                    <span className="text-xl font-bold text-black">от 4 500 ₽</span>
+                    <Badge variant="secondary">60 мин</Badge>
+                  </CardDescription>
+                </div>
+              </CardHeader>
+              <CardContent>
+                <p className="text-black/80 mb-5">
+                  Консультация у врача-проктолога Галимова Рината Фаритовича для решения проблем
+                  пищеварения, заболеваний прямой кишки и профилактики. Дополняет нутрициологический
+                  подход комплексным медицинским осмотром.
+                </p>
+                <div className="">
+                  <p className="font-semibold text-black/80 uppercase tracking-wider mb-3">
+                    Что включено:
+                  </p>
+                  <ul className="space-y-2">
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                      <span>Первичный осмотр и диагностика</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                      <span>Анализ жалоб и симптомов</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                      <span>Рекомендации по лечению</span>
+                    </li>
+                    <li className="flex items-start gap-2">
+                      <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                      <span>Согласование рекомендаций с нутриционным планом</span>
                     </li>
                   </ul>
                 </div>

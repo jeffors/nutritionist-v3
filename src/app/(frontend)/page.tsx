@@ -16,6 +16,7 @@ import {
   CheckCircle,
   ChevronDown,
   Heart,
+  ImageIcon,
   Leaf,
   Mail,
   MessageCircle,
@@ -426,6 +427,60 @@ export default async function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-indigo-50 py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="relative">
+              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0 bg-indigo-200 flex items-center justify-center">
+                <div className="text-center">
+                  <ImageIcon className="w-24 h-24 text-indigo-600 mx-auto mb-4 opacity-30" />
+                  <p className="text-indigo-600 font-medium">Галимов Ринат Фаритович</p>
+                  <p className="text-indigo-500">Врач-проктолог</p>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <Badge className="mb-4 bg-indigo-100 text-indigo-700">Смежный специалист</Badge>
+              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+                Врач-проктолог
+                <div className="text-indigo-600">Галимов Ринат Фаритович</div>
+              </h2>
+              <p className="text-black/80 leading-relaxed mb-4">
+                Опытный врач-проктолог с 20-летней практикой. Специализируется на диагностике и
+                лечении заболеваний прямой кишки, анального канала и толстого кишечника.
+              </p>
+              <p className="text-black/80 leading-relaxed mb-6">
+                Работает в тесном сотрудничестве с нутрициологом для комплексного подхода к здоровью
+                пациентов. Правильное питание часто является ключевым элементом лечения
+                проктологических проблем.
+              </p>
+
+              <ul className="space-y-3 mb-8">
+                {[
+                  'Консультации и диагностика',
+                  'Лечение геморроя и анальных трещин',
+                  'Колоноскопия и другие процедуры',
+                  'Координация с нутрициологом для комплексного плана',
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle className="w-5 h-5 text-indigo-600 shrink-0 mt-0.5" />
+                    <p className="text-sm text-black/80">{item}</p>
+                  </li>
+                ))}
+              </ul>
+
+              <Button asChild variant="outline" size="xl">
+                <Link href="/about">
+                  Записаться к врачу
+                  <ArrowRight className="w-4 h-4" />
+                </Link>
+              </Button>
+            </div>
           </div>
         </div>
       </section>
