@@ -1,6 +1,6 @@
 import { Leaf } from 'lucide-react'
 
-export function Logo() {
+export default function Logo() {
   return (
     <>
       <div className="w-8 h-8 rounded-full bg-green-300/30 flex items-center justify-center">

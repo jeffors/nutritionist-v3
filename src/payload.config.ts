@@ -8,18 +8,25 @@ import { ru } from '@payloadcms/translations/languages/ru'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
+import { Services } from './collections/Services'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
   admin: {
+    dateFormat: 'dd MMMM yyyy, HH:mm',
     user: Users.slug,
     importMap: {
       baseDir: path.resolve(dirname),
     },
+    components: {
+      graphics: {
+        Logo: '/components/sections/Logo',
+      },
+    },
   },
-  collections: [Users, Media],
+  collections: [Users, Media, Services],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
@@ -34,5 +41,13 @@ export default buildConfig({
   plugins: [],
   i18n: {
     supportedLanguages: { ru },
+    translations: {
+      ru: {
+        general: {
+          createNewLabel: 'Создать новый предмет "{{label}}"',
+          creatingNewLabel: 'Создание нового предмета "{{label}}"',
+        },
+      },
+    },
   },
 })

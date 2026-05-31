@@ -1,4 +1,4 @@
-import { Logo } from '@/components/sections/Logo'
+import Logo from '@/components/sections/Logo'
 import { Button } from '@/components/ui/button'
 import { Leaf, Send, Phone, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
