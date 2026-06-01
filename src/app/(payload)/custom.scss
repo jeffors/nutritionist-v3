@@ -1,22 +1,8 @@
-/* app/(payload)/custom.scss */
-
-@layer theme {
-  @import 'tailwindcss/theme.css';
-}
-
-@layer base {
-  .twp {
-    @import 'tailwindcss/preflight.css';
+@layer payload-default {
+  :root {
+    --base-body-size: 16;
   }
-  .twp.no-twp {
-    *, ::after, ::before, ::backdrop, ::file-selector-button {
-      all: revert-layer;
-    }
+  html {
+    font-size: 16px;
   }
-}
-
-@layer components;
-
-@layer utilities {
-  @import 'tailwindcss/utilities.css';
 }
