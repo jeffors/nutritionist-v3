@@ -22,7 +22,8 @@ export default buildConfig({
     },
     components: {
       graphics: {
-        Logo: '/components/sections/Logo',
+        Logo: '/components/admin/logo',
+        Icon: '/components/admin/icon',
       },
     },
   },
