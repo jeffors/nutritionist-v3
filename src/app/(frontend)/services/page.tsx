@@ -26,9 +26,6 @@ export default async function Services() {
   const payloadServices = await payload.find({
     collection: 'services',
   })
-
-  console.log(payloadServices.docs)
-
   return (
     <div className="pt-20">
       <section className="py-15 bg-gray-50">
