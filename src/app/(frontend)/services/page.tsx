@@ -18,8 +18,17 @@ import {
   Stethoscope,
 } from 'lucide-react'
 import Link from 'next/link'
+import { getPayload } from 'payload'
+import config from '@payload-config'
 
 export default async function Services() {
+  const payload = await getPayload({ config })
+  const payloadServices = await payload.find({
+    collection: 'services',
+  })
+
+  console.log(payloadServices.docs)
+
   return (
     <div className="pt-20">
       <section className="py-15 bg-gray-50">
@@ -297,6 +306,53 @@ export default async function Services() {
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>
+        </div>
+      </section>
+      <section className="py-15 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+          <h1 className="font-heading text-5xl md:text-6xl text-black font-light mb-6 text-center">
+            Услуги из админки
+          </h1>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            {payloadServices.docs.map((service) => (
+              <Card className="justify-between" key={service.id}>
+                <CardHeader className="flex items-start gap-4 relative">
+                  <div className="w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 bg-indigo-500/10 text-indigo-900">
+                    <Stethoscope className="w-8 h-8" />
+                  </div>
+                  <div className="">
+                    <CardTitle className="text-2xl">{service.title}</CardTitle>
+                    <CardDescription className="flex items-center gap-3">
+                      <span className="text-xl font-bold text-black">от {service.price} ₽</span>
+                      <Badge variant="secondary">{service.duration}</Badge>
+                    </CardDescription>
+                  </div>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-black/80 mb-5">{service.description}</p>
+                  <div className="">
+                    <p className="font-semibold text-black/80 uppercase tracking-wider mb-3">
+                      Что включено:
+                    </p>
+                    <ul className="space-y-2">
+                      {service.includes?.split('\n').map((line, index) => (
+                        <li key={index} className="flex items-start gap-2">
+                          <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
+                          <span>{line}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </CardContent>
+                <CardFooter>
+                  <Button size={'xl'} className="w-full">
+                    Записаться
+                  </Button>
+                </CardFooter>
+              </Card>
+            ))}
+          </div>
         </div>
       </section>
     </div>
