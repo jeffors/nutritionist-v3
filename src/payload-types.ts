@@ -171,7 +171,7 @@ export interface Service {
   id: number;
   title?: string | null;
   description?: string | null;
-  price?: string | null;
+  price?: number | null;
   duration?: string | null;
   includes?: string | null;
   updatedAt: string;

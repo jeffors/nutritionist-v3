@@ -19,7 +19,7 @@ export const Services: CollectionConfig = {
     },
     {
       name: 'price',
-      type: 'text',
+      type: 'number',
       label: 'Цена',
     },
     {
