@@ -169,11 +169,30 @@ export interface Media {
  */
 export interface Service {
   id: number;
-  title?: string | null;
-  description?: string | null;
-  price?: number | null;
-  duration?: string | null;
-  includes?: string | null;
+  title: string;
+  description: string;
+  icon: 'Stethoscope' | 'Leaf' | 'Salad' | 'Pill' | 'Activity' | 'Dna' | 'Heart' | 'Brain' | 'Scale' | 'Microscope';
+  color: 'green' | 'blue' | 'rose' | 'violet' | 'amber' | 'sky' | 'orange';
+  /**
+   * Произвольный текст: "от 4 500 ₽", "Бесплатно" и т.д.
+   */
+  price: string;
+  duration: string;
+  includes?:
+    | {
+        item: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Если заполнено - отображается в углу карточки
+   */
+  tag?: string | null;
+  /**
+   * Меньше = выше. Верхние три карточки отображаются на главной странице
+   */
+  order?: number | null;
+  isActive?: boolean | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -302,9 +321,19 @@ export interface MediaSelect<T extends boolean = true> {
 export interface ServicesSelect<T extends boolean = true> {
   title?: T;
   description?: T;
+  icon?: T;
+  color?: T;
   price?: T;
   duration?: T;
-  includes?: T;
+  includes?:
+    | T
+    | {
+        item?: T;
+        id?: T;
+      };
+  tag?: T;
+  order?: T;
+  isActive?: T;
   updatedAt?: T;
   createdAt?: T;
 }
