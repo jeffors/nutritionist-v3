@@ -6,6 +6,11 @@ export const Services: CollectionConfig = {
     singular: 'Услуга',
     plural: 'Услуги',
   },
+  admin: {
+    useAsTitle: 'title',
+    defaultColumns: ['title', 'price', 'duration', 'tag'],
+    group: 'Контент',
+  },
   fields: [
     {
       name: 'title',
