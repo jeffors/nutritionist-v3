@@ -70,6 +70,7 @@ export interface Config {
     users: User;
     media: Media;
     services: Service;
+    guides: Guide;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -80,6 +81,7 @@ export interface Config {
     users: UsersSelect<false> | UsersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    guides: GuidesSelect<false> | GuidesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -198,6 +200,45 @@ export interface Service {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides".
+ */
+export interface Guide {
+  id: number;
+  image: number | Media;
+  title: string;
+  /**
+   * Отображается на карточке товара. ~150 символов.
+   */
+  description: string;
+  /**
+   * Отображается в модальном окне / на странице товара.
+   */
+  fullDescription: string;
+  category: 'guides' | 'lectures' | 'checklists' | 'mini-courses';
+  /**
+   * Не обязательно для лекцией и видео-курсов
+   */
+  pages?: number | null;
+  price: number;
+  /**
+   * Приватный файл - отправляется покупателю после оплаты
+   */
+  file?: (number | null) | Media;
+  /**
+   * Например: 4.9
+   */
+  rating?: number | null;
+  review?: number | null;
+  /**
+   * Если заполнено - отображается в углу карточки
+   */
+  tag?: string | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -231,6 +272,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'services';
         value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'guides';
+        value: number | Guide;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -333,6 +378,26 @@ export interface ServicesSelect<T extends boolean = true> {
       };
   tag?: T;
   order?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "guides_select".
+ */
+export interface GuidesSelect<T extends boolean = true> {
+  image?: T;
+  title?: T;
+  description?: T;
+  fullDescription?: T;
+  category?: T;
+  pages?: T;
+  price?: T;
+  file?: T;
+  rating?: T;
+  review?: T;
+  tag?: T;
   isActive?: T;
   updatedAt?: T;
   createdAt?: T;
