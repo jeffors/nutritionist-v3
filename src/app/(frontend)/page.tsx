@@ -1,4 +1,3 @@
-import { headers as getHeaders } from 'next/headers.js'
 import { getPayload } from 'payload'
 import { Button } from '@/components/ui/button'
 
@@ -8,18 +7,14 @@ import Link from 'next/link'
 import Image from 'next/image'
 import BackgroundImage from './../../../public/images/hero-bg.png'
 import Portrait from './../../../public/images/portrait.jpg'
-import Guide from './../../../public/images/guide-cover-1.jpg'
 import {
   ArrowRight,
   Award,
-  BookOpen,
   CheckCircle,
   ChevronDown,
-  Heart,
   ImageIcon,
   Leaf,
   Mail,
-  MessageCircle,
   Phone,
   Send,
   ShoppingBag,
@@ -42,6 +37,7 @@ import {
 } from '@/components/ui/accordion'
 import ConsultationForm from '@/components/forms/ConsultationForm'
 import { ServiceHomeCard } from '@/components/cards/ServiceHomeCard'
+import { GuideHomeCard } from '@/components/cards/GuideHomeCard'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -52,7 +48,12 @@ export default async function HomePage() {
     sort: 'order',
     limit: 3,
   })
-
+  const payloadGuides = await payload.find({
+    collection: 'guides',
+    depth: 1,
+    sort: '-createdAt',
+    limit: 3,
+  })
   return (
     <div className="overflow-x-hidden">
       <section className="relative min-h-screen flex items-center pt-20">
@@ -207,23 +208,11 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className=""></div>
-            <Card className="relative">
-              <Image src={Guide} alt="Гайд по питанию" />
-              <Badge variant="secondary" className="absolute top-4 left-4">
-                Новинка
-              </Badge>
-              <CardHeader>
-                <CardTitle>Гайд по сбалансированному питанию</CardTitle>
-                <CardDescription>
-                  50 страниц практических рекомендаций, меню на неделю, списки продуктов.
-                </CardDescription>
-              </CardHeader>
-              <CardFooter className="flex justify-between">
-                <p className="text-lg font-bold">500 ₽</p>
-                <Button variant="default">Купить</Button>
-              </CardFooter>
-            </Card>
+            {payloadGuides.docs.length === 1 && <div className=""></div>}
+
+            {payloadGuides.docs.map((guide) => (
+              <GuideHomeCard key={guide.id} guide={guide} />
+            ))}
           </div>
 
           <div className="text-center mt-8">
