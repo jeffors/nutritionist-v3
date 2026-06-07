@@ -2,8 +2,14 @@ import Logo from '@/components/sections/Logo'
 import { Button } from '@/components/ui/button'
 import { Leaf, Send, Phone, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 
-export function Footer() {
+export async function Footer() {
+  const payloadConfig = await config
+  const payload = await getPayload({ config: payloadConfig })
+  const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
   return (
     <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -107,20 +113,20 @@ export function Footer() {
             <ul className="space-y-3">
               <li>
                 <Link
-                  href="tel:+79001234567"
+                  href={`tel:+${payloadGlobalContacts.whatsapp}`}
                   className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
                 >
                   <Phone className="w-4 h-4 text-gray-400 shrink-0" />
-                  +7 (900) 123-45-67
+                  {formatPhoneNumber(payloadGlobalContacts.whatsapp)}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="mailto:larisa.galimova@example.com"
+                  href={`mailto:${payloadGlobalContacts.email}`}
                   className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
                 >
                   <Mail className="w-4 h-4 text-gray-400 shrink-0" />
-                  larisa.galimova@example.com
+                  {payloadGlobalContacts.email}
                 </Link>
               </li>
               <li className="flex items-start gap-2.5 text-gray-400 text-sm">
@@ -132,7 +138,7 @@ export function Footer() {
             <div className="mt-5 flex gap-2">
               <Button asChild size="sm" className="bg-blue-500 hover:bg-blue-600 text-xs">
                 <Link
-                  href="https://t.me/_"
+                  href={`https://t.me/${payloadGlobalContacts.telegram}`}
                   target="_blank"
                   aria-label="Telegram"
                   rel="noopener noreferrer"
@@ -143,7 +149,7 @@ export function Footer() {
               </Button>
               <Button asChild size="sm" className="bg-green-500 hover:bg-green-600 text-xs">
                 <Link
-                  href="https://wa.me/_"
+                  href={`https://wa.me/${payloadGlobalContacts.whatsapp}`}
                   target="_blank"
                   aria-label="WhatsApp"
                   rel="noopener noreferrer"

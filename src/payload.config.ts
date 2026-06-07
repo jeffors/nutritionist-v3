@@ -11,6 +11,7 @@ import { Media } from './collections/Media'
 import { Services } from './collections/Services'
 import { Guides } from './collections/Guides'
 import { Reviews } from './collections/Reviews'
+import { Contacts } from './globals/Contacts'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -30,6 +31,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Services, Guides, Reviews],
+  globals: [Contacts],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

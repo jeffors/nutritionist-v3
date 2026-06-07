@@ -2,8 +2,14 @@ import ConsultationForm from '@/components/forms/ConsultationForm'
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Clock, Globe, Mail, Phone, Send } from 'lucide-react'
 import Link from 'next/link'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 
 export default async function Contacts() {
+  const payloadConfig = await config
+  const payload = await getPayload({ config: payloadConfig })
+  const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
   return (
     <div className="pt-20">
       <section className="py-15 bg-gray-50">
@@ -22,7 +28,7 @@ export default async function Contacts() {
               <h2 className="font-heading text-3xl text-black font-light mb-8">Как связаться</h2>
               <div className="space-y-5">
                 <Link
-                  href="https://wa.me/79001234567"
+                  href={`https://wa.me/{${payloadGlobalContacts.whatsapp}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-5 bg-green-50 rounded-2xl border border-green-100 hover:border-green-300 transition-colors group"
@@ -34,12 +40,14 @@ export default async function Contacts() {
                     <p className="font-semibold text-black group-hover:text-green-700 transition-colors">
                       WhatsApp
                     </p>
-                    <p className="text-black/80 text-sm">+7 (900) 123-45-67</p>
+                    <p className="text-black/80 text-sm">
+                      {formatPhoneNumber(payloadGlobalContacts.whatsapp)}
+                    </p>
                     <p className="text-xs text-green-600 mt-0.5">Написать сейчас →</p>
                   </div>
                 </Link>
                 <Link
-                  href="https://t.me/_"
+                  href={`https://t.me/{${payloadGlobalContacts.telegram}`}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-4 p-5 bg-blue-50 rounded-2xl border border-blue-100 hover:border-blue-300 transition-colors group"
@@ -51,12 +59,14 @@ export default async function Contacts() {
                     <p className="font-semibold text-black group-hover:text-blue-700 transition-colors">
                       Telegram
                     </p>
-                    <p className="text-black/80 text-sm">@samplename</p>
+                    <p className="text-black/80 text-sm">
+                      {formatTelegram(payloadGlobalContacts.telegram)}
+                    </p>
                     <p className="text-xs text-blue-600 mt-0.5">Написать в Telegram →</p>
                   </div>
                 </Link>
                 <Link
-                  href="mailto:larisa.galimova@example.com"
+                  href={`mailto:${payloadGlobalContacts.email}`}
                   className="flex items-center gap-4 p-5 bg-gray-50 rounded-2xl border border-gray-100 hover:border-gray-300 transition-colors group"
                 >
                   <div className="w-12 h-12 rounded-xl bg-gray-500 flex items-center justify-center shrink-0">
@@ -66,7 +76,7 @@ export default async function Contacts() {
                     <p className="font-semibold text-black group-hover:text-gray-700 transition-colors">
                       Email
                     </p>
-                    <p className="text-black/80 text-sm">larisa.galimova@example.com</p>
+                    <p className="text-black/80 text-sm">{payloadGlobalContacts.email}</p>
                     <p className="text-xs text-gray-600 mt-0.5">Написать на почту →</p>
                   </div>
                 </Link>

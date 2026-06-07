@@ -93,8 +93,12 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'contacts-global': ContactsGlobal;
+  };
+  globalsSelect: {
+    'contacts-global': ContactsGlobalSelect<false> | ContactsGlobalSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -480,6 +484,38 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Контакты изменяются во всех разделах сайта
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts-global".
+ */
+export interface ContactsGlobal {
+  id: number;
+  /**
+   * Формат: 7XXXXXXXXXX. Не используйте плюс, пробел, скобки или дефисы - сайт сам сделает красивый вид номера
+   */
+  whatsapp: number;
+  /**
+   * Просто ник. Не используйте @ или https://t.me/ - сайт сам подставит необходимые символы
+   */
+  telegram: string;
+  email: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts-global_select".
+ */
+export interface ContactsGlobalSelect<T extends boolean = true> {
+  whatsapp?: T;
+  telegram?: T;
+  email?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

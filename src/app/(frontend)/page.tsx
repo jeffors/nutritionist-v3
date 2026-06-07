@@ -39,6 +39,7 @@ import ConsultationForm from '@/components/forms/ConsultationForm'
 import { ServiceHomeCard } from '@/components/cards/ServiceHomeCard'
 import { GuideHomeCard } from '@/components/cards/GuideHomeCard'
 import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
+import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -61,6 +62,7 @@ export default async function HomePage() {
     sort: '-data',
     limit: 2,
   })
+  const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
   return (
     <div className="overflow-x-hidden">
       <section className="relative min-h-screen flex items-center pt-20">
@@ -443,7 +445,7 @@ export default async function HomePage() {
 
                 <CardTitle className="flex font-sans justify-center">WhatsApp</CardTitle>
                 <CardDescription className="flex justify-center">
-                  +7 (900) 123-45-67
+                  {formatPhoneNumber(payloadGlobalContacts.whatsapp)}
                 </CardDescription>
               </CardHeader>
             </Card>
@@ -456,7 +458,9 @@ export default async function HomePage() {
                 </div>
 
                 <CardTitle className="flex font-sans justify-center">Telegram</CardTitle>
-                <CardDescription className="flex justify-center">@samplename</CardDescription>
+                <CardDescription className="flex justify-center">
+                  {formatTelegram(payloadGlobalContacts.telegram)}
+                </CardDescription>
               </CardHeader>
             </Card>
             <Card>
@@ -469,7 +473,7 @@ export default async function HomePage() {
 
                 <CardTitle className="flex font-sans justify-center">Mail</CardTitle>
                 <CardDescription className="flex justify-center">
-                  larisa.galimova@example.com
+                  {payloadGlobalContacts.email}
                 </CardDescription>
               </CardHeader>
             </Card>
