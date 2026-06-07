@@ -38,6 +38,7 @@ import {
 import ConsultationForm from '@/components/forms/ConsultationForm'
 import { ServiceHomeCard } from '@/components/cards/ServiceHomeCard'
 import { GuideHomeCard } from '@/components/cards/GuideHomeCard'
+import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -53,6 +54,12 @@ export default async function HomePage() {
     depth: 1,
     sort: '-createdAt',
     limit: 3,
+  })
+  const payloadReviews = await payload.find({
+    collection: 'reviews',
+    where: { isActive: { equals: true } },
+    sort: '-data',
+    limit: 2,
   })
   return (
     <div className="overflow-x-hidden">
@@ -298,58 +305,9 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Мария К.</CardTitle>
-                    <CardDescription>34 года</CardDescription>
-                  </div>
-                  <div className="flex gap-0.5">
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-black/80">
-                  "За 2 месяца работы я наконец-то разобралась со своим здоровьем. Ушло 6 кг,
-                  нормализовался сон и уровень энергии. Очень рекомендую!"
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Badge variant={'secondary'}>Программа снижения веса</Badge>
-              </CardFooter>
-            </Card>
-            <Card>
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Елена М.</CardTitle>
-                    <CardDescription>29 лет</CardDescription>
-                  </div>
-                  <div className="flex gap-0.5">
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-black/80">
-                  "Разбор анализов помог понять, откуда берётся постоянная усталость. Оказалось —
-                  дефицит железа и В12. Уже через месяц почувствовала себя намного лучше."
-                </p>
-              </CardContent>
-              <CardFooter>
-                <Badge variant={'secondary'}>Разбор анализов</Badge>
-              </CardFooter>
-            </Card>
+            {payloadReviews.docs.map((review) => (
+              <ReviewHomeCard key={review.id} review={review} />
+            ))}
           </div>
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="xl">

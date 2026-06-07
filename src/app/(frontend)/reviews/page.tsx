@@ -1,17 +1,17 @@
-import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-import { Star } from 'lucide-react'
 import Link from 'next/link'
+import { getPayload } from 'payload'
+import config from '@payload-config'
+import { ReviewCard } from '@/components/cards/ReviewCard'
 
 export default async function Reviews() {
+  const payload = await getPayload({ config })
+  const payloadReviews = await payload.find({
+    collection: 'reviews',
+    where: { isActive: { equals: true } },
+    sort: '-data',
+  })
+
   return (
     <div className="pt-20">
       <section className="py-15 bg-gray-50">
@@ -48,61 +48,9 @@ export default async function Reviews() {
       <section className="py-15 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <Card className="justify-between">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Мария К.</CardTitle>
-                    <CardDescription>34 года · Москва</CardDescription>
-                  </div>
-                  <div className="flex gap-0.5">
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-black/80">
-                  "За 2 месяца работы я наконец-то разобралась со своим здоровьем. Ушло 6 кг,
-                  нормализовался сон и уровень энергии. Очень рекомендую!"
-                </p>
-              </CardContent>
-              <CardFooter className="justify-between">
-                <Badge variant={'secondary'}>Программа снижения веса</Badge>
-                <span className="text-xs text-black/80">Март 2026</span>
-              </CardFooter>
-            </Card>
-            <Card className="justify-between">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Елена М.</CardTitle>
-                    <CardDescription>29 лет · Санкт-Петербург</CardDescription>
-                  </div>
-                  <div className="flex gap-0.5">
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                    <Star className="w-4 h-4 fill-yellow-500 text-yellow-500" />
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-black/80">
-                  "Разбор анализов помог понять, откуда берётся постоянная усталость. Оказалось —
-                  дефицит железа и В12. Уже через месяц почувствовала себя намного лучше."
-                </p>
-              </CardContent>
-
-              <CardFooter className="justify-between">
-                <Badge variant={'secondary'}>Разбор анализов</Badge>
-                <span className="text-xs text-black/80">Февраль 2026</span>
-              </CardFooter>
-            </Card>
+            {payloadReviews.docs.map((review) => (
+              <ReviewCard key={review.id} review={review} />
+            ))}
           </div>
         </div>
       </section>
