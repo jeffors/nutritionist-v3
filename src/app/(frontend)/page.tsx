@@ -133,7 +133,7 @@ export default async function HomePage() {
                     </div>
                     <div>
                       <p className="font-semibold text-sm text-black">Лариса Галимова</p>
-                      <p className="text-xs text-black/70">Rлинический нутрициолог</p>
+                      <p className="text-xs text-black/70">Клинический нутрициолог</p>
                     </div>
                   </div>
                 </div>
