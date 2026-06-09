@@ -615,6 +615,7 @@ export interface HomePage {
     heading?: string | null;
     description?: string | null;
   };
+  _status?: ('draft' | 'published') | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -742,6 +743,7 @@ export interface HomePageSelect<T extends boolean = true> {
         heading?: T;
         description?: T;
       };
+  _status?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

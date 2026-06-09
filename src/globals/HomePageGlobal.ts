@@ -14,6 +14,13 @@ export const HomePageGlobal: GlobalConfig = {
       },
     ],
   },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
+  },
   fields: [
     {
       name: 'hero',

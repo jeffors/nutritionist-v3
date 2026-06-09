@@ -40,6 +40,7 @@ import { ServiceHomeCard } from '@/components/cards/ServiceHomeCard'
 import { GuideHomeCard } from '@/components/cards/GuideHomeCard'
 import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -63,9 +64,10 @@ export default async function HomePage() {
     limit: 2,
   })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
-  const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page' })
+  const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page', draft: true })
   return (
     <div className="overflow-x-hidden">
+      <RefreshRouteOnSave />
       <section className="relative min-h-screen flex items-center pt-20">
         <div className="absolute inset-0 z-0">
           <Image src={BackgroundImage} alt="Hero" className="w-full h-full object-cover" />

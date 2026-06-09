@@ -30,6 +30,19 @@ export default buildConfig({
         Icon: '/components/admin/icon',
       },
     },
+    livePreview: {
+      url: ({ globalConfig }) => {
+        if (globalConfig?.slug === 'home-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/`
+        }
+      },
+      globals: ['home-page'],
+      breakpoints: [
+        { label: 'Телефон', name: 'mobile', width: 375, height: 667 },
+        { label: 'Планшет', name: 'tablet', width: 768, height: 1024 },
+        { label: 'Компьютер', name: 'desktop', width: 1440, height: 900 },
+      ],
+    },
   },
   collections: [Users, Media, Services, Guides, Reviews],
   globals: [Contacts, HomePageGlobal],
