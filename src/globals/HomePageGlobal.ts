@@ -13,49 +13,62 @@ export const HomePageGlobal: GlobalConfig = {
       label: 'Первая секция',
       fields: [
         {
-          name: 'badge',
-          type: 'text',
-          label: 'Текст плашки',
-          defaultValue: 'Нутрициолог · Онлайн-консультации',
-        },
-        {
-          name: 'heading',
-          type: 'text',
-          label: 'Заголовок (первая строка)',
-          defaultValue: 'Ваше здоровье —',
-        },
-        {
-          name: 'headingAccent',
-          type: 'text',
-          label: 'Заголовок (вторая строка)',
-          defaultValue: 'мой приоритет',
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          label: 'Описание',
-          defaultValue:
-            'Помогаю улучшить самочувствие, нормализовать вес и восстановить здоровье через индивидуальный подход к питанию и образу жизни.',
-        },
-        {
-          name: 'stats',
-          type: 'array',
-          label: 'Статистика',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
           fields: [
-            { name: 'value', type: 'text', label: 'Значение', required: true },
-            { name: 'label', type: 'text', label: 'Подпись', required: true },
+            {
+              name: 'badge',
+              type: 'text',
+              label: 'Текст плашки',
+              defaultValue: 'Нутрициолог · Онлайн-консультации',
+            },
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок (первая строка)',
+              defaultValue: 'Ваше здоровье —',
+            },
+            {
+              name: 'headingAccent',
+              type: 'text',
+              label: 'Заголовок (вторая строка)',
+              defaultValue: 'мой приоритет',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue:
+                'Помогаю улучшить самочувствие, нормализовать вес и восстановить здоровье через индивидуальный подход к питанию и образу жизни.',
+            },
+            {
+              name: 'stats',
+              type: 'array',
+              label: 'Статистика',
+              labels: {
+                singular: 'Показатель',
+                plural: 'Показатели',
+              },
+              fields: [
+                { name: 'value', type: 'text', label: 'Значение', required: true },
+                { name: 'label', type: 'text', label: 'Подпись', required: true },
+              ],
+              defaultValue: [
+                { value: '500+', label: 'клиентов' },
+                { value: '5 лет', label: 'практики' },
+                { value: '97%', label: 'довольны результатом' },
+              ],
+            },
+            {
+              name: 'ctaLabel',
+              type: 'text',
+              label: 'Текст кнопки',
+              defaultValue: 'Записаться на консультацию',
+            },
           ],
-          defaultValue: [
-            { value: '500+', label: 'клиентов' },
-            { value: '5 лет', label: 'практики' },
-            { value: '97%', label: 'довольны результатом' },
-          ],
-        },
-        {
-          name: 'ctaLabel',
-          type: 'text',
-          label: 'Текст кнопки',
-          defaultValue: 'Записаться на консультацию',
         },
       ],
     },
@@ -65,47 +78,60 @@ export const HomePageGlobal: GlobalConfig = {
       label: 'Секция "Обо мне"',
       fields: [
         {
-          name: 'heading',
-          type: 'text',
-          label: 'Заголовок',
-          defaultValue: 'Обо мне',
-        },
-        {
-          name: 'paragraph1',
-          type: 'textarea',
-          label: 'Первый абзац',
-          defaultValue:
-            'Меня зовут Лариса Галимова. Я — клинический нутрициолог с высшем медицинским образованием. Помогаю людям по всему миру улучшить здоровье через осознанное и сбалансированное питание.',
-        },
-        {
-          name: 'paragraph2',
-          type: 'textarea',
-          label: 'Второй абзац',
-          defaultValue:
-            'Моя цель — помочь вам достичь оптимального здоровья и благополучия через правильное питание и образ жизни.',
-        },
-        {
-          name: 'checklistItem',
-          type: 'array',
-          label: 'Пункты списка',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
           fields: [
             {
-              name: 'text',
+              name: 'heading',
               type: 'text',
-              label: 'Текст',
-              required: true,
+              label: 'Заголовок',
+              defaultValue: 'Обо мне',
+            },
+            {
+              name: 'paragraph1',
+              type: 'textarea',
+              label: 'Первый абзац',
+              defaultValue:
+                'Меня зовут Лариса Галимова. Я — клинический нутрициолог с высшем медицинским образованием. Помогаю людям по всему миру улучшить здоровье через осознанное и сбалансированное питание.',
+            },
+            {
+              name: 'paragraph2',
+              type: 'textarea',
+              label: 'Второй абзац',
+              defaultValue:
+                'Моя цель — помочь вам достичь оптимального здоровья и благополучия через правильное питание и образ жизни.',
+            },
+            {
+              name: 'checklistItem',
+              type: 'array',
+              label: 'Пункты списка',
+              labels: {
+                singular: 'Пункт',
+                plural: 'Пункты',
+              },
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  label: 'Текст',
+                  required: true,
+                },
+              ],
+              defaultValue: [
+                { text: 'Индивидуальный подход к каждому клиенту' },
+                { text: 'Научно обоснованные рекомендации' },
+              ],
+            },
+            {
+              name: 'ctaLabel',
+              type: 'text',
+              label: 'Текст кнопки',
+              defaultValue: 'Подробнее обо мне',
             },
           ],
-          defaultValue: [
-            { text: 'Индивидуальный подход к каждому клиенту' },
-            { text: 'Научно обоснованные рекомендации' },
-          ],
-        },
-        {
-          name: 'ctaLabel',
-          type: 'text',
-          label: 'Текст кнопки',
-          defaultValue: 'Подробнее обо мне',
         },
       ],
     },
@@ -118,22 +144,32 @@ export const HomePageGlobal: GlobalConfig = {
       },
       fields: [
         {
-          name: 'heading',
-          type: 'text',
-          label: 'Заголовок',
-          defaultValue: 'Услуги',
-        },
-        {
-          name: 'description',
-          type: 'textarea',
-          label: 'Описание',
-          defaultValue: 'Индивидуальный подход к каждому клиенту. Работаю онлайн со всем миром.',
-        },
-        {
-          name: 'ctaLabel',
-          type: 'text',
-          label: 'Текст кнопки',
-          defaultValue: 'Все услуги',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Услуги',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue:
+                'Индивидуальный подход к каждому клиенту. Работаю онлайн со всем миром.',
+            },
+            {
+              name: 'ctaLabel',
+              type: 'text',
+              label: 'Текст кнопки',
+              defaultValue: 'Все услуги',
+            },
+          ],
         },
       ],
     },
@@ -146,23 +182,99 @@ export const HomePageGlobal: GlobalConfig = {
       },
       fields: [
         {
-          name: 'heading',
-          type: 'text',
-          label: 'Заголовок',
-          defaultValue: 'Гайды и лекции',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Гайды и лекции',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue:
+                'Авторские цифровые продукты — скачайте и начните улучшать своё здоровье прямо сейчас.',
+            },
+            {
+              name: 'ctaLabel',
+              type: 'text',
+              label: 'Текст кнопки',
+              defaultValue: 'Все продукты в магазине',
+            },
+          ],
         },
+      ],
+    },
+    {
+      name: 'howItWorks',
+      type: 'group',
+      label: 'Секция "Как проходит работа"',
+      fields: [
         {
-          name: 'description',
-          type: 'textarea',
-          label: 'Описание',
-          defaultValue:
-            'Авторские цифровые продукты — скачайте и начните улучшать своё здоровье прямо сейчас.',
-        },
-        {
-          name: 'ctaLabel',
-          type: 'text',
-          label: 'Текст кнопки',
-          defaultValue: 'Все продукты в магазине',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Как проходит работа',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue: 'Простой и понятный процесс на пути к вашему здоровью',
+            },
+            {
+              name: 'steps',
+              type: 'array',
+              label: 'Шаги',
+              labels: {
+                singular: 'Шаг',
+                plural: 'Шаги',
+              },
+              fields: [
+                { name: 'number', type: 'text', label: 'Номер (01, 02...)', required: true },
+                { name: 'title', type: 'text', label: 'Заголовок шага', required: true },
+                { name: 'description', type: 'textarea', label: 'Описание шага', required: true },
+              ],
+              defaultValue: [
+                {
+                  number: '01',
+                  title: 'Оставляете заявку',
+                  description:
+                    'Заполняете форму или пишете в мессенджер. Я отвечаю в течение 2 часов.',
+                },
+                {
+                  number: '02',
+                  title: 'Первичная консультация',
+                  description: 'Разбираем ваш запрос, анализы, образ жизни и формулируем цели.',
+                },
+                {
+                  number: '03',
+                  title: 'Получаете план',
+                  description:
+                    'Индивидуальный план питания, рекомендации по нутриентам и образу жизни.',
+                },
+                {
+                  number: '04',
+                  title: 'Результат',
+                  description:
+                    'Наблюдаете изменения, получаете поддержку и корректировки на каждом этапе.',
+                },
+              ],
+            },
+          ],
         },
       ],
     },
@@ -175,22 +287,222 @@ export const HomePageGlobal: GlobalConfig = {
       },
       fields: [
         {
-          name: 'heading',
-          type: 'text',
-          label: 'Заголовок',
-          defaultValue: 'Отзывы клиентов',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Отзывы клиентов',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue: 'Более 500 довольных клиентов по всему миру',
+            },
+            {
+              name: 'ctaLabel',
+              type: 'text',
+              label: 'Текст кнопки',
+              defaultValue: 'Все отзывы',
+            },
+          ],
         },
+      ],
+    },
+    {
+      name: 'proctolog',
+      type: 'group',
+      label: 'Секция "Врач-проктолог"',
+      fields: [
         {
-          name: 'description',
-          type: 'textarea',
-          label: 'Описание',
-          defaultValue: 'Более 500 довольных клиентов по всему миру',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'badge',
+              type: 'text',
+              label: 'Текст плашки',
+              defaultValue: 'Смежный специалист',
+            },
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок (профессия)',
+              defaultValue: 'Врач-проктолог',
+            },
+            {
+              name: 'headingAccent',
+              type: 'text',
+              label: 'Заголовок (ФИО)',
+              defaultValue: 'Галимов Ринат Фаритович',
+            },
+            {
+              name: 'paragraph1',
+              type: 'textarea',
+              label: 'Первый абзац',
+              defaultValue:
+                'Опытный врач-проктолог с 20-летней практикой. Специализируется на диагностике и лечении заболеваний прямой кишки, анального канала и толстого кишечника.',
+            },
+            {
+              name: 'paragraph2',
+              type: 'textarea',
+              label: 'Второй абзац',
+              defaultValue:
+                'Работает в тесном сотрудничестве с нутрициологом для комплексного подхода к здоровьюпациентов. Правильное питание часто является ключевым элементом лечения проктологических проблем.',
+            },
+            {
+              name: 'checklistItem',
+              type: 'array',
+              label: 'Пункты списка',
+              labels: {
+                singular: 'Пункт',
+                plural: 'Пункты',
+              },
+              fields: [
+                {
+                  name: 'text',
+                  type: 'text',
+                  label: 'Текст',
+                  required: true,
+                },
+              ],
+              defaultValue: [
+                { text: 'Консультации и диагностика' },
+                { text: 'Лечение геморроя и анальных трещин' },
+                { text: 'Колоноскопия и другие процедуры' },
+                { text: 'Координация с нутрициологом для комплексного плана' },
+              ],
+            },
+            {
+              name: 'ctaLabel',
+              type: 'text',
+              label: 'Текст кнопки',
+              defaultValue: 'Записаться к врачу',
+            },
+          ],
         },
+      ],
+    },
+    {
+      name: 'faq',
+      type: 'group',
+      label: 'Секция "Вопросы и ответы"',
+      fields: [
         {
-          name: 'ctaLabel',
-          type: 'text',
-          label: 'Текст кнопки',
-          defaultValue: 'Все отзывы',
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Часто задаваемые вопросы',
+            },
+            {
+              name: 'items',
+              type: 'array',
+              label: 'Вопросы',
+              fields: [
+                { name: 'question', type: 'text', label: 'Вопрос', required: true },
+                { name: 'answer', type: 'textarea', label: 'Ответ', required: true },
+              ],
+              labels: {
+                singular: 'Вопрос',
+                plural: 'Вопросы',
+              },
+              defaultValue: [
+                {
+                  question: 'Как проходит консультация?',
+                  answer:
+                    'Консультация проходит онлайн — через WhatsApp или Telegram. После записи я пришлю анкету для заполнения, чтобы подготовиться к встрече.',
+                },
+                {
+                  question: 'Нужно ли сдавать анализы перед консультацией?',
+                  answer:
+                    'Не обязательно. Если у вас есть результаты анализов — отлично, мы их разберём. Если нет — я помогу определить, какие анализы стоит сдать.',
+                },
+                {
+                  question: 'Сколько длится сопровождение?',
+                  answer:
+                    'Минимальный срок — 1 месяц. Оптимально — 2–3 месяца. За это время успевают проявиться устойчивые изменения и формируются новые привычки.',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'consultation',
+      type: 'group',
+      label: 'Cекция "Записаться на консультацию"',
+      admin: {
+        description: 'Сама форма настраивается в отдельной категории',
+      },
+      fields: [
+        {
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Записаться на консультацию',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue: 'Оставьте заявку, и я свяжусь с вами в течение 2 часов',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: 'contacts',
+      type: 'group',
+      label: 'Cекция "Контакты"',
+      admin: {
+        description: 'Сами контакты настраиваются в отдельной категории',
+      },
+      fields: [
+        {
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Контакты',
+              defaultValue: 'Записаться на консультацию',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue: 'Выберите удобный способ связи',
+            },
+          ],
         },
       ],
     },

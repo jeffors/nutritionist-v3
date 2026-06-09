@@ -12,6 +12,7 @@ import { Services } from './collections/Services'
 import { Guides } from './collections/Guides'
 import { Reviews } from './collections/Reviews'
 import { Contacts } from './globals/Contacts'
+import { HomePageGlobal } from './globals/HomePageGlobal'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -31,7 +32,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Services, Guides, Reviews],
-  globals: [Contacts],
+  globals: [Contacts, HomePageGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

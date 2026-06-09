@@ -95,9 +95,11 @@ export interface Config {
   fallbackLocale: null;
   globals: {
     'contacts-global': ContactsGlobal;
+    'home-page': HomePage;
   };
   globalsSelect: {
     'contacts-global': ContactsGlobalSelect<false> | ContactsGlobalSelect<true>;
+    'home-page': HomePageSelect<false> | HomePageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -507,12 +509,235 @@ export interface ContactsGlobal {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page".
+ */
+export interface HomePage {
+  id: number;
+  hero?: {
+    badge?: string | null;
+    heading?: string | null;
+    headingAccent?: string | null;
+    description?: string | null;
+    stats?:
+      | {
+          value: string;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+  };
+  about?: {
+    heading?: string | null;
+    paragraph1?: string | null;
+    paragraph2?: string | null;
+    checklistItem?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+  };
+  /**
+   * Сами услуги настраиваются в отдельной категории
+   */
+  services?: {
+    heading?: string | null;
+    description?: string | null;
+    ctaLabel?: string | null;
+  };
+  /**
+   * Сами гайды и лекции настраиваются в отдельной категории
+   */
+  guides?: {
+    heading?: string | null;
+    description?: string | null;
+    ctaLabel?: string | null;
+  };
+  howItWorks?: {
+    heading?: string | null;
+    description?: string | null;
+    steps?:
+      | {
+          number: string;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Сами отзывы настраиваются в отдельной категории
+   */
+  reviews?: {
+    heading?: string | null;
+    description?: string | null;
+    ctaLabel?: string | null;
+  };
+  proctolog?: {
+    badge?: string | null;
+    heading?: string | null;
+    headingAccent?: string | null;
+    paragraph1?: string | null;
+    paragraph2?: string | null;
+    checklistItem?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    ctaLabel?: string | null;
+  };
+  faq?: {
+    heading?: string | null;
+    items?:
+      | {
+          question: string;
+          answer: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Сама форма настраивается в отдельной категории
+   */
+  consultation?: {
+    heading?: string | null;
+    description?: string | null;
+  };
+  /**
+   * Сами контакты настраиваются в отдельной категории
+   */
+  contacts?: {
+    heading?: string | null;
+    description?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts-global_select".
  */
 export interface ContactsGlobalSelect<T extends boolean = true> {
   whatsapp?: T;
   telegram?: T;
   email?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home-page_select".
+ */
+export interface HomePageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        badge?: T;
+        heading?: T;
+        headingAccent?: T;
+        description?: T;
+        stats?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+      };
+  about?:
+    | T
+    | {
+        heading?: T;
+        paragraph1?: T;
+        paragraph2?: T;
+        checklistItem?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+      };
+  services?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        ctaLabel?: T;
+      };
+  guides?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        ctaLabel?: T;
+      };
+  howItWorks?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        steps?:
+          | T
+          | {
+              number?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  reviews?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        ctaLabel?: T;
+      };
+  proctolog?:
+    | T
+    | {
+        badge?: T;
+        heading?: T;
+        headingAccent?: T;
+        paragraph1?: T;
+        paragraph2?: T;
+        checklistItem?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctaLabel?: T;
+      };
+  faq?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              question?: T;
+              answer?: T;
+              id?: T;
+            };
+      };
+  consultation?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  contacts?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;
