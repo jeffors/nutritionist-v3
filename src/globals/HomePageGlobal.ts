@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { GlobalConfig } from 'payload'
 
 export const HomePageGlobal: GlobalConfig = {
@@ -5,6 +6,13 @@ export const HomePageGlobal: GlobalConfig = {
   label: 'Главная страница',
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/')
+      },
+    ],
   },
   fields: [
     {
@@ -84,6 +92,24 @@ export const HomePageGlobal: GlobalConfig = {
             initCollapsed: true,
           },
           fields: [
+            {
+              type: 'row',
+              fields: [
+                {
+                  name: 'imageTitle',
+                  type: 'text',
+                  label: 'ФИО на картинке',
+                  defaultValue: 'Лариса Галимова',
+                },
+                {
+                  name: 'imageDescription',
+                  type: 'text',
+                  label: 'Профессия на картинке',
+                  defaultValue: 'Клинический нутрициолог',
+                },
+              ],
+            },
+
             {
               name: 'heading',
               type: 'text',
@@ -357,7 +383,7 @@ export const HomePageGlobal: GlobalConfig = {
               type: 'textarea',
               label: 'Второй абзац',
               defaultValue:
-                'Работает в тесном сотрудничестве с нутрициологом для комплексного подхода к здоровьюпациентов. Правильное питание часто является ключевым элементом лечения проктологических проблем.',
+                'Работает в тесном сотрудничестве с нутрициологом для комплексного подхода к здоровью пациентов. Правильное питание часто является ключевым элементом лечения проктологических проблем.',
             },
             {
               name: 'checklistItem',

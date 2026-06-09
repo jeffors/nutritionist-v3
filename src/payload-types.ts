@@ -528,6 +528,8 @@ export interface HomePage {
     ctaLabel?: string | null;
   };
   about?: {
+    imageTitle?: string | null;
+    imageDescription?: string | null;
     heading?: string | null;
     paragraph1?: string | null;
     paragraph2?: string | null;
@@ -652,6 +654,8 @@ export interface HomePageSelect<T extends boolean = true> {
   about?:
     | T
     | {
+        imageTitle?: T;
+        imageDescription?: T;
         heading?: T;
         paragraph1?: T;
         paragraph2?: T;
