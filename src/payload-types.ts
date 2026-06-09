@@ -528,6 +528,7 @@ export interface HomePage {
     ctaLabel?: string | null;
   };
   about?: {
+    image?: (number | null) | Media;
     imageTitle?: string | null;
     imageDescription?: string | null;
     heading?: string | null;
@@ -578,6 +579,7 @@ export interface HomePage {
     ctaLabel?: string | null;
   };
   proctolog?: {
+    image?: (number | null) | Media;
     badge?: string | null;
     heading?: string | null;
     headingAccent?: string | null;
@@ -655,6 +657,7 @@ export interface HomePageSelect<T extends boolean = true> {
   about?:
     | T
     | {
+        image?: T;
         imageTitle?: T;
         imageDescription?: T;
         heading?: T;
@@ -706,6 +709,7 @@ export interface HomePageSelect<T extends boolean = true> {
   proctolog?:
     | T
     | {
+        image?: T;
         badge?: T;
         heading?: T;
         headingAccent?: T;

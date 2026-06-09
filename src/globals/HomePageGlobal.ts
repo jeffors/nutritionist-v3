@@ -100,6 +100,12 @@ export const HomePageGlobal: GlobalConfig = {
           },
           fields: [
             {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Фотография',
+            },
+            {
               type: 'row',
               fields: [
                 {
@@ -360,6 +366,12 @@ export const HomePageGlobal: GlobalConfig = {
             initCollapsed: true,
           },
           fields: [
+            {
+              name: 'image',
+              type: 'upload',
+              relationTo: 'media',
+              label: 'Фотография',
+            },
             {
               name: 'badge',
               type: 'text',

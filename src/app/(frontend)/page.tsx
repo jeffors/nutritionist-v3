@@ -19,6 +19,7 @@ import {
   Send,
   ShoppingBag,
   Star,
+  Stethoscope,
 } from 'lucide-react'
 import {
   Card,
@@ -41,6 +42,7 @@ import { GuideHomeCard } from '@/components/cards/GuideHomeCard'
 import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { getMediaUrl } from '@/lib/media'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -65,6 +67,8 @@ export default async function HomePage() {
   })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
   const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page', draft: true })
+  const imageAboutUrl = getMediaUrl(payloadGlobalHomePage.about.image)
+  const imageProctologUrl = getMediaUrl(payloadGlobalHomePage.proctolog.image)
   return (
     <div className="overflow-x-hidden">
       <RefreshRouteOnSave />
@@ -120,24 +124,44 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0">
-                <Image src={Portrait} alt="Портрет" className="w-full h-full object-cover" />
-                <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                      <Award className="w-5 h-5 text-green-500" />
-                    </div>
-                    <div>
-                      <p className="font-semibold text-sm text-black">
-                        {payloadGlobalHomePage.about?.imageTitle}
-                      </p>
-                      <p className="text-xs text-black/70">
-                        {payloadGlobalHomePage.about?.imageDescription}
-                      </p>
+              {imageAboutUrl ? (
+                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0">
+                  <Image
+                    src={imageAboutUrl}
+                    width={400}
+                    height={500}
+                    alt="Портрет"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
+                        <Award className="w-5 h-5 text-green-500" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-sm text-black">
+                          {payloadGlobalHomePage.about?.imageTitle}
+                        </p>
+                        <p className="text-xs text-black/70">
+                          {payloadGlobalHomePage.about?.imageDescription}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              ) : (
+                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0 bg-green-200 flex items-center justify-center">
+                  <div className="text-center">
+                    <ImageIcon className="w-24 h-24 text-green-600 mx-auto mb-4 opacity-30" />
+                    <p className="text-green-600 font-medium">
+                      {payloadGlobalHomePage.about?.imageTitle}
+                    </p>
+                    <p className="text-green-500">
+                      {payloadGlobalHomePage.about?.imageDescription}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div>
@@ -289,15 +313,42 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div className="relative">
-              <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0 bg-indigo-200 flex items-center justify-center">
-                <div className="text-center">
-                  <ImageIcon className="w-24 h-24 text-indigo-600 mx-auto mb-4 opacity-30" />
-                  <p className="text-indigo-600 font-medium">
-                    {payloadGlobalHomePage.proctolog?.headingAccent}
-                  </p>
-                  <p className="text-indigo-500">{payloadGlobalHomePage.proctolog?.heading}</p>
+              {imageProctologUrl ? (
+                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0">
+                  <Image
+                    src={Portrait}
+                    width={400}
+                    height={500}
+                    alt="Портрет"
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center">
+                        <Stethoscope className="w-5 h-5 text-indigo-500" />
+                      </div>
+                      <div>
+                        <p className="font-semibold text-sm text-black">
+                          {payloadGlobalHomePage.proctolog?.headingAccent}
+                        </p>
+                        <p className="text-xs text-black/70">
+                          {payloadGlobalHomePage.proctolog?.heading}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              ) : (
+                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0 bg-indigo-200 flex items-center justify-center">
+                  <div className="text-center">
+                    <ImageIcon className="w-24 h-24 text-indigo-600 mx-auto mb-4 opacity-30" />
+                    <p className="text-indigo-600 font-medium">
+                      {payloadGlobalHomePage.proctolog?.headingAccent}
+                    </p>
+                    <p className="text-indigo-500">{payloadGlobalHomePage.proctolog?.heading}</p>
+                  </div>
+                </div>
+              )}
             </div>
 
             <div>
