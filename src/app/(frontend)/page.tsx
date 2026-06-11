@@ -67,8 +67,8 @@ export default async function HomePage() {
   })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
   const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page', draft: true })
-  const imageAboutUrl = getMediaUrl(payloadGlobalHomePage.about.image)
-  const imageProctologUrl = getMediaUrl(payloadGlobalHomePage.proctolog.image)
+  const imageAboutUrl = getMediaUrl(payloadGlobalHomePage.about?.image)
+  const imageProctologUrl = getMediaUrl(payloadGlobalHomePage.proctolog?.image)
   return (
     <div className="overflow-x-hidden">
       <RefreshRouteOnSave />

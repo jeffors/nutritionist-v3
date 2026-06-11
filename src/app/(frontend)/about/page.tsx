@@ -2,10 +2,18 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Award, BookOpen, CheckCircle, GraduationCap, Heart } from 'lucide-react'
 import Link from 'next/link'
 
-import Portrait from './../../../../public/images/portrait.jpg'
 import Image from 'next/image'
+import { getPayload } from 'payload'
+import config from '@payload-config'
+import { getMediaUrl } from '@/lib/media'
+import { iconMap } from '@/lib/service-maps'
 
 export default async function About() {
+  const payloadConfig = await config
+  const payload = await getPayload({ config: payloadConfig })
+  const payloadGlobalAboutPage = await payload.findGlobal({ slug: 'about-page' })
+  const imageAboutUrl = getMediaUrl(payloadGlobalAboutPage.hero?.image)
+
   return (
     <div className="pt-20">
       <section className="py-15 bg-gray-50">
@@ -14,32 +22,32 @@ export default async function About() {
             <div className="">
               <div className="w-60 h-1 bg-green-500  mb-4"></div>
               <h1 className="font-heading text-5xl md:text-6xl text-black font-light mb-6">
-                Обо мне
+                {payloadGlobalAboutPage.hero?.heading}
               </h1>
               <div className="text-xl text-black/80 leading-relaxed mb-6">
-                Меня зовут <strong>Лариса Галимова</strong>. Я клинический нутрициолог с высшим
-                медицинским образованием. Помогаю людям обрести здоровье и энергию через осознанное
-                питание.
+                {payloadGlobalAboutPage.hero?.paragraph1}
               </div>
               <p className="text-black/70 leading-relaxed mb-8">
-                Сегодня я помогаю более 500 клиентам по всему миру решать проблемы со здоровьем,
-                которые казались безнадёжными. Работаю онлайн — это позволяет сотрудничать с людьми
-                из любой точки мира.
+                {payloadGlobalAboutPage.hero?.paragraph2}
               </p>
               <Button asChild variant="default" size="xl">
                 <Link href="/contacts">
-                  Записаться на консультацию
+                  {payloadGlobalAboutPage.hero?.ctaLabel}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
             </div>
             <div className="relative">
               <div className="rounded-3xl overflow-hidden aspect-3/4 max-w-sm mx-auto">
-                <Image
-                  src={Portrait}
-                  alt="Нутрициолог Лариса Галимова"
-                  className="w-full h-full object-cover"
-                ></Image>
+                {imageAboutUrl && (
+                  <Image
+                    src={imageAboutUrl}
+                    alt="Нутрициолог Лариса Галимова"
+                    width={300}
+                    height={400}
+                    className="w-full h-full object-cover"
+                  ></Image>
+                )}
               </div>
             </div>
           </div>
@@ -49,46 +57,23 @@ export default async function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="w-60 h-1 bg-green-500 mx-auto mb-4"> </div>
-            <h2 className="font-heading text-4xl text-black font-light">Мои ценности в работе</h2>
+            <h2 className="font-heading text-4xl text-black font-light">
+              {payloadGlobalAboutPage.values?.heading}
+            </h2>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="text-center p-6">
-              <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mx-auto mb-4">
-                <Heart className="w-6 h-6"></Heart>
-              </div>
-              <h3 className="font-semibold text-black mb-2">Индивидуальный подход</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                Каждый человек уникален. Я не верю в универсальные диеты — только в
-                персонализированные решения.
-              </p>
-            </div>
-            <div className="text-center p-6">
-              <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mx-auto mb-4">
-                <BookOpen className="w-6 h-6"></BookOpen>
-              </div>
-              <h3 className="font-semibold text-black mb-2">Наука и практика</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                Мои рекомендации основаны на современных научных данных и доказательной медицине.
-              </p>
-            </div>
-            <div className="text-center p-6">
-              <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mx-auto mb-4">
-                <Award className="w-6 h-6"></Award>
-              </div>
-              <h3 className="font-semibold text-black mb-2">Долгосрочный результат</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                Работаю на устойчивое изменение привычек, а не на временный эффект.
-              </p>
-            </div>
-            <div className="text-center p-6">
-              <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mx-auto mb-4">
-                <CheckCircle className="w-6 h-6"></CheckCircle>
-              </div>
-              <h3 className="font-semibold text-black mb-2">Поддержка и забота</h3>
-              <p className="text-gray-500 text-sm leading-relaxed">
-                Я рядом на каждом шагу — отвечаю на вопросы, поддерживаю и корректирую план.
-              </p>
-            </div>
+            {payloadGlobalAboutPage.values?.items?.map((item) => {
+              const Icon = iconMap[item.icon]
+              return (
+                <div className="text-center p-6" key={item.id}>
+                  <div className="w-14 h-14 rounded-2xl bg-green-500/10 flex items-center justify-center text-green-900 mx-auto mb-4">
+                    <Icon className="w-6 h-6"></Icon>
+                  </div>
+                  <h3 className="font-semibold text-black mb-2">{item.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -97,53 +82,46 @@ export default async function About() {
           <div className="text-center mb-12">
             <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
             <h2 className="font-heading text-4xl text-black font-light">
-              Образование и сертификаты
+              {payloadGlobalAboutPage.education?.heading}
             </h2>
           </div>
           <div className="space-y-4">
-            <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100">
-              <div className="w-14 h-14 rounded-xl bg-green-500/10 flex flex-col items-center justify-center shrink-0">
-                <GraduationCap className="w-5 h-5 text-green-900" />
-                <span className="text-xs font-semibold text-green-900 mt-0.5">2024</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-black">Название образования</h3>
-                <p className="text-gray-500">Место образования</p>
-              </div>
-              <div className="ml-auto">
-                <span className="text-xs bg-green-500/10 text-green-900 px-3 py-1 rounded-full">
-                  Диплом
-                </span>
-              </div>
-            </div>
-            <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100">
-              <div className="w-14 h-14 rounded-xl bg-green-500/10 flex flex-col items-center justify-center shrink-0">
-                <GraduationCap className="w-5 h-5 text-green-900" />
-                <span className="text-xs font-semibold text-green-900 mt-0.5">2025</span>
-              </div>
-              <div>
-                <h3 className="font-semibold text-black">Название образования</h3>
-                <p className="text-gray-500">Место образования</p>
-              </div>
-              <div className="ml-auto">
-                <span className="text-xs bg-green-500/10 text-green-900 px-3 py-1 rounded-full">
-                  Сертификат
-                </span>
-              </div>
-            </div>
+            {payloadGlobalAboutPage.education?.items?.map((item) => {
+              return (
+                <div
+                  key={item.id}
+                  className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100"
+                >
+                  <div className="w-14 h-14 rounded-xl bg-green-500/10 flex flex-col items-center justify-center shrink-0">
+                    <GraduationCap className="w-5 h-5 text-green-900" />
+                    <span className="text-xs font-semibold text-green-900 mt-0.5">{item.year}</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-black">{item.title}</h3>
+                    <p className="text-gray-500">{item.place}</p>
+                  </div>
+                  <div className="ml-auto">
+                    <span className="text-xs bg-green-500/10 text-green-900 px-3 py-1 rounded-full">
+                      {item.variant}
+                    </span>
+                  </div>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
       <section className="py-15 bg-green-700 text-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-4xl font-light mb-4">Готовы начать путь к здоровью?</h2>
+          <h2 className="font-heading text-4xl font-light mb-4">
+            {payloadGlobalAboutPage.cta?.heading}
+          </h2>
           <p className="text-white/80 mb-8 leading-relaxed">
-            Запишитесь на первичную консультацию и получите персональную стратегию улучшения вашего
-            здоровья.
+            {payloadGlobalAboutPage.cta?.description}
           </p>
           <Button asChild variant="secondary" size="xl">
             <Link href="/contacts">
-              Записаться на консультацию
+              {payloadGlobalAboutPage.cta?.button}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>

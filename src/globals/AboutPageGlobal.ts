@@ -93,6 +93,7 @@ export const AboutPageGlobal: GlobalConfig = {
                     { label: '🎓 Выпускник', value: 'GraduationCap' },
                   ],
                   defaultValue: 'Heart',
+                  required: true,
                 },
                 {
                   name: 'title',

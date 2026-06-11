@@ -640,7 +640,7 @@ export interface AboutPage {
     heading?: string | null;
     items?:
       | {
-          icon?: ('Heart' | 'BookOpen' | 'Award' | 'CheckCircle' | 'GraduationCap') | null;
+          icon: 'Heart' | 'BookOpen' | 'Award' | 'CheckCircle' | 'GraduationCap';
           title: string;
           description: string;
           id?: string | null;
