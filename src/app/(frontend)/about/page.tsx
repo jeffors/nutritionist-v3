@@ -7,6 +7,7 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { getMediaUrl } from '@/lib/media'
 import { iconMap } from '@/lib/service-maps'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 
 export default async function About() {
   const payloadConfig = await config
@@ -87,25 +88,35 @@ export default async function About() {
           </div>
           <div className="space-y-4">
             {payloadGlobalAboutPage.education?.items?.map((item) => {
+              const image = getMediaUrl(item.image)
               return (
-                <div
-                  key={item.id}
-                  className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100"
-                >
-                  <div className="w-14 h-14 rounded-xl bg-green-500/10 flex flex-col items-center justify-center shrink-0">
-                    <GraduationCap className="w-5 h-5 text-green-900" />
-                    <span className="text-xs font-semibold text-green-900 mt-0.5">{item.year}</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-black">{item.title}</h3>
-                    <p className="text-gray-500">{item.place}</p>
-                  </div>
-                  <div className="ml-auto">
-                    <span className="text-xs bg-green-500/10 text-green-900 px-3 py-1 rounded-full">
-                      {item.variant}
-                    </span>
-                  </div>
-                </div>
+                <Dialog key={item.id}>
+                  <DialogTrigger className="w-full">
+                    <div className="bg-white rounded-2xl p-6 flex items-start gap-4 border border-gray-100">
+                      <div className="w-14 h-14 rounded-xl bg-green-500/10 flex flex-col items-center justify-center shrink-0">
+                        <GraduationCap className="w-5 h-5 text-green-900" />
+                        <span className="text-xs font-semibold text-green-900 mt-0.5">
+                          {item.year}
+                        </span>
+                      </div>
+                      <div className="flex flex-col items-start">
+                        <h3 className="font-semibold text-black">{item.title}</h3>
+                        <p className="text-gray-500">{item.place}</p>
+                      </div>
+                      <div className="ml-auto">
+                        <span className="text-xs bg-green-500/10 text-green-900 px-3 py-1 rounded-full">
+                          {item.variant}
+                        </span>
+                      </div>
+                    </div>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogTitle>{item.title}</DialogTitle>
+                    {image && (
+                      <Image src={image} alt="Фото образования" width={700} height={1200} />
+                    )}
+                  </DialogContent>
+                </Dialog>
               )
             })}
           </div>
