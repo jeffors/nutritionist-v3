@@ -96,10 +96,12 @@ export interface Config {
   globals: {
     'contacts-global': ContactsGlobal;
     'home-page': HomePage;
+    'about-page': AboutPage;
   };
   globalsSelect: {
     'contacts-global': ContactsGlobalSelect<false> | ContactsGlobalSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -623,6 +625,51 @@ export interface HomePage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  hero?: {
+    image?: (number | null) | Media;
+    heading?: string | null;
+    paragraph1?: string | null;
+    paragraph2?: string | null;
+    ctaLabel?: string | null;
+  };
+  values?: {
+    heading?: string | null;
+    items?:
+      | {
+          icon?: ('Heart' | 'BookOpen' | 'Award' | 'CheckCircle' | 'GraduationCap') | null;
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  education?: {
+    heading?: string | null;
+    items?:
+      | {
+          image?: (number | null) | Media;
+          year: string;
+          title: string;
+          place: string;
+          variant: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  cta?: {
+    heading?: string | null;
+    description?: string | null;
+    button?: string | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts-global_select".
  */
 export interface ContactsGlobalSelect<T extends boolean = true> {
@@ -748,6 +795,59 @@ export interface HomePageSelect<T extends boolean = true> {
         description?: T;
       };
   _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        image?: T;
+        heading?: T;
+        paragraph1?: T;
+        paragraph2?: T;
+        ctaLabel?: T;
+      };
+  values?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  education?:
+    | T
+    | {
+        heading?: T;
+        items?:
+          | T
+          | {
+              image?: T;
+              year?: T;
+              title?: T;
+              place?: T;
+              variant?: T;
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        button?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

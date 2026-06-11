@@ -76,6 +76,10 @@ export const AboutPageGlobal: GlobalConfig = {
               type: 'array',
               minRows: 1,
               maxRows: 4,
+              labels: {
+                singular: 'Пункт',
+                plural: 'Пункты',
+              },
               fields: [
                 {
                   name: 'icon',
@@ -128,25 +132,39 @@ export const AboutPageGlobal: GlobalConfig = {
               name: 'items',
               type: 'array',
               minRows: 1,
+              labels: {
+                singular: 'Образование',
+                plural: 'Образование',
+              },
               fields: [
+                {
+                  name: 'image',
+                  type: 'upload',
+                  relationTo: 'media',
+                  label: 'Фото диплома/сертификата',
+                },
                 {
                   name: 'year',
                   type: 'text',
+                  label: 'Год получения образования',
                   required: true,
                 },
                 {
                   name: 'title',
                   type: 'text',
+                  label: 'Название образования',
                   required: true,
                 },
                 {
                   name: 'place',
                   type: 'text',
+                  label: 'Место получения',
                   required: true,
                 },
                 {
                   name: 'variant',
                   type: 'text',
+                  label: 'Тип образования',
                   required: true,
                 },
               ],
