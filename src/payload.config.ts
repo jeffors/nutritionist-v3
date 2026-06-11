@@ -36,8 +36,11 @@ export default buildConfig({
         if (globalConfig?.slug === 'home-page') {
           return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/`
         }
+        if (globalConfig?.slug === 'about-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/about/`
+        }
       },
-      globals: ['home-page'],
+      globals: ['home-page', 'about-page'],
       breakpoints: [
         { label: 'Телефон', name: 'mobile', width: 375, height: 667 },
         { label: 'Планшет', name: 'tablet', width: 768, height: 1024 },

@@ -1,9 +1,24 @@
+import { revalidatePath } from 'next/cache'
 import { array } from 'node:stream/iter'
 import { GlobalConfig } from 'payload'
 
 export const AboutPageGlobal: GlobalConfig = {
   slug: 'about-page',
   label: 'Страница "Обо мне"',
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/')
+      },
+    ],
+  },
+  versions: {
+    drafts: {
+      autosave: {
+        interval: 375,
+      },
+    },
+  },
   fields: [
     {
       name: 'hero',

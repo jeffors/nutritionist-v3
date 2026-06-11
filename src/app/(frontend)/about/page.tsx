@@ -7,16 +7,24 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { getMediaUrl } from '@/lib/media'
 import { iconMap } from '@/lib/service-maps'
-import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 
 export default async function About() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const payloadGlobalAboutPage = await payload.findGlobal({ slug: 'about-page' })
+  const payloadGlobalAboutPage = await payload.findGlobal({ slug: 'about-page', draft: true })
   const imageAboutUrl = getMediaUrl(payloadGlobalAboutPage.hero?.image)
 
   return (
     <div className="pt-20">
+      <RefreshRouteOnSave />
       <section className="py-15 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
@@ -112,9 +120,11 @@ export default async function About() {
                   </DialogTrigger>
                   <DialogContent>
                     <DialogTitle>{item.title}</DialogTitle>
-                    {image && (
-                      <Image src={image} alt="Фото образования" width={700} height={1200} />
-                    )}
+                    <DialogDescription>
+                      {image && (
+                        <Image src={image} alt="Фото образования" width={700} height={1200} />
+                      )}
+                    </DialogDescription>
                   </DialogContent>
                 </Dialog>
               )
