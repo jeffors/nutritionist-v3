@@ -9,6 +9,10 @@ import {
   Brain,
   Scale,
   Microscope,
+  BookOpen,
+  Award,
+  CheckCircle,
+  GraduationCap,
   type LucideIcon,
 } from 'lucide-react'
 
@@ -23,6 +27,10 @@ export const iconMap: Record<string, LucideIcon> = {
   Brain,
   Scale,
   Microscope,
+  BookOpen,
+  Award,
+  CheckCircle,
+  GraduationCap,
 }
 
 export const colorMap: Record<string, { bg: string; text: string }> = {
