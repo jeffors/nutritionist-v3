@@ -5,19 +5,24 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 
 export default async function Contacts() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
+  const payloadGlobalContactsPage = await payload.findGlobal({ slug: 'contacts-page', draft: true })
   return (
     <div className="pt-20">
+      <RefreshRouteOnSave />
       <section className="py-15 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-          <h1 className="font-heading text-5xl md:text-6xl text-black font-light mb-6">Контакты</h1>
+          <h1 className="font-heading text-5xl md:text-6xl text-black font-light mb-6">
+            {payloadGlobalContactsPage.hero?.heading}
+          </h1>
           <div className="text-lg text-black/80 max-w-2xl mx-auto leading-relaxed mb-6">
-            Выберите удобный способ связи. Отвечаю в течение 2 часов в рабочее время.
+            {payloadGlobalContactsPage.hero?.description}
           </div>
         </div>
       </section>
@@ -25,7 +30,9 @@ export default async function Contacts() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
             <div className="">
-              <h2 className="font-heading text-3xl text-black font-light mb-8">Как связаться</h2>
+              <h2 className="font-heading text-3xl text-black font-light mb-8">
+                {payloadGlobalContactsPage.hero?.howToContact}
+              </h2>
               <div className="space-y-5">
                 <Link
                   href={`https://wa.me/{${payloadGlobalContacts.whatsapp}`}
@@ -85,35 +92,33 @@ export default async function Contacts() {
                 <Card>
                   <CardHeader>
                     <Clock className="w-6 h-6 text-green-700 mb-3"></Clock>
-                    <CardTitle className="font-sans text-sm">Время работы</CardTitle>
+                    <CardTitle className="font-sans text-sm">
+                      {payloadGlobalContactsPage.hours?.heading}
+                    </CardTitle>
                     <CardDescription>
-                      Пн–Пт: 9:00–19:00
-                      <br />
-                      Сб: 10:00–16:00
-                      <br />
-                      Вс: выходной
+                      {payloadGlobalContactsPage.hours?.description}
                     </CardDescription>
                   </CardHeader>
                 </Card>
                 <Card>
                   <CardHeader>
                     <Globe className="w-6 h-6 text-green-700 mb-3" />
-                    <CardTitle className="font-sans text-sm">Работаю онлайн</CardTitle>
+                    <CardTitle className="font-sans text-sm">
+                      {payloadGlobalContactsPage.online?.heading}
+                    </CardTitle>
                     <CardDescription>
-                      Консультирую клиентов
-                      <br />
-                      из любой страны мира.
-                      <br />
-                      WhatsApp / TG
+                      {payloadGlobalContactsPage.online?.description}
                     </CardDescription>
                   </CardHeader>
                 </Card>
               </div>
             </div>
             <Card className="p-8">
-              <h2 className="font-heading text-3xl text-black font-light mb-2">Оставить заявку</h2>
+              <h2 className="font-heading text-3xl text-black font-light mb-2">
+                {payloadGlobalContactsPage.form?.heading}
+              </h2>
               <p className="text-black/80 text-sm mb-6">
-                Заполните форму и я свяжусь с вами в течение 2 часов
+                {payloadGlobalContactsPage.form?.description}
               </p>
               <ConsultationForm />
             </Card>

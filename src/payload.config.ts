@@ -14,6 +14,7 @@ import { Reviews } from './collections/Reviews'
 import { Contacts } from './globals/Contacts'
 import { HomePageGlobal } from './globals/HomePageGlobal'
 import { AboutPageGlobal } from './globals/AboutPageGlobal'
+import { ContactsPageGlobal } from './globals/ContactsPageGlobal'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -39,8 +40,11 @@ export default buildConfig({
         if (globalConfig?.slug === 'about-page') {
           return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/about/`
         }
+        if (globalConfig?.slug === 'contacts-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/contacts/`
+        }
       },
-      globals: ['home-page', 'about-page'],
+      globals: ['home-page', 'about-page', 'contacts-page'],
       breakpoints: [
         { label: 'Телефон', name: 'mobile', width: 375, height: 667 },
         { label: 'Планшет', name: 'tablet', width: 768, height: 1024 },
@@ -49,7 +53,7 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Services, Guides, Reviews],
-  globals: [Contacts, HomePageGlobal, AboutPageGlobal],
+  globals: [Contacts, HomePageGlobal, AboutPageGlobal, ContactsPageGlobal],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

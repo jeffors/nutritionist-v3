@@ -97,11 +97,13 @@ export interface Config {
     'contacts-global': ContactsGlobal;
     'home-page': HomePage;
     'about-page': AboutPage;
+    'contacts-page': ContactsPage;
   };
   globalsSelect: {
     'contacts-global': ContactsGlobalSelect<false> | ContactsGlobalSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'contacts-page': ContactsPageSelect<false> | ContactsPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -671,6 +673,33 @@ export interface AboutPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts-page".
+ */
+export interface ContactsPage {
+  id: number;
+  hero?: {
+    heading?: string | null;
+    description?: string | null;
+    howToContact?: string | null;
+  };
+  hours?: {
+    heading?: string | null;
+    description?: string | null;
+  };
+  online?: {
+    heading?: string | null;
+    description?: string | null;
+  };
+  form?: {
+    heading?: string | null;
+    description?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts-global_select".
  */
 export interface ContactsGlobalSelect<T extends boolean = true> {
@@ -848,6 +877,41 @@ export interface AboutPageSelect<T extends boolean = true> {
         heading?: T;
         description?: T;
         button?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contacts-page_select".
+ */
+export interface ContactsPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        howToContact?: T;
+      };
+  hours?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  online?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  form?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
       };
   _status?: T;
   updatedAt?: T;
