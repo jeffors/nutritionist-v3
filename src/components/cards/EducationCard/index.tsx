@@ -31,7 +31,7 @@ export function EducationCard({ item }: { item: ItemProps }) {
             <GraduationCap className="w-5 h-5 text-green-900" />
             <span className="text-xs font-semibold text-green-900 mt-0.5">{item.year}</span>
           </div>
-          <div className="flex flex-col items-start">
+          <div className="flex flex-col items-start my-auto">
             <div className="flex gap-2">
               <h3 className="font-semibold text-black">{item.title}</h3>
               <span className="text-xs bg-green-500/10 text-green-900 px-3 py-1 rounded-full">
