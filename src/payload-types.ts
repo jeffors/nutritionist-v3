@@ -98,12 +98,18 @@ export interface Config {
     'home-page': HomePage;
     'about-page': AboutPage;
     'contacts-page': ContactsPage;
+    'services-page': ServicesPage;
+    'shop-page': ShopPage;
+    'review-page': ReviewPage;
   };
   globalsSelect: {
     'contacts-global': ContactsGlobalSelect<false> | ContactsGlobalSelect<true>;
     'home-page': HomePageSelect<false> | HomePageSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'contacts-page': ContactsPageSelect<false> | ContactsPageSelect<true>;
+    'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
+    'shop-page': ShopPageSelect<false> | ShopPageSelect<true>;
+    'review-page': ReviewPageSelect<false> | ReviewPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -700,6 +706,65 @@ export interface ContactsPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page".
+ */
+export interface ServicesPage {
+  id: number;
+  hero?: {
+    heading?: string | null;
+    description?: string | null;
+  };
+  cta?: {
+    heading?: string | null;
+    description?: string | null;
+    button?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shop-page".
+ */
+export interface ShopPage {
+  id: number;
+  hero?: {
+    heading?: string | null;
+    description?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "review-page".
+ */
+export interface ReviewPage {
+  id: number;
+  hero?: {
+    heading?: string | null;
+    description?: string | null;
+    stats?:
+      | {
+          value: string;
+          label: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  cta?: {
+    heading?: string | null;
+    description?: string | null;
+    button?: string | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts-global_select".
  */
 export interface ContactsGlobalSelect<T extends boolean = true> {
@@ -912,6 +977,75 @@ export interface ContactsPageSelect<T extends boolean = true> {
     | {
         heading?: T;
         description?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services-page_select".
+ */
+export interface ServicesPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  cta?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        button?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "shop-page_select".
+ */
+export interface ShopPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "review-page_select".
+ */
+export interface ReviewPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        stats?:
+          | T
+          | {
+              value?: T;
+              label?: T;
+              id?: T;
+            };
+      };
+  cta?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        button?: T;
       };
   _status?: T;
   updatedAt?: T;

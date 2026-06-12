@@ -3,6 +3,7 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { ReviewCard } from '@/components/cards/ReviewCard'
+import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 
 export default async function Reviews() {
   const payload = await getPayload({ config })
@@ -11,37 +12,27 @@ export default async function Reviews() {
     where: { isActive: { equals: true } },
     sort: '-data',
   })
+  const payloadGlobalReviewPage = await payload.findGlobal({ slug: 'review-page', draft: true })
 
   return (
     <div className="pt-20">
+      <RefreshRouteOnSave />
       <section className="py-15 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
           <h1 className="font-heading text-5xl md:text-6xl text-black font-light mb-6">
-            Отзывы клиентов
+            {payloadGlobalReviewPage.hero?.heading}
           </h1>
           <div className="text-lg text-black/80 max-w-2xl mx-auto leading-relaxed mb-6">
-            Реальные истории реальных людей, которые улучшили своё здоровье
+            {payloadGlobalReviewPage.hero?.description}
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-2xl mx-auto">
-            <div className="text-center">
-              <div className="font-heading text-4xl font-light text-black mb-1">500+</div>
-              <div className="text-xs text-black/80 uppercase tracking-wider">клиентов</div>
-            </div>
-            <div className="text-center">
-              <div className="font-heading text-4xl font-light text-black mb-1">4.9</div>
-              <div className="text-xs text-black/80 uppercase tracking-wider">Средняя оценка</div>
-            </div>
-            <div className="text-center">
-              <div className="font-heading text-4xl font-light text-black mb-1">97%</div>
-              <div className="text-xs text-black/80 uppercase tracking-wider">
-                Рекомендуют знакомым
+            {payloadGlobalReviewPage.hero?.stats?.map((stat) => (
+              <div className="text-center" key={stat.id}>
+                <div className="font-heading text-4xl font-light text-black mb-1">{stat.value}</div>
+                <div className="text-xs text-black/80 uppercase tracking-wider">{stat.label}</div>
               </div>
-            </div>
-            <div className="text-center">
-              <div className="font-heading text-4xl font-light text-black mb-1">5 лет</div>
-              <div className="text-xs text-black/80 uppercase tracking-wider">Практики</div>
-            </div>
+            ))}
           </div>
         </div>
       </section>
@@ -57,13 +48,13 @@ export default async function Reviews() {
       <section className="py-15 bg-green-100">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="font-heading text-3xl font-light mb-4">
-            Станьте следующим успешным примером
+            {payloadGlobalReviewPage.cta?.heading}
           </h2>
           <p className="text-black/80 mb-8 leading-relaxed">
-            Запишитесь на консультацию и начните свой путь к здоровью уже сегодня.
+            {payloadGlobalReviewPage.cta?.description}
           </p>
           <Button asChild variant="default" size="xl">
-            <Link href="/contacts">Записаться на консультацию</Link>
+            <Link href="/contacts">{payloadGlobalReviewPage.cta?.button}</Link>
           </Button>
         </div>
       </section>

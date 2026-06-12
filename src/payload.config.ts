@@ -15,6 +15,9 @@ import { Contacts } from './globals/Contacts'
 import { HomePageGlobal } from './globals/HomePageGlobal'
 import { AboutPageGlobal } from './globals/AboutPageGlobal'
 import { ContactsPageGlobal } from './globals/ContactsPageGlobal'
+import { ServicesPageGlobal } from './globals/ServicesPageGlobal'
+import { ShopPageGlobal } from './globals/ShopPageGlobal'
+import { ReviewPageGlobal } from './globals/ReviewPageGlobal'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -43,8 +46,24 @@ export default buildConfig({
         if (globalConfig?.slug === 'contacts-page') {
           return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/contacts/`
         }
+        if (globalConfig?.slug === 'services-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/services/`
+        }
+        if (globalConfig?.slug === 'shop-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/shop/`
+        }
+        if (globalConfig?.slug === 'review-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/reviews/`
+        }
       },
-      globals: ['home-page', 'about-page', 'contacts-page'],
+      globals: [
+        'home-page',
+        'about-page',
+        'contacts-page',
+        'services-page',
+        'shop-page',
+        'review-page',
+      ],
       breakpoints: [
         { label: 'Телефон', name: 'mobile', width: 375, height: 667 },
         { label: 'Планшет', name: 'tablet', width: 768, height: 1024 },
@@ -53,7 +72,15 @@ export default buildConfig({
     },
   },
   collections: [Users, Media, Services, Guides, Reviews],
-  globals: [Contacts, HomePageGlobal, AboutPageGlobal, ContactsPageGlobal],
+  globals: [
+    Contacts,
+    HomePageGlobal,
+    AboutPageGlobal,
+    ContactsPageGlobal,
+    ServicesPageGlobal,
+    ShopPageGlobal,
+    ReviewPageGlobal,
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {

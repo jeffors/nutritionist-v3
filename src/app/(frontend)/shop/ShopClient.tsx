@@ -3,15 +3,16 @@ import { Button } from '@/components/ui/button'
 import { PackageX } from 'lucide-react'
 import { ButtonGroup } from '@/components/ui/button-group'
 import { useState } from 'react'
-import type { Guide } from '@/payload-types'
+import type { Guide, ServicesPage } from '@/payload-types'
 import { CATEGORIES, CategoryValue } from '@/lib/shop-maps'
 import { GuideCard } from '@/components/cards/GuideCard'
 
 interface ShopClientProps {
   guides: Guide[]
+  page: ServicesPage
 }
 
-export function ShopClient({ guides }: ShopClientProps) {
+export function ShopClient({ guides, page }: ShopClientProps) {
   const [activeCategory, setActiveCategory] = useState<CategoryValue>('all')
 
   const filteredGuides =
@@ -23,10 +24,10 @@ export function ShopClient({ guides }: ShopClientProps) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
           <h1 className="font-heading text-5xl md:text-6xl text-black font-light mb-6">
-            Гайды и лекции
+            {page.hero?.heading}
           </h1>
           <div className="text-lg text-black/80 max-w-2xl mx-auto leading-relaxed mb-6">
-            Авторские цифровые продукты для вашего здоровья. После оплаты — мгновенный доступ.
+            {page.hero?.description}
           </div>
         </div>
       </section>
