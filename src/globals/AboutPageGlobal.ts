@@ -1,5 +1,4 @@
 import { revalidatePath } from 'next/cache'
-import { array } from 'node:stream/iter'
 import { GlobalConfig } from 'payload'
 
 export const AboutPageGlobal: GlobalConfig = {

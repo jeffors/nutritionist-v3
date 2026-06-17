@@ -18,6 +18,7 @@ import { ContactsPageGlobal } from './globals/ContactsPageGlobal'
 import { ServicesPageGlobal } from './globals/ServicesPageGlobal'
 import { ShopPageGlobal } from './globals/ShopPageGlobal'
 import { ReviewPageGlobal } from './globals/ReviewPageGlobal'
+import { Consultations } from './collections/Consultations'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -71,7 +72,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Services, Guides, Reviews],
+  collections: [Users, Media, Services, Guides, Reviews, Consultations],
   globals: [
     Contacts,
     HomePageGlobal,
@@ -100,6 +101,8 @@ export default buildConfig({
         general: {
           createNewLabel: 'Создать новый предмет "{{label}}"',
           creatingNewLabel: 'Создание нового предмета "{{label}}"',
+          false: 'НЕТ',
+          true: 'ДА',
         },
       },
     },

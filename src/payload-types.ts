@@ -72,6 +72,7 @@ export interface Config {
     services: Service;
     guides: Guide;
     reviews: Review;
+    consultations: Consultation;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -84,6 +85,7 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     guides: GuidesSelect<false> | GuidesSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
+    consultations: ConsultationsSelect<false> | ConsultationsSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -274,6 +276,21 @@ export interface Review {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consultations".
+ */
+export interface Consultation {
+  id: number;
+  name: string;
+  phone: string;
+  email: string;
+  messenger: 'whatsapp' | 'telegram';
+  request: string;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -315,6 +332,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'reviews';
         value: number | Review;
+      } | null)
+    | ({
+        relationTo: 'consultations';
+        value: number | Consultation;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -453,6 +474,20 @@ export interface ReviewsSelect<T extends boolean = true> {
   stars?: T;
   service?: T;
   date?: T;
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consultations_select".
+ */
+export interface ConsultationsSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  messenger?: T;
+  request?: T;
   isActive?: T;
   updatedAt?: T;
   createdAt?: T;

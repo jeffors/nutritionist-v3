@@ -19,6 +19,7 @@ import { useState } from 'react'
 import z from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { submitConsultation } from './actions'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать не менее 2 символов'),
@@ -34,10 +35,11 @@ const formSchema = z.object({
   }),
 })
 
-type formData = z.infer<typeof formSchema>
+export type FormData = z.infer<typeof formSchema>
 
 export default function ConsultationForm() {
   const [submitted, setSubmitted] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
   const {
     register,
@@ -45,7 +47,7 @@ export default function ConsultationForm() {
     control,
     reset,
     formState: { errors, isSubmitting },
-  } = useForm<formData>({
+  } = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: '',
@@ -57,14 +59,21 @@ export default function ConsultationForm() {
     },
   })
 
-  const onSubmit = async (data: formData) => {
-    console.log(data)
-    setSubmitted(true)
+  const onSubmit = async (data: FormData) => {
+    const result = await submitConsultation(data)
+
+    if (result.success) {
+      setSubmitted(true)
+      setError(null)
+    } else {
+      setError(result.error || 'Что-то пошло не так')
+    }
   }
 
   const handleReset = () => {
     reset()
     setSubmitted(false)
+    setError(null)
   }
 
   if (submitted) {
@@ -170,6 +179,7 @@ export default function ConsultationForm() {
           </FieldLabel>
         </Field>
         <FieldError errors={[errors.terms]} />
+        {error && <p className="text-red-500 text-sm">{error}</p>}
         <Field>
           <Button type="submit" size={'xl'} disabled={isSubmitting}>
             <Send></Send>
