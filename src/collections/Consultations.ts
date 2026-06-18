@@ -1,4 +1,6 @@
+import ConsultationEmail from 'emails/consultation'
 import { CollectionConfig } from 'payload'
+import { render } from 'react-email'
 
 export const Consultations: CollectionConfig = {
   slug: 'consultations',
@@ -14,6 +16,31 @@ export const Consultations: CollectionConfig = {
   access: {
     create: () => true,
     read: ({ req: { user } }) => !!user,
+  },
+  hooks: {
+    afterChange: [
+      async ({ doc, operation, req }) => {
+        if (operation === 'create') {
+          const html = await render(
+            ConsultationEmail({
+              url: '/admin',
+              name: doc.name,
+              phone: doc.phone,
+              email: doc.email,
+              messenger: doc.messenger,
+              request: doc.request,
+            }),
+          )
+
+          await req.payload.sendEmail({
+            to: 'test@example.com',
+            subject: 'Новая заявка на консультацию',
+            html,
+          })
+        }
+        return doc
+      },
+    ],
   },
   fields: [
     {

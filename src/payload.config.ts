@@ -19,11 +19,21 @@ import { ServicesPageGlobal } from './globals/ServicesPageGlobal'
 import { ShopPageGlobal } from './globals/ShopPageGlobal'
 import { ReviewPageGlobal } from './globals/ReviewPageGlobal'
 import { Consultations } from './collections/Consultations'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
+  email: nodemailerAdapter({
+    defaultFromAddress: 'info@lg.com',
+    defaultFromName: 'Larisa Galimova Site',
+    transportOptions: {
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT,
+      secure: false,
+    },
+  }),
   admin: {
     dateFormat: 'dd MMMM yyyy, HH:mm',
     user: Users.slug,
