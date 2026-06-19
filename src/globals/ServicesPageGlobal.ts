@@ -7,7 +7,7 @@ export const ServicesPageGlobal: GlobalConfig = {
   hooks: {
     afterChange: [
       () => {
-        revalidatePath('/')
+        revalidatePath('/services')
       },
     ],
   },

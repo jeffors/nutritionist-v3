@@ -103,6 +103,9 @@ export interface Config {
     'services-page': ServicesPage;
     'shop-page': ShopPage;
     'review-page': ReviewPage;
+    'consent-page': ConsentPage;
+    'offer-page': OfferPage;
+    'privacy-page': PrivacyPage;
   };
   globalsSelect: {
     'contacts-global': ContactsGlobalSelect<false> | ContactsGlobalSelect<true>;
@@ -112,6 +115,9 @@ export interface Config {
     'services-page': ServicesPageSelect<false> | ServicesPageSelect<true>;
     'shop-page': ShopPageSelect<false> | ShopPageSelect<true>;
     'review-page': ReviewPageSelect<false> | ReviewPageSelect<true>;
+    'consent-page': ConsentPageSelect<false> | ConsentPageSelect<true>;
+    'offer-page': OfferPageSelect<false> | OfferPageSelect<true>;
+    'privacy-page': PrivacyPageSelect<false> | PrivacyPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -800,6 +806,121 @@ export interface ReviewPage {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consent-page".
+ */
+export interface ConsentPage {
+  id: number;
+  hero: {
+    heading: string;
+    lastUpdated: string;
+    intro: string;
+  };
+  sections?: {
+    items?:
+      | {
+          title: string;
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  notice: {
+    description: string;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offer-page".
+ */
+export interface OfferPage {
+  id: number;
+  hero: {
+    heading: string;
+    lastUpdated: string;
+  };
+  sections?: {
+    items?:
+      | {
+          title: string;
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-page".
+ */
+export interface PrivacyPage {
+  id: number;
+  hero: {
+    heading: string;
+    lastUpdated: string;
+  };
+  sections?: {
+    items?:
+      | {
+          title: string;
+          description: {
+            root: {
+              type: string;
+              children: {
+                type: any;
+                version: number;
+                [k: string]: unknown;
+              }[];
+              direction: ('ltr' | 'rtl') | null;
+              format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+              indent: number;
+              version: number;
+            };
+            [k: string]: unknown;
+          };
+          id?: string | null;
+        }[]
+      | null;
+  };
+  _status?: ('draft' | 'published') | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts-global_select".
  */
 export interface ContactsGlobalSelect<T extends boolean = true> {
@@ -1081,6 +1202,93 @@ export interface ReviewPageSelect<T extends boolean = true> {
         heading?: T;
         description?: T;
         button?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "consent-page_select".
+ */
+export interface ConsentPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        lastUpdated?: T;
+        intro?: T;
+      };
+  sections?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  notice?:
+    | T
+    | {
+        description?: T;
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "offer-page_select".
+ */
+export interface OfferPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        lastUpdated?: T;
+      };
+  sections?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
+      };
+  _status?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "privacy-page_select".
+ */
+export interface PrivacyPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        heading?: T;
+        lastUpdated?: T;
+      };
+  sections?:
+    | T
+    | {
+        items?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
       };
   _status?: T;
   updatedAt?: T;

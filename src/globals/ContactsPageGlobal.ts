@@ -7,7 +7,7 @@ export const ContactsPageGlobal: GlobalConfig = {
   hooks: {
     afterChange: [
       () => {
-        revalidatePath('/')
+        revalidatePath('/contacts')
       },
     ],
   },

@@ -20,6 +20,9 @@ import { ShopPageGlobal } from './globals/ShopPageGlobal'
 import { ReviewPageGlobal } from './globals/ReviewPageGlobal'
 import { Consultations } from './collections/Consultations'
 import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
+import { ConsentPageGlobal } from './globals/ConsentPageGlobal'
+import { OfferPageGlobal } from './globals/OfferPageGlobal'
+import { PrivacyPageGlobal } from './globals/PrivacyPageGlobal'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -91,6 +94,9 @@ export default buildConfig({
     ServicesPageGlobal,
     ShopPageGlobal,
     ReviewPageGlobal,
+    ConsentPageGlobal,
+    OfferPageGlobal,
+    PrivacyPageGlobal,
   ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',

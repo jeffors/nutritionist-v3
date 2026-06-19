@@ -7,7 +7,7 @@ export const ReviewPageGlobal: GlobalConfig = {
   hooks: {
     afterChange: [
       () => {
-        revalidatePath('/')
+        revalidatePath('/reviews')
       },
     ],
   },

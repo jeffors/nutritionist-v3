@@ -7,7 +7,7 @@ export const AboutPageGlobal: GlobalConfig = {
   hooks: {
     afterChange: [
       () => {
-        revalidatePath('/')
+        revalidatePath('/about')
       },
     ],
   },

@@ -7,7 +7,7 @@ export const ShopPageGlobal: GlobalConfig = {
   hooks: {
     afterChange: [
       () => {
-        revalidatePath('/')
+        revalidatePath('/shop')
       },
     ],
   },
