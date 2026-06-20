@@ -69,6 +69,15 @@ export default buildConfig({
         if (globalConfig?.slug === 'review-page') {
           return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/reviews/`
         }
+        if (globalConfig?.slug === 'consent-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/consent/`
+        }
+        if (globalConfig?.slug === 'offer-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/offer/`
+        }
+        if (globalConfig?.slug === 'privacy-page') {
+          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/privacy/`
+        }
       },
       globals: [
         'home-page',
@@ -77,6 +86,9 @@ export default buildConfig({
         'services-page',
         'shop-page',
         'review-page',
+        'consent-page',
+        'offer-page',
+        'privacy-page',
       ],
       breakpoints: [
         { label: 'Телефон', name: 'mobile', width: 375, height: 667 },

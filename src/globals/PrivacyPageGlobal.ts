@@ -65,7 +65,7 @@ export const PrivacyPageGlobal: GlobalConfig = {
               name: 'items',
               type: 'array',
               minRows: 1,
-              maxRows: 4,
+              label: 'Разделы',
               labels: {
                 singular: 'Раздел',
                 plural: 'Разделы',
