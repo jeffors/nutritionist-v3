@@ -7,7 +7,7 @@ interface PreviewBannerProps {
 
 export function PreviewBanner({ currentPath = '/' }: PreviewBannerProps) {
   return (
-    <div className="bg-amber-500 text-white text-sm py-2 px-4 top-20 text-center font-medium flex items-center justify-center gap-3 sticky top-0 z-50 shadow-md animate-fade-in">
+    <div className="bg-amber-500 text-white text-sm py-2 px-4 top-20 text-center font-medium flex items-center justify-center gap-3 sticky z-50 shadow-md animate-fade-in">
       <div className="flex items-center gap-1.5">
         <EyeOff className="w-4 h-4" />
         <span>
