@@ -16,11 +16,16 @@ import {
 } from '@/components/ui/dialog'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { EducationCard } from '@/components/cards/EducationCard'
+import { draftMode } from 'next/headers'
 
 export default async function About() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const payloadGlobalAboutPage = await payload.findGlobal({ slug: 'about-page', draft: true })
+  const { isEnabled: isDraftMode } = await draftMode()
+  const payloadGlobalAboutPage = await payload.findGlobal({
+    slug: 'about-page',
+    draft: isDraftMode,
+  })
   const imageAboutUrl = getMediaUrl(payloadGlobalAboutPage.hero?.image)
 
   return (

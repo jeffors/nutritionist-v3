@@ -43,10 +43,12 @@ import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { getMediaUrl } from '@/lib/media'
+import { draftMode } from 'next/headers'
 
 export default async function HomePage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
+  const { isEnabled: isDraftMode } = await draftMode()
   const payloadServices = await payload.find({
     collection: 'services',
     where: { isActive: { equals: true } },
@@ -66,7 +68,7 @@ export default async function HomePage() {
     limit: 2,
   })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
-  const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page', draft: true })
+  const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page', draft: isDraftMode })
   const imageAboutUrl = getMediaUrl(payloadGlobalHomePage.about?.image)
   const imageProctologUrl = getMediaUrl(payloadGlobalHomePage.proctolog?.image)
   return (

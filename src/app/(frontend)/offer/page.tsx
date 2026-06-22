@@ -2,11 +2,16 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { draftMode } from 'next/headers'
 
 export default async function Offer() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const payloadGlobalOfferPage = await payload.findGlobal({ slug: 'offer-page', draft: true })
+  const { isEnabled: isDraftMode } = await draftMode()
+  const payloadGlobalOfferPage = await payload.findGlobal({
+    slug: 'offer-page',
+    draft: isDraftMode,
+  })
   return (
     <>
       <div className="pt-20 py-15 bg-white">

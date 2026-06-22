@@ -6,12 +6,17 @@ import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { draftMode } from 'next/headers'
 
 export default async function Contacts() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
+  const { isEnabled: isDraftMode } = await draftMode()
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
-  const payloadGlobalContactsPage = await payload.findGlobal({ slug: 'contacts-page', draft: true })
+  const payloadGlobalContactsPage = await payload.findGlobal({
+    slug: 'contacts-page',
+    draft: isDraftMode,
+  })
   return (
     <div className="pt-20">
       <RefreshRouteOnSave />

@@ -4,15 +4,20 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { ReviewCard } from '@/components/cards/ReviewCard'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { draftMode } from 'next/headers'
 
 export default async function Reviews() {
   const payload = await getPayload({ config })
+  const { isEnabled: isDraftMode } = await draftMode()
   const payloadReviews = await payload.find({
     collection: 'reviews',
     where: { isActive: { equals: true } },
     sort: '-data',
   })
-  const payloadGlobalReviewPage = await payload.findGlobal({ slug: 'review-page', draft: true })
+  const payloadGlobalReviewPage = await payload.findGlobal({
+    slug: 'review-page',
+    draft: isDraftMode,
+  })
 
   return (
     <div className="pt-20">

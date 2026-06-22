@@ -2,11 +2,16 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { draftMode } from 'next/headers'
 
 export default async function Privacy() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const payloadGlobalPrivacyPage = await payload.findGlobal({ slug: 'privacy-page', draft: true })
+  const { isEnabled: isDraftMode } = await draftMode()
+  const payloadGlobalPrivacyPage = await payload.findGlobal({
+    slug: 'privacy-page',
+    draft: isDraftMode,
+  })
   return (
     <>
       <div className="pt-20 py-15 bg-white">

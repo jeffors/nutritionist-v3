@@ -2,11 +2,16 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { draftMode } from 'next/headers'
 
 export default async function Consent() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
-  const payloadGlobalConsentPage = await payload.findGlobal({ slug: 'consent-page', draft: true })
+  const { isEnabled: isDraftMode } = await draftMode()
+  const payloadGlobalConsentPage = await payload.findGlobal({
+    slug: 'consent-page',
+    draft: isDraftMode,
+  })
 
   return (
     <>

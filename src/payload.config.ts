@@ -23,6 +23,7 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { ConsentPageGlobal } from './globals/ConsentPageGlobal'
 import { OfferPageGlobal } from './globals/OfferPageGlobal'
 import { PrivacyPageGlobal } from './globals/PrivacyPageGlobal'
+import { importExportPlugin } from '@payloadcms/plugin-import-export'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -51,33 +52,20 @@ export default buildConfig({
     },
     livePreview: {
       url: ({ globalConfig }) => {
-        if (globalConfig?.slug === 'home-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/`
-        }
-        if (globalConfig?.slug === 'about-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/about/`
-        }
-        if (globalConfig?.slug === 'contacts-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/contacts/`
-        }
-        if (globalConfig?.slug === 'services-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/services/`
-        }
-        if (globalConfig?.slug === 'shop-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/shop/`
-        }
-        if (globalConfig?.slug === 'review-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/reviews/`
-        }
-        if (globalConfig?.slug === 'consent-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/consent/`
-        }
-        if (globalConfig?.slug === 'offer-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/offer/`
-        }
-        if (globalConfig?.slug === 'privacy-page') {
-          return `${process.env.NEXT_PUBLIC_PAYLOAD_URL}/privacy/`
-        }
+        const baseUrl = process.env.NEXT_PUBLIC_PAYLOAD_URL || 'http://localhost:3000'
+        const secret = process.env.PAYLOAD_SECRET || ''
+
+        let pagePath = '/'
+        if (globalConfig?.slug === 'about-page') pagePath = '/about/'
+        if (globalConfig?.slug === 'contacts-page') pagePath = '/contacts/'
+        if (globalConfig?.slug === 'services-page') pagePath = '/services/'
+        if (globalConfig?.slug === 'shop-page') pagePath = '/shop/'
+        if (globalConfig?.slug === 'review-page') pagePath = '/reviews/'
+        if (globalConfig?.slug === 'consent-page') pagePath = '/consent/'
+        if (globalConfig?.slug === 'offer-page') pagePath = '/offer/'
+        if (globalConfig?.slug === 'privacy-page') pagePath = '/privacy/'
+
+        return `${baseUrl}/api/preview?secret=${secret}&url=${pagePath}`
       },
       globals: [
         'home-page',
@@ -121,7 +109,17 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [],
+  plugins: [
+    importExportPlugin({
+      collections: [
+        {
+          slug: 'consultations',
+          export: { disableJobsQueue: true },
+          import: { disableJobsQueue: true },
+        },
+      ],
+    }),
+  ],
   i18n: {
     supportedLanguages: { ru },
     translations: {

@@ -22,15 +22,20 @@ import { getPayload } from 'payload'
 import config from '@payload-config'
 import { ServiceCard } from '@/components/cards/ServiceCard'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { draftMode } from 'next/headers'
 
 export default async function Services() {
   const payload = await getPayload({ config })
+  const { isEnabled: isDraftMode } = await draftMode()
   const payloadServices = await payload.find({
     collection: 'services',
     where: { isActive: { equals: true } },
     sort: 'order',
   })
-  const payloadGlobalServicesPage = await payload.findGlobal({ slug: 'services-page', draft: true })
+  const payloadGlobalServicesPage = await payload.findGlobal({
+    slug: 'services-page',
+    draft: isDraftMode,
+  })
   return (
     <div className="pt-20">
       <RefreshRouteOnSave />
