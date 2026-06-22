@@ -3,6 +3,8 @@ import './styles.css'
 import { Inter, Merriweather } from 'next/font/google'
 import { Footer } from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
+import { draftMode } from 'next/headers'
+import { PreviewBanner } from '@/components/PreviewBanner'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
 const merriweather = Merriweather({
@@ -17,10 +19,12 @@ export const metadata = {
 
 export default async function RootLayout(props: { children: React.ReactNode }) {
   const { children } = props
+  const { isEnabled: isDraftMode } = await draftMode()
 
   return (
     <html lang="ru" className={`${inter.variable} ${merriweather.variable} antialiased`}>
       <body>
+        {isDraftMode && <PreviewBanner currentPath="/" />}
         <Header />
         <main>{children}</main>
         <Footer />
