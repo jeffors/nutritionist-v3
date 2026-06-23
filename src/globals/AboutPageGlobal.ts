@@ -45,10 +45,9 @@ export const AboutPageGlobal: GlobalConfig = {
             },
             {
               name: 'paragraph1',
-              type: 'textarea',
+              type: 'richText',
               label: 'Первый абзац',
-              defaultValue:
-                'Меня зовут Лариса Галимова. Я клинический нутрициолог с высшим медицинским образованием. Помогаю людям обрести здоровье и энергию через осознанное питание.',
+              required: true,
             },
             {
               name: 'paragraph2',

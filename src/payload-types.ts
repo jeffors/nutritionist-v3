@@ -943,10 +943,24 @@ export interface HomePage {
  */
 export interface AboutPage {
   id: number;
-  hero?: {
+  hero: {
     image?: (number | null) | Media;
     heading?: string | null;
-    paragraph1?: string | null;
+    paragraph1: {
+      root: {
+        type: string;
+        children: {
+          type: any;
+          version: number;
+          [k: string]: unknown;
+        }[];
+        direction: ('ltr' | 'rtl') | null;
+        format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+        indent: number;
+        version: number;
+      };
+      [k: string]: unknown;
+    };
     paragraph2?: string | null;
     ctaLabel?: string | null;
   };

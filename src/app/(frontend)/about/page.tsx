@@ -17,6 +17,7 @@ import {
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { EducationCard } from '@/components/cards/EducationCard'
 import { draftMode } from 'next/headers'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 export default async function About() {
   const payloadConfig = await config
@@ -40,7 +41,7 @@ export default async function About() {
                 {payloadGlobalAboutPage.hero?.heading}
               </h1>
               <div className="text-xl text-black/80 leading-relaxed mb-6">
-                {payloadGlobalAboutPage.hero?.paragraph1}
+                <RichText data={payloadGlobalAboutPage.hero?.paragraph1} />
               </div>
               <p className="text-black/70 leading-relaxed mb-8">
                 {payloadGlobalAboutPage.hero?.paragraph2}

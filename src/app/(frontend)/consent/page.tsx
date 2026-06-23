@@ -35,9 +35,9 @@ export default async function Consent() {
           {payloadGlobalConsentPage.sections?.items?.map((item) => (
             <div key={item.id} className="mb-8">
               <h2 className="font-serif text-2xl text-black font-light mb-3">{item.title}</h2>
-              <p className="text-text/80 text-sm leading-relaxed whitespace-pre-line">
+              <div className="text-text/80 text-sm leading-relaxed whitespace-pre-line">
                 <RichText data={item.description} />
-              </p>
+              </div>
             </div>
           ))}
 
