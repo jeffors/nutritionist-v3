@@ -74,9 +74,9 @@ export const ContactsPageGlobal: GlobalConfig = {
             },
             {
               name: 'description',
-              type: 'textarea',
+              type: 'richText',
+              required: true,
               label: 'Описание',
-              defaultValue: 'Пн–Пт: 9:00–19:00 Сб: 10:00–16:00 Вс: выходной.',
             },
           ],
         },
@@ -102,9 +102,9 @@ export const ContactsPageGlobal: GlobalConfig = {
             },
             {
               name: 'description',
-              type: 'textarea',
+              type: 'richText',
+              required: true,
               label: 'Описание',
-              defaultValue: 'Консультирую клиентов из любой страны мира. WhatsApp / TG',
             },
           ],
         },

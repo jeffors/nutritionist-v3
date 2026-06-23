@@ -7,6 +7,7 @@ import config from '@/payload.config'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { draftMode } from 'next/headers'
+import { RichText } from '@payloadcms/richtext-lexical/react'
 
 export default async function Contacts() {
   const payloadConfig = await config
@@ -101,7 +102,7 @@ export default async function Contacts() {
                       {payloadGlobalContactsPage.hours?.heading}
                     </CardTitle>
                     <CardDescription>
-                      {payloadGlobalContactsPage.hours?.description}
+                      <RichText data={payloadGlobalContactsPage.hours?.description} />
                     </CardDescription>
                   </CardHeader>
                 </Card>
@@ -112,7 +113,7 @@ export default async function Contacts() {
                       {payloadGlobalContactsPage.online?.heading}
                     </CardTitle>
                     <CardDescription>
-                      {payloadGlobalContactsPage.online?.description}
+                      <RichText data={payloadGlobalContactsPage.online?.description} />
                     </CardDescription>
                   </CardHeader>
                 </Card>
