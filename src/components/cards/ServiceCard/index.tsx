@@ -31,7 +31,9 @@ export function ServiceCard({ service }: { service: Service }) {
         <div className="">
           <CardTitle className="text-2xl">{service.title}</CardTitle>
           <CardDescription className="flex items-center gap-3">
-            <span className="text-xl font-bold text-black">{service.price}</span>
+            <span className="text-xl font-bold text-black">
+              {service.price !== 0 ? `От ${service.price} ₽` : `Бесплатно`}
+            </span>
             <Badge variant="secondary">{service.duration}</Badge>
           </CardDescription>
         </div>

@@ -30,7 +30,9 @@ export function ServiceHomeCard({ service }: { service: Service }) {
       <CardContent className="flex justify-between"></CardContent>
       <CardFooter className="flex flex-col gap-5">
         <div className="w-full flex justify-between">
-          <p className="text-lg font-bold">{service.price}</p>
+          <p className="text-lg font-bold">
+            {service.price !== 0 ? `От ${service.price} ₽` : `Бесплатно`}
+          </p>
           <Badge variant="secondary">{service.duration}</Badge>
         </div>
         <Button variant="outline" className="w-full">

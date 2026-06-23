@@ -214,10 +214,7 @@ export interface Service {
   description: string;
   icon: 'Stethoscope' | 'Leaf' | 'Salad' | 'Pill' | 'Activity' | 'Dna' | 'Heart' | 'Brain' | 'Scale' | 'Microscope';
   color: 'green' | 'blue' | 'rose' | 'violet' | 'amber' | 'sky' | 'orange';
-  /**
-   * Произвольный текст: "от 4 500 ₽", "Бесплатно" и т.д.
-   */
-  price: string;
+  price: number;
   duration: string;
   includes?:
     | {

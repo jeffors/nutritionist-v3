@@ -65,13 +65,11 @@ export const Services: CollectionConfig = {
     },
     {
       name: 'price',
-      type: 'text',
-      label: 'Цена (отображаемая)',
+      type: 'number',
+      label: 'Цена (₽)',
       required: true,
-      admin: {
-        placeholder: 'от 4500 ₽',
-        description: 'Произвольный текст: "от 4 500 ₽", "Бесплатно" и т.д.',
-      },
+      min: 0,
+      defaultValue: 0,
     },
     {
       name: 'duration',
