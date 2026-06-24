@@ -21,22 +21,63 @@ export const Consultations: CollectionConfig = {
     afterChange: [
       async ({ doc, operation, req }) => {
         if (operation === 'create') {
-          const html = await render(
-            ConsultationEmail({
-              url: '/admin',
-              name: doc.name,
-              phone: doc.phone,
-              email: doc.email,
-              messenger: doc.messenger,
-              request: doc.request,
-            }),
-          )
+          const website = process.env.NEXT_PUBLIC_PAYLOAD_URL
+          try {
+            const html = await render(
+              ConsultationEmail({
+                url: `${website}/admin`,
+                name: doc.name,
+                phone: doc.phone,
+                email: doc.email,
+                messenger: doc.messenger,
+                request: doc.request,
+              }),
+            )
 
-          await req.payload.sendEmail({
-            to: 'test@example.com',
-            subject: 'Новая заявка на консультацию',
-            html,
-          })
+            await req.payload.sendEmail({
+              to: 'test@example.com',
+              subject: 'Новая заявка на консультацию',
+              html,
+            })
+          } catch (emailError) {
+            req.payload.logger.error(`Ошибка отправки Email: ${emailError}`)
+          }
+
+          const botToken = process.env.TELEGRAM_BOT_TOKEN
+          const chatId = process.env.TELEGRAM_CHAT_ID
+
+          if (botToken && chatId) {
+            const message = [
+              `🔔 <b>Новая заявка на консультацию!</b>`,
+              ``,
+              `👤 <b>Имя:</b> ${doc.name}`,
+              `📞 <b>Телефон:</b> ${doc.phone}`,
+              `📧 <b>Email:</b> ${doc.email}`,
+              `💬 <b>Предпочитаемый мессенджер:</b> ${doc.messenger === 'telegram' ? 'Telegram' : 'WhatsApp'}`,
+              ``,
+              `📝 <b>Запрос:</b>\n${doc.request}`,
+              ``,
+              `<a href="https://grammy.dev/admin">Открыть заявку в админ-панели</a>`,
+            ].join('\n')
+
+            try {
+              await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                  chat_id: chatId,
+                  text: message,
+                  parse_mode: 'HTML',
+                }),
+              })
+            } catch (tgError) {
+              req.payload.logger.error(`Ошибка отправки в Telegram: ${tgError}`)
+            }
+          } else {
+            req.payload.logger.warn('Telegram переменные окружения не настроены.')
+          }
         }
         return doc
       },
@@ -78,7 +119,7 @@ export const Consultations: CollectionConfig = {
       name: 'isActive',
       label: 'Обработана',
       type: 'checkbox',
-      defaultValue: 'false',
+      defaultValue: false,
     },
   ],
 }
