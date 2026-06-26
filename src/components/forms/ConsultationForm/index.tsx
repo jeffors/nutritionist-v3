@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { CheckCircle, Send } from 'lucide-react'
+import { CheckCircle, Loader2, Send } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import z from 'zod'
@@ -182,7 +182,11 @@ export default function ConsultationForm() {
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <Field>
           <Button type="submit" size={'xl'} disabled={isSubmitting}>
-            <Send></Send>
+            {isSubmitting ? (
+              <Loader2 className="w-4 h-4 animate-spin" />
+            ) : (
+              <Send className="w-4 h-4" />
+            )}
             {isSubmitting ? 'Отправляем...' : 'Записаться на консультацию'}
           </Button>
         </Field>

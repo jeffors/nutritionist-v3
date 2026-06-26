@@ -22,7 +22,7 @@ export function GuideHomeCard({ guide }: { guide: Guide }) {
       </CardHeader>
       <CardFooter className="flex justify-between">
         <p className="text-lg font-bold">{guide.price} ₽</p>
-        <Button variant="default">Купить</Button>
+        <Button variant="default">Подробнее </Button>
       </CardFooter>
     </Card>
   )

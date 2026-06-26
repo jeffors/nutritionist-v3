@@ -1,3 +1,5 @@
+'use client'
+
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import {
@@ -28,6 +30,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { getMediaUrl } from '@/lib/media'
 import { CATEGORIES } from '@/lib/shop-maps'
+import GuideForm from '@/components/forms/GuideForm'
 
 const categoryLabels: Record<string, string> = {
   guides: 'Гайды',
@@ -84,42 +87,7 @@ export function GuideCard({ guide }: { guide: Guide }) {
               </ItemContent>
               <ItemActions className="font-bold text-2xl">{guide.price} ₽</ItemActions>
             </Item>
-            <Form action={''}>
-              <FieldGroup>
-                <Field>
-                  <FieldLabel htmlFor="input-name">Имя</FieldLabel>
-                  <Input id="input-name" type="text" placeholder="Ваше имя"></Input>
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="input-email">Email</FieldLabel>
-                  <Input id="input-email" type="email" placeholder="your@email.com"></Input>
-                </Field>
-                <Field orientation={'horizontal'}>
-                  <Checkbox id="terms-checkbox" name="terms-checkbox"></Checkbox>
-                  <FieldLabel htmlFor="terms-checkbox">
-                    <span>
-                      Я согласен(а) c{' '}
-                      <Link href="/offer" className="text-green-600 underline hover:no-underline">
-                        Публичной офертой
-                      </Link>{' '}
-                      и{' '}
-                      <Link href="/privacy" className="text-green-600 underline hover:no-underline">
-                        Политикой конфиденциальности
-                      </Link>
-                    </span>
-                  </FieldLabel>
-                </Field>
-              </FieldGroup>
-            </Form>
-            <p className="text-center text-xs text-black/60 mt-4">
-              🔒 Безопасная оплата. После оплаты материал придёт на email.
-            </p>
-            <DialogFooter>
-              <Button className="w-full" size={'xl'}>
-                <ShoppingCart className="w-4 h-4" />
-                Оплатить {guide.price} ₽
-              </Button>
-            </DialogFooter>
+            <GuideForm guide={guide} />
           </DialogContent>
         </Dialog>
       </CardFooter>
