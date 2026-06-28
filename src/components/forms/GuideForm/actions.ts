@@ -26,6 +26,9 @@ export async function createPaymentAction(data: FormData): Promise<CreatePayment
       return { error: 'Товар не найден или недоступен' }
     }
 
+    return { error: 'Не подключена система оплаты' }
+
+    // TODO: change payment system to ROBOKASSA
     const shopId = process.env.YOOKASSA_SHOP_ID
     const secretKey = process.env.YOOKASSA_SECRET_KEY
     const authHeader = `Basic ${Buffer.from(`${shopId}:${secretKey}`).toString('base64')}`

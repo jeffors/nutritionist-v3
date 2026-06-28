@@ -46,6 +46,7 @@ export const Consultations: CollectionConfig = {
           const botToken = process.env.TELEGRAM_BOT_TOKEN
           const chatId = process.env.TELEGRAM_CHAT_ID
 
+          // TODO: change website to env
           if (botToken && chatId) {
             const message = [
               `🔔 <b>Новая заявка на консультацию!</b>`,
