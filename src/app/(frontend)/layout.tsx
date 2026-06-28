@@ -13,8 +13,9 @@ const merriweather = Merriweather({
   style: ['normal', 'italic'],
 })
 export const metadata = {
-  description: 'Сайт нутрициолога.',
-  title: 'Нутрициолог',
+  description:
+    'Клинический нутрициолог с высшим медицинским образованием. Помогает людям обрести здоровье и энергию через осознанное питание.',
+  title: 'Лариса Галимова - Сайт нутрициолога',
 }
 
 export default async function RootLayout(props: { children: React.ReactNode }) {

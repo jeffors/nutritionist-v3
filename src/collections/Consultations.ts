@@ -1,6 +1,9 @@
+import UnprocessedCount from '@/components/admin/UnprocessedCount'
 import ConsultationEmail from 'emails/consultation'
 import { CollectionConfig } from 'payload'
 import { render } from 'react-email'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
 
 export const Consultations: CollectionConfig = {
   slug: 'consultations',
@@ -10,8 +13,11 @@ export const Consultations: CollectionConfig = {
   },
   admin: {
     useAsTitle: 'name',
-    group: 'Контент',
+    group: 'Заявки',
     defaultColumns: ['name', 'phone', 'messenger', 'isActive'],
+    // components: {
+    //   beforeList: [UnprocessedCount],
+    // },
   },
   access: {
     create: () => true,
@@ -20,6 +26,10 @@ export const Consultations: CollectionConfig = {
   hooks: {
     afterChange: [
       async ({ doc, operation, req }) => {
+        const payloadConfig = await config
+        const payload = await getPayload({ config: payloadConfig })
+        const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
+
         if (operation === 'create') {
           const website = process.env.NEXT_PUBLIC_PAYLOAD_URL
           try {
@@ -35,7 +45,7 @@ export const Consultations: CollectionConfig = {
             )
 
             await req.payload.sendEmail({
-              to: 'test@example.com',
+              to: payloadGlobalContacts.email,
               subject: 'Новая заявка на консультацию',
               html,
             })
@@ -46,7 +56,6 @@ export const Consultations: CollectionConfig = {
           const botToken = process.env.TELEGRAM_BOT_TOKEN
           const chatId = process.env.TELEGRAM_CHAT_ID
 
-          // TODO: change website to env
           if (botToken && chatId) {
             const message = [
               `🔔 <b>Новая заявка на консультацию!</b>`,
@@ -58,7 +67,7 @@ export const Consultations: CollectionConfig = {
               ``,
               `📝 <b>Запрос:</b>\n${doc.request}`,
               ``,
-              `<a href="https://grammy.dev/admin">Открыть заявку в админ-панели</a>`,
+              `<a href="${website}/admin">Открыть заявку в админ-панели</a>`,
             ].join('\n')
 
             try {

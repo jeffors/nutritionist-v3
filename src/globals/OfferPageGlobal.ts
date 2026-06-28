@@ -18,6 +18,9 @@ export const OfferPageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Юр. страницы',
+  },
   fields: [
     {
       name: 'hero',

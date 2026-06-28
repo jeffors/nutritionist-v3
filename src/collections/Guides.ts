@@ -3,8 +3,8 @@ import { CollectionConfig } from 'payload'
 export const Guides: CollectionConfig = {
   slug: 'guides',
   labels: {
-    singular: 'Материал',
-    plural: 'Материалы',
+    singular: 'Гайды и лекции',
+    plural: 'Гайды и лекции',
   },
   admin: {
     useAsTitle: 'title',

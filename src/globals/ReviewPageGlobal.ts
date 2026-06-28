@@ -18,6 +18,9 @@ export const ReviewPageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Страницы',
+  },
   fields: [
     {
       name: 'hero',

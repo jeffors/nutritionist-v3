@@ -18,6 +18,9 @@ export const ServicesPageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Страницы',
+  },
   fields: [
     {
       name: 'hero',

@@ -18,6 +18,9 @@ export const PrivacyPageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Юр. страницы',
+  },
   fields: [
     {
       name: 'hero',

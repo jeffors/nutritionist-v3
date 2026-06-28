@@ -20,6 +20,7 @@ import z from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { submitConsultation } from './actions'
+import { SmartCaptcha } from '@yandex/smart-captcha'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать не менее 2 символов'),
@@ -33,6 +34,7 @@ const formSchema = z.object({
   terms: z.boolean().refine((val) => val === true, {
     error: 'Необходимо принять условия политики конфиденциальности',
   }),
+  captchaToken: z.string().min(1, 'Пожалуйста, подтвердите, что вы не робот'),
 })
 
 export type FormData = z.infer<typeof formSchema>
@@ -40,6 +42,7 @@ export type FormData = z.infer<typeof formSchema>
 export default function ConsultationForm() {
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [captchaResetKey, setCaptchaResetKey] = useState(0)
 
   const {
     register,
@@ -56,6 +59,7 @@ export default function ConsultationForm() {
       messenger: undefined,
       request: '',
       terms: false,
+      captchaToken: '',
     },
   })
 
@@ -67,6 +71,7 @@ export default function ConsultationForm() {
       setError(null)
     } else {
       setError(result.error || 'Что-то пошло не так')
+      setCaptchaResetKey((prev) => prev + 1)
     }
   }
 
@@ -74,6 +79,7 @@ export default function ConsultationForm() {
     reset()
     setSubmitted(false)
     setError(null)
+    setCaptchaResetKey((prev) => prev + 1)
   }
 
   if (submitted) {
@@ -179,6 +185,20 @@ export default function ConsultationForm() {
           </FieldLabel>
         </Field>
         <FieldError errors={[errors.terms]} />
+        <Field>
+          <Controller
+            name="captchaToken"
+            control={control}
+            render={({ field }) => (
+              <SmartCaptcha
+                sitekey={process.env.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY || ''}
+                key={captchaResetKey}
+                onSuccess={(token) => field.onChange(token)}
+                onTokenExpired={() => field.onChange('')}
+              />
+            )}
+          ></Controller>
+        </Field>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <Field>
           <Button type="submit" size={'xl'} disabled={isSubmitting}>

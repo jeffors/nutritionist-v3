@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card'
 import { colorMap, iconMap } from '@/lib/service-maps'
 import { Service } from '@/payload-types'
-import { CheckCircle } from 'lucide-react'
+import Link from 'next/link'
 
 export function ServiceHomeCard({ service }: { service: Service }) {
   const Icon = iconMap[service.icon]
@@ -35,8 +35,8 @@ export function ServiceHomeCard({ service }: { service: Service }) {
           </p>
           <Badge variant="secondary">{service.duration}</Badge>
         </div>
-        <Button variant="outline" className="w-full">
-          Записаться
+        <Button asChild variant="outline" className="w-full">
+          <Link href="/services">Подробнее</Link>
         </Button>
       </CardFooter>
     </Card>

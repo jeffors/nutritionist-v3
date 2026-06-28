@@ -4,6 +4,7 @@ import { Card, CardDescription, CardFooter, CardHeader, CardTitle } from '@/comp
 import { getMediaUrl } from '@/lib/media'
 import { Guide } from '@/payload-types'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export function GuideHomeCard({ guide }: { guide: Guide }) {
   const imageUrl = getMediaUrl(guide.image)
@@ -22,7 +23,9 @@ export function GuideHomeCard({ guide }: { guide: Guide }) {
       </CardHeader>
       <CardFooter className="flex justify-between">
         <p className="text-lg font-bold">{guide.price} ₽</p>
-        <Button variant="default">Подробнее </Button>
+        <Button asChild variant="default">
+          <Link href="/shop">Подробнее</Link>
+        </Button>
       </CardFooter>
     </Card>
   )

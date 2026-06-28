@@ -18,17 +18,9 @@ import {
   Phone,
   Send,
   ShoppingBag,
-  Star,
   Stethoscope,
 } from 'lucide-react'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
+import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
   Accordion,
@@ -59,6 +51,7 @@ export default async function HomePage() {
     collection: 'guides',
     depth: 1,
     sort: '-createdAt',
+    where: { isActive: { equals: true } },
     limit: 3,
   })
   const payloadReviews = await payload.find({
@@ -227,35 +220,37 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="bg-white py-15">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.guides?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.guides?.description}
-            </p>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {payloadGuides.docs.length === 1 && <div className=""></div>}
+      {payloadGuides.docs.length !== 0 && (
+        <section className="bg-white py-15">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+                {payloadGlobalHomePage.guides?.heading}
+              </h2>
+              <p className="text-black/80 max-w-xl mx-auto">
+                {payloadGlobalHomePage.guides?.description}
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              {payloadGuides.docs.length === 1 && <div className=""></div>}
 
-            {payloadGuides.docs.map((guide) => (
-              <GuideHomeCard key={guide.id} guide={guide} />
-            ))}
-          </div>
+              {payloadGuides.docs.map((guide) => (
+                <GuideHomeCard key={guide.id} guide={guide} />
+              ))}
+            </div>
 
-          <div className="text-center mt-8">
-            <Button asChild variant="outline" size="xl">
-              <Link href="/shop">
-                <ShoppingBag className="w-4 h-4" />
-                {payloadGlobalHomePage.guides?.ctaLabel}
-              </Link>
-            </Button>
+            <div className="text-center mt-8">
+              <Button asChild variant="outline" size="xl">
+                <Link href="/shop">
+                  <ShoppingBag className="w-4 h-4" />
+                  {payloadGlobalHomePage.guides?.ctaLabel}
+                </Link>
+              </Button>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <section className="bg-gray-50 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -380,7 +375,7 @@ export default async function HomePage() {
               </ul>
 
               <Button asChild variant="outline" size="xl">
-                <Link href="/services">
+                <Link href={payloadGlobalHomePage.proctolog?.ctaLink ?? ''}>
                   {payloadGlobalHomePage.proctolog?.ctaLabel}
                   <ArrowRight className="w-4 h-4" />
                 </Link>

@@ -10,6 +10,18 @@ export async function Footer() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
+  const payloadGuides = await payload.find({
+    collection: 'guides',
+    depth: 1,
+    sort: '-createdAt',
+    where: { isActive: { equals: true } },
+    limit: 3,
+  })
+  const payloadServices = await payload.find({
+    collection: 'services',
+    where: { isActive: { equals: true } },
+    sort: 'order',
+  })
   return (
     <footer className="bg-black text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
@@ -49,14 +61,16 @@ export async function Footer() {
                   Услуги
                 </Link>
               </li>
-              <li>
-                <Link
-                  href="/shop"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Гайды и лекции
-                </Link>
-              </li>
+              {payloadGuides.docs.length !== 0 && (
+                <li>
+                  <Link
+                    href="/shop"
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
+                  >
+                    Гайды и лекции
+                  </Link>
+                </li>
+              )}
               <li>
                 <Link
                   href="/reviews"
@@ -80,30 +94,16 @@ export async function Footer() {
               Услуги
             </h3>
             <ul className="space-y-2.5">
-              <li>
-                <Link
-                  href="/services/"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Консультация
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Разбор анализов
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services/"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Снижение веса
-                </Link>
-              </li>
+              {payloadServices.docs.map((service) => (
+                <li key={service.id}>
+                  <Link
+                    href="/services/"
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

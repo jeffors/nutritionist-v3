@@ -11,6 +11,7 @@ import {
 import { colorMap, iconMap } from '@/lib/service-maps'
 import { Service } from '@/payload-types'
 import { CheckCircle } from 'lucide-react'
+import Link from 'next/link'
 
 export function ServiceCard({ service }: { service: Service }) {
   const Icon = iconMap[service.icon]
@@ -53,8 +54,8 @@ export function ServiceCard({ service }: { service: Service }) {
         </div>
       </CardContent>
       <CardFooter>
-        <Button size={'xl'} className="w-full">
-          Записаться
+        <Button asChild size={'xl'} className="w-full">
+          <Link href="/contacts">Записаться</Link>
         </Button>
       </CardFooter>
     </Card>

@@ -11,6 +11,9 @@ export const AboutPageGlobal: GlobalConfig = {
       },
     ],
   },
+  admin: {
+    group: 'Страницы',
+  },
   versions: {
     drafts: {
       autosave: {

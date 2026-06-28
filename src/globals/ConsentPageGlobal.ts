@@ -18,6 +18,9 @@ export const ConsentPageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Юр. страницы',
+  },
   fields: [
     {
       name: 'hero',

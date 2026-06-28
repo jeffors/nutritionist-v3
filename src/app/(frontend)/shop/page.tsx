@@ -12,6 +12,7 @@ export default async function Shop() {
     collection: 'guides',
     depth: 1,
     sort: '-createdAt',
+    where: { isActive: { equals: true } },
   })
   const payloadGlobalShopPage = await payload.findGlobal({ slug: 'shop-page', draft: isDraftMode })
 

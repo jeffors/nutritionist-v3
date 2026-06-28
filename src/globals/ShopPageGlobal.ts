@@ -18,6 +18,9 @@ export const ShopPageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Страницы',
+  },
   fields: [
     {
       name: 'hero',

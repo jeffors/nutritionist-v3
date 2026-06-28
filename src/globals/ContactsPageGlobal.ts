@@ -18,6 +18,9 @@ export const ContactsPageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Страницы',
+  },
   fields: [
     {
       name: 'hero',

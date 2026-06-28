@@ -23,7 +23,8 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { ConsentPageGlobal } from './globals/ConsentPageGlobal'
 import { OfferPageGlobal } from './globals/OfferPageGlobal'
 import { PrivacyPageGlobal } from './globals/PrivacyPageGlobal'
-import { importExportPlugin } from '@payloadcms/plugin-import-export'
+import { seoPlugin } from '@payloadcms/plugin-seo'
+import ConsultationsWidget from './components/admin/ConsultationsWidget'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -35,7 +36,11 @@ export default buildConfig({
     transportOptions: {
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,
-      secure: false,
+      secure: true,
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
     },
   }),
   admin: {
@@ -49,6 +54,7 @@ export default buildConfig({
         Logo: '/components/admin/logo',
         Icon: '/components/admin/icon',
       },
+      beforeDashboard: ['/components/admin/ConsultationsWidget'],
     },
     livePreview: {
       url: ({ globalConfig }) => {
@@ -109,17 +115,7 @@ export default buildConfig({
     },
   }),
   sharp,
-  plugins: [
-    importExportPlugin({
-      collections: [
-        {
-          slug: 'consultations',
-          export: { disableJobsQueue: true },
-          import: { disableJobsQueue: true },
-        },
-      ],
-    }),
-  ],
+  plugins: [],
   i18n: {
     supportedLanguages: { ru },
     translations: {

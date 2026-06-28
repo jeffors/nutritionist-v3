@@ -21,6 +21,9 @@ export const HomePageGlobal: GlobalConfig = {
       },
     },
   },
+  admin: {
+    group: 'Страницы',
+  },
   fields: [
     {
       name: 'hero',
@@ -432,6 +435,11 @@ export const HomePageGlobal: GlobalConfig = {
               type: 'text',
               label: 'Текст кнопки',
               defaultValue: 'Записаться к врачу',
+            },
+            {
+              name: 'ctaLink',
+              type: 'text',
+              label: 'Ссылка для связи',
             },
           ],
         },
