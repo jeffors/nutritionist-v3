@@ -39,8 +39,8 @@ export default async function ConsultationsWidget() {
           style={{
             display: 'inline-block',
             padding: '8px 16px',
-            backgroundColor: 'var(--theme-success-500, #52c41a)',
-            color: '#fff',
+            backgroundColor: 'var(--theme-elevation-800, #ebebeb)',
+            color: 'var(--theme-elevation-0)',
             borderRadius: '4px',
             textDecoration: 'none',
             fontWeight: 'bold',

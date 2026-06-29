@@ -31,7 +31,7 @@ const dirname = path.dirname(filename)
 
 export default buildConfig({
   email: nodemailerAdapter({
-    defaultFromAddress: 'info@galimova-larisa.ru',
+    defaultFromAddress: process.env.EMAIL_DOMAIN ?? '',
     defaultFromName: 'Лариса Галимова | Нутрициолог',
     transportOptions: {
       host: process.env.SMTP_HOST,

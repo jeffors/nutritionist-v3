@@ -45,7 +45,7 @@ export const Consultations: CollectionConfig = {
             )
 
             await req.payload.sendEmail({
-              from: '"Лариса Галимова | Нутрициолог" <info@galimova-larisa.ru>',
+              from: `"Лариса Галимова | Нутрициолог" <${process.env.EMAIL_DOMAIN}>`,
               to: payloadGlobalContacts.email,
               subject: 'Новая заявка на консультацию',
               html,

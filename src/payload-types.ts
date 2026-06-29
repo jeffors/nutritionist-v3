@@ -536,7 +536,7 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   createdAt?: T;
 }
 /**
- * Контакты изменяются во всех разделах сайта
+ * Контакты изменяются во всех разделах сайта, кроме юридических
  *
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "contacts-global".
@@ -551,6 +551,9 @@ export interface ContactsGlobal {
    * Просто ник. Не используйте @ или https://t.me/ - сайт сам подставит необходимые символы
    */
   telegram: string;
+  /**
+   * На этот email также будут отправляться письма о новой заявке
+   */
   email: string;
   updatedAt?: string | null;
   createdAt?: string | null;
@@ -653,7 +656,7 @@ export interface HomePage {
       | null;
   };
   /**
-   * Сама форма настраивается в отдельной категории
+   * Заявки находятся в отдельной категории
    */
   consultation?: {
     heading?: string | null;

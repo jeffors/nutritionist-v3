@@ -4,7 +4,7 @@ export const Contacts: GlobalConfig = {
   slug: 'contacts-global',
   label: 'Контакты',
   admin: {
-    description: 'Контакты изменяются во всех разделах сайта',
+    description: 'Контакты изменяются во всех разделах сайта, кроме юридических',
   },
   fields: [
     {
@@ -35,6 +35,9 @@ export const Contacts: GlobalConfig = {
       label: 'Email',
       defaultValue: 'larisa.galimova@example.com',
       required: true,
+      admin: {
+        description: 'На этот email также будут отправляться письма о новой заявке',
+      },
     },
   ],
 }

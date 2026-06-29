@@ -502,7 +502,7 @@ export const HomePageGlobal: GlobalConfig = {
       type: 'group',
       label: 'Cекция "Записаться на консультацию"',
       admin: {
-        description: 'Сама форма настраивается в отдельной категории',
+        description: 'Заявки находятся в отдельной категории',
       },
       fields: [
         {
