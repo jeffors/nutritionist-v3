@@ -1,0 +1,56 @@
+name: Deploy App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'latest'
+          cache: 'npm'
+      
+      - name: Install dependencies & Build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Prune development dependencies
+        run: npm prune --production
+
+      - name: Create deployment package
+        run: |
+          tar -czf deploy.tar.gz .next node_modules public package.json
+
+      - name: Copy archive to Server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: "deploy.tar.gz"
+          target: "/var/www/payload-app"
+
+      - name: Deploy and Restart App via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /var/www/payload-app
+            tar -xzf deploy.tar.gz
+            rm deploy.tar.gz
+            pm2 restart payload-app || pm2 start npm --name "payload-app" -- start
+
+
+      
