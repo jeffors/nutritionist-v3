@@ -32,18 +32,27 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
-          node-version: 'latest'
+          node-version: '22'
           cache: 'npm'
+
+      - name: Install dependencies
+        env:
+          DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
+        run: npm ci
+
+      - name: Run Payload migrations
+        env:
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
+        run: npx payload migrate
       
-      - name: Install dependencies & Build
+      - name: Build
         env:
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
           NEXT_PUBLIC_PAYLOAD_URL: ${{ secrets.NEXT_PUBLIC_PAYLOAD_URL }}
           NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY: ${{ secrets.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY }}
           DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
-        run: |
-          npm ci
-          npm run build
+        run: npm run build
 
       - name: Prune development dependencies
         run: npm prune --production
