@@ -40,7 +40,7 @@ jobs:
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
           NEXT_PUBLIC_PAYLOAD_URL: ${{ secrets.NEXT_PUBLIC_PAYLOAD_URL }}
           NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY: ${{ secrets.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY }}
-          DATABASE_URI: "postgresql://payload_user:payload_password@localhost:5432/build_db"
+          DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
         run: |
           npm ci
           npm run build
