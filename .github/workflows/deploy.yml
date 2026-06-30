@@ -9,50 +9,71 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    # steps:
-    #   - name: Checkout code
-    #     uses: actions/checkout@v7
+    services:
+      postgres:
+        image: postgres
+        env:
+          POSTGRES_DB: build_db
+          POSTGRES_USER: payload_user
+          POSTGRES_PASSWORD: payload_password
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
-    #   - name: Setup Node.js
-    #     uses: actions/setup-node@v6
-    #     with:
-    #       node-version: 'latest'
-    #       cache: 'npm'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 'latest'
+          cache: 'npm'
       
-    #   - name: Install dependencies & Build
-    #     run: |
-    #       npm ci
-    #       npm run build
+      - name: Install dependencies & Build
+        env:
+          PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
+          NEXT_PUBLIC_PAYLOAD_URL: ${{ secrets.NEXT_PUBLIC_PAYLOAD_URL }}
+          NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY: ${{ secrets.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY }}
+          DATABASE_URI: "postgresql://payload_user:payload_password@localhost:5432/build_db"
+        run: |
+          npm ci
+          npm run build
 
-    #   - name: Prune development dependencies
-    #     run: npm prune --production
+      - name: Prune development dependencies
+        run: npm prune --production
 
-    #   - name: Create deployment package
-    #     run: |
-    #       tar -czf deploy.tar.gz .next node_modules public package.json
+      - name: Create deployment package
+        run: |
+          tar -czf deploy.tar.gz .next node_modules public package.json
 
-    #   - name: Copy archive to Server
-    #     uses: appleboy/scp-action@v1
-    #     with:
-    #       host: ${{ secrets.HOST }}
-    #       username: ${{ secrets.USERNAME }}
-    #       key: ${{ secrets.SSH_KEY }}
-    #       passphrase: ${{ secrets.PASSPHRASE }}
-    #       source: "deploy.tar.gz"
-    #       target: "/var/www/payload-app"
+      - name: Copy archive to Server
+        uses: appleboy/scp-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          source: "deploy.tar.gz"
+          target: "/var/www/payload-app"
 
-    #   - name: Deploy and Restart App via SSH
-    #     uses: appleboy/ssh-action@v1
-    #     with:
-    #       host: ${{ secrets.HOST }}
-    #       username: ${{ secrets.USERNAME }}
-    #       key: ${{ secrets.SSH_KEY }}
-    #       passphrase: ${{ secrets.PASSPHRASE }}
-    #       script: |
-    #         cd /var/www/payload-app
-    #         tar -xzf deploy.tar.gz
-    #         rm deploy.tar.gz
-    #         pm2 restart payload-app || pm2 start npm --name "payload-app" -- start
+      - name: Deploy and Restart App via SSH
+        uses: appleboy/ssh-action@v1
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          passphrase: ${{ secrets.PASSPHRASE }}
+          script: |
+            cd /var/www/payload-app
+            tar -xzf deploy.tar.gz
+            rm deploy.tar.gz
+            pm2 restart payload-app || pm2 start npm --name "payload-app" -- start
 
 
       
