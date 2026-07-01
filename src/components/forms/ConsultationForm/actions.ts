@@ -13,7 +13,7 @@ async function validateCaptcha(token: string): Promise<Boolean> {
   }
 
   try {
-    const response = await fetch('https://smartcaptcha.yandex.cloud/validate', {
+    const response = await fetch('https://smartcaptcha.cloud.yandex.ru/validate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
