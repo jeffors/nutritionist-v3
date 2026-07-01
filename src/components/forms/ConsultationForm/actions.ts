@@ -3,7 +3,6 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { FormData } from '.'
-import { success } from 'zod'
 
 async function validateCaptcha(token: string): Promise<Boolean> {
   const secret = process.env.SMARTCAPTCHA_SERVER_KEY
