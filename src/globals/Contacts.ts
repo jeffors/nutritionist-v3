@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { GlobalConfig } from 'payload'
 
 export const Contacts: GlobalConfig = {
@@ -5,6 +6,13 @@ export const Contacts: GlobalConfig = {
   label: 'Контакты',
   admin: {
     description: 'Контакты изменяются во всех разделах сайта, кроме юридических',
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/', 'layout')
+      },
+    ],
   },
   fields: [
     {

@@ -80,9 +80,12 @@ jobs:
           passphrase: ${{ secrets.PASSPHRASE }}
           script: |
             cd /var/www/payload-app
+            pm2 stop payload-app || true
+            rm -rf .next node_modules public
             tar -xzf deploy.tar.gz
             rm deploy.tar.gz
-            pm2 restart payload-app || pm2 start npm --name "payload-app" -- start
+            npx payload migrate
+            pm2 start payload-app || pm2 start npm --name "payload-app" -- start
 
 
       

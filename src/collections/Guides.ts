@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { CollectionConfig } from 'payload'
 
 export const Guides: CollectionConfig = {
@@ -13,6 +14,13 @@ export const Guides: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/shop')
+      },
+    ],
   },
   fields: [
     {

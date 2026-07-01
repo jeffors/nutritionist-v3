@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { CollectionConfig } from 'payload'
 
 export const Reviews: CollectionConfig = {
@@ -10,6 +11,13 @@ export const Reviews: CollectionConfig = {
     useAsTitle: 'name',
     group: 'Контент',
     defaultColumns: ['name', 'service', 'stars', 'date'],
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/reviews')
+      },
+    ],
   },
   fields: [
     {

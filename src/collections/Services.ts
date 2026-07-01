@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import { CollectionConfig } from 'payload'
 
 export const Services: CollectionConfig = {
@@ -10,6 +11,13 @@ export const Services: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'price', 'duration', 'tag'],
     group: 'Контент',
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/services')
+      },
+    ],
   },
   fields: [
     {
