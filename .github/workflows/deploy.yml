@@ -54,12 +54,9 @@ jobs:
           DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
         run: npm run build
 
-      - name: Prune development dependencies
-        run: npm prune --production
-
       - name: Create deployment package
         run: |
-          tar -czf deploy.tar.gz .next node_modules public package.json
+          tar -czf deploy.tar.gz .next node_modules public package.json src
 
       - name: Copy archive to Server
         uses: appleboy/scp-action@v1
@@ -81,7 +78,7 @@ jobs:
           script: |
             cd /var/www/payload-app
             pm2 stop payload-app || true
-            rm -rf .next node_modules public
+            rm -rf .next node_modules public src
             tar -xzf deploy.tar.gz
             rm deploy.tar.gz
             npx payload migrate
