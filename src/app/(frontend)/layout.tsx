@@ -13,6 +13,7 @@ const merriweather = Merriweather({
   style: ['normal', 'italic'],
 })
 export const metadata = {
+  metadataBase: new URL('https://galimova-larisa.ru/'),
   description:
     'Клинический нутрициолог с высшим медицинским образованием. Помогает людям обрести здоровье и энергию через осознанное питание.',
   title: 'Лариса Галимова - Сайт нутрициолога',
