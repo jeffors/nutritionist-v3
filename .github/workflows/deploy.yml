@@ -9,22 +9,6 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
-    services:
-      postgres:
-        image: postgres
-        env:
-          POSTGRES_DB: build_db
-          POSTGRES_USER: payload_user
-          POSTGRES_PASSWORD: payload_password
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd pg_isready
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v7
@@ -35,15 +19,35 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Start SSH Tunnel to Production DB
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
+
+          export SSH_ASKPASS_REQUIRE=force
+          echo -e '#!/bin/bash\necho "${{ secrets.PASSPHRASE }}"' > /tmp/askpass.sh
+          chmod +x /tmp/askpass.sh
+          export SSH_ASKPASS=/tmp/askpass.sh
+
+          eval $(ssh-agent -s)
+          echo "SSH_AUTH_SOCK=$SSH_AUTH_SOCK" >> $GITHUB_ENV
+          echo "SSH_AGENT_PID=$SSH_AGENT_PID" >> $GITHUB_ENV
+
+          setsid ssh-add ~/.ssh/id_rsa < /dev/null
+
+          ssh -f -N -L 5432:127.0.0.1:5432 ${{ secrets.USERNAME }}@${{ secrets.HOST }}
+
       - name: Install dependencies
         env:
-          DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
         run: npm ci
 
       - name: Run Payload migrations
         env:
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
-          DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
         run: npx payload migrate
       
       - name: Build
@@ -51,7 +55,7 @@ jobs:
           PAYLOAD_SECRET: ${{ secrets.PAYLOAD_SECRET }}
           NEXT_PUBLIC_PAYLOAD_URL: ${{ secrets.NEXT_PUBLIC_PAYLOAD_URL }}
           NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY: ${{ secrets.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY }}
-          DATABASE_URL: "postgresql://payload_user:payload_password@localhost:5432/build_db"
+          DATABASE_URL: ${{ secrets.PROD_DATABASE_URL }}
         run: npm run build
 
       - name: Create deployment package
@@ -83,6 +87,3 @@ jobs:
             rm deploy.tar.gz
             npx payload migrate
             pm2 start payload-app || pm2 start npm --name "payload-app" -- start
-
-
-      
