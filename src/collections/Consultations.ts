@@ -35,7 +35,7 @@ export const Consultations: CollectionConfig = {
           try {
             const html = await render(
               ConsultationEmail({
-                url: `${website}/admin`,
+                url: `${website}/admin/collections/consultations/${doc.id}`,
                 name: doc.name,
                 phone: doc.phone,
                 email: doc.email,
@@ -61,16 +61,9 @@ export const Consultations: CollectionConfig = {
 
           if (botToken && chatId) {
             const message = [
-              `🔔 <b>Новая заявка на консультацию!</b>`,
+              `🔔 <b>Новая заявка на консультацию! Номер: ${doc.id}</b>`,
               ``,
-              `👤 <b>Имя:</b> ${doc.name}`,
-              `📞 <b>Телефон:</b> ${doc.phone}`,
-              `📧 <b>Email:</b> ${doc.email}`,
-              `💬 <b>Предпочитаемый мессенджер:</b> ${doc.messenger === 'telegram' ? 'Telegram' : 'WhatsApp'}`,
-              ``,
-              `📝 <b>Запрос:</b>\n${doc.request}`,
-              ``,
-              `<a href="${website}/admin">Открыть заявку в админ-панели</a>`,
+              `<a href="${website}/admin/collections/consultations/${doc.id}">Открыть заявку в админ-панели</a>`,
             ].join('\n')
 
             try {
