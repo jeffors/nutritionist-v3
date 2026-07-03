@@ -13,7 +13,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { CheckCircle, Loader2, Send } from 'lucide-react'
+import { Ban, CheckCircle, Loader2, Send } from 'lucide-react'
 import Link from 'next/link'
 import { useState } from 'react'
 import z from 'zod'
@@ -174,11 +174,17 @@ export default function ConsultationForm() {
           <FieldLabel htmlFor="terms-checkbox">
             <span>
               Я согласен(а) c{' '}
-              <Link href="/privacy" className="text-green-600 underline hover:no-underline">
+              <Link
+                href="/privacy"
+                className="text-green-600 underline transition-colors hover:text-green-500"
+              >
                 Политикой конфидециальности
               </Link>{' '}
               и даю{' '}
-              <Link href="/consent" className="text-green-600 underline hover:no-underline">
+              <Link
+                href="/consent"
+                className="text-green-600 underline transition-colors hover:text-green-500"
+              >
                 согласие на обработку персональных данных
               </Link>
             </span>
@@ -201,13 +207,13 @@ export default function ConsultationForm() {
         </Field>
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <Field>
-          <Button type="submit" size={'xl'} disabled={isSubmitting}>
+          <Button type="submit" size={'xl'} disabled>
             {isSubmitting ? (
               <Loader2 className="w-4 h-4 animate-spin" />
             ) : (
-              <Send className="w-4 h-4" />
+              <Ban className="w-4 h-4" />
             )}
-            {isSubmitting ? 'Отправляем...' : 'Записаться на консультацию'}
+            {isSubmitting ? 'Отправляем...' : 'Временно недоступно'}
           </Button>
         </Field>
       </FieldGroup>

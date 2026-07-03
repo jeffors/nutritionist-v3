@@ -5,6 +5,7 @@ import { Footer } from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import { draftMode } from 'next/headers'
 import { PreviewBanner } from '@/components/PreviewBanner'
+import { CookieBanner } from '@/components/CookieBanner'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
 const merriweather = Merriweather({
@@ -29,6 +30,7 @@ export default async function RootLayout(props: { children: React.ReactNode }) {
         {isDraftMode && <PreviewBanner currentPath="/" />}
         <Header />
         <main>{children}</main>
+        <CookieBanner />
         <Footer />
       </body>
     </html>
