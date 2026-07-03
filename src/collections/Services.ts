@@ -16,6 +16,7 @@ export const Services: CollectionConfig = {
     afterChange: [
       () => {
         revalidatePath('/services')
+        revalidatePath('/')
       },
     ],
   },

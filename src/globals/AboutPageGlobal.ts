@@ -92,6 +92,7 @@ export const AboutPageGlobal: GlobalConfig = {
               type: 'array',
               minRows: 1,
               maxRows: 4,
+              label: 'Пункты',
               labels: {
                 singular: 'Пункт',
                 plural: 'Пункты',
@@ -114,11 +115,13 @@ export const AboutPageGlobal: GlobalConfig = {
                 {
                   name: 'title',
                   type: 'text',
+                  label: 'Заголовок',
                   required: true,
                 },
                 {
                   name: 'description',
                   type: 'textarea',
+                  label: 'Описание',
                   required: true,
                 },
               ],
@@ -149,6 +152,7 @@ export const AboutPageGlobal: GlobalConfig = {
               name: 'items',
               type: 'array',
               minRows: 1,
+              label: 'Образование',
               labels: {
                 singular: 'Образование',
                 plural: 'Образование',

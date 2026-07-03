@@ -69,7 +69,12 @@ export default async function HomePage() {
       <RefreshRouteOnSave />
       <section className="relative min-h-screen flex items-center pt-20">
         <div className="absolute inset-0 z-0">
-          <Image src={BackgroundImage} alt="Hero" className="w-full h-full object-cover" />
+          <Image
+            src={BackgroundImage}
+            alt="Hero"
+            className="w-full h-full object-cover"
+            loading="eager"
+          />
           <div className="absolute inset-0 bg-white opacity-75" />
         </div>
 

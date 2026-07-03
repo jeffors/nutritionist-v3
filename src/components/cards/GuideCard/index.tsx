@@ -44,7 +44,7 @@ export function GuideCard({ guide }: { guide: Guide }) {
 
   return (
     <Card className="relative">
-      {imageUrl && <Image src={imageUrl} alt={guide.title} width={400} height={300} />}
+      {imageUrl && <Image src={imageUrl} alt={guide.title} width={800} height={600} />}
       {guide.tag && (
         <Badge variant="secondary" className="absolute top-4 left-4">
           {guide.tag}

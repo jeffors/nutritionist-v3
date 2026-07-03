@@ -552,9 +552,13 @@ export interface ContactsGlobal {
    */
   telegram: string;
   /**
-   * На этот email также будут отправляться письма о новой заявке
+   * Этот email будет отображаться на сайте
    */
   email: string;
+  /**
+   * Этот email будет использоваться для уведомлений о новых заявках
+   */
+  email_notify: string;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -970,6 +974,7 @@ export interface ContactsGlobalSelect<T extends boolean = true> {
   whatsapp?: T;
   telegram?: T;
   email?: T;
+  email_notify?: T;
   updatedAt?: T;
   createdAt?: T;
   globalType?: T;

@@ -44,7 +44,17 @@ export const Contacts: GlobalConfig = {
       defaultValue: 'larisa.galimova@example.com',
       required: true,
       admin: {
-        description: 'На этот email также будут отправляться письма о новой заявке',
+        description: 'Этот email будет отображаться на сайте',
+      },
+    },
+    {
+      name: 'email_notify',
+      type: 'email',
+      label: 'Email (для уведомлений)',
+      defaultValue: 'larisa.galimova@example.com',
+      required: true,
+      admin: {
+        description: 'Этот email будет использоваться для уведомлений о новых заявках',
       },
     },
   ],

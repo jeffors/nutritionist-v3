@@ -16,6 +16,7 @@ export const Reviews: CollectionConfig = {
     afterChange: [
       () => {
         revalidatePath('/reviews')
+        revalidatePath('/')
       },
     ],
   },

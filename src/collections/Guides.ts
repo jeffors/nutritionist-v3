@@ -19,6 +19,7 @@ export const Guides: CollectionConfig = {
     afterChange: [
       () => {
         revalidatePath('/shop')
+        revalidatePath('/')
       },
     ],
   },
