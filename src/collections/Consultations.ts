@@ -56,6 +56,8 @@ export const Consultations: CollectionConfig = {
 
           const botToken = process.env.TELEGRAM_BOT_TOKEN
           const chatId = process.env.TELEGRAM_CHAT_ID
+          const PROXY_URL = process.env.PROXY_URL ?? ''
+          const PROXY_SECRET = process.env.PROXY_SECRET ?? ''
 
           if (botToken && chatId) {
             const message = [
@@ -72,15 +74,20 @@ export const Consultations: CollectionConfig = {
             ].join('\n')
 
             try {
-              await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+              await fetch(PROXY_URL, {
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',
+                  'x-proxy-secret': PROXY_SECRET,
                 },
                 body: JSON.stringify({
-                  chat_id: chatId,
-                  text: message,
-                  parse_mode: 'HTML',
+                  token: botToken,
+                  method: 'sendMessage',
+                  payload: {
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'HTML',
+                  },
                 }),
               })
             } catch (tgError) {
