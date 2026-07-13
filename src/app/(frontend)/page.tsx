@@ -318,7 +318,7 @@ export default async function HomePage() {
               {imageProctologUrl ? (
                 <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0">
                   <Image
-                    src={Portrait}
+                    src={imageProctologUrl}
                     width={400}
                     height={500}
                     alt="Портрет"
