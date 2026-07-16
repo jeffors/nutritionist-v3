@@ -57,7 +57,7 @@ export default async function HomePage() {
   const payloadReviews = await payload.find({
     collection: 'reviews',
     where: { isActive: { equals: true } },
-    sort: '-data',
+    sort: 'id',
     limit: 2,
   })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
@@ -296,9 +296,13 @@ export default async function HomePage() {
             </p>
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {payloadReviews.docs.map((review) => (
-              <ReviewHomeCard key={review.id} review={review} />
-            ))}
+            {payloadReviews.docs.map((review) => {
+              let short_review = {
+                ...review,
+                text: Array.from(review.text.split('.', 12)).join('.'),
+              }
+              return <ReviewHomeCard key={review.id} review={short_review} />
+            })}
           </div>
           <div className="text-center mt-8">
             <Button asChild variant="outline" size="xl">

@@ -20,9 +20,12 @@ export function ReviewCard({ review }: { review: Review }) {
         <div className="flex items-center justify-between">
           <div>
             <CardTitle>{formattedReview.name}</CardTitle>
-            <CardDescription>
-              {formattedReview.age} {formattedReview.location && ` · ${formattedReview.location}`}
-            </CardDescription>
+            {formattedReview.age && (
+              <CardDescription>
+                {formattedReview.age}
+                {formattedReview.location && ` · ${formattedReview.location}`}
+              </CardDescription>
+            )}
           </div>
           <div className="flex gap-0.5">
             {Array.from({ length: 5 }, (_, i) => (
