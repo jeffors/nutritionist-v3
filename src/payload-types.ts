@@ -582,6 +582,18 @@ export interface HomePage {
       | null;
     ctaLabel?: string | null;
   };
+  nutrition?: {
+    heading?: string | null;
+    paragraph1?: string | null;
+    paragraph2?: string | null;
+    cards?:
+      | {
+          title: string;
+          description: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   about?: {
     image?: (number | null) | Media;
     imageTitle?: string | null;
@@ -999,6 +1011,20 @@ export interface HomePageSelect<T extends boolean = true> {
               id?: T;
             };
         ctaLabel?: T;
+      };
+  nutrition?:
+    | T
+    | {
+        heading?: T;
+        paragraph1?: T;
+        paragraph2?: T;
+        cards?:
+          | T
+          | {
+              title?: T;
+              description?: T;
+              id?: T;
+            };
       };
   about?:
     | T

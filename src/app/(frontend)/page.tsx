@@ -196,7 +196,40 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="py-15 bg-gray-50">
+      <section className="bg-gray-50 py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <div className="w-60 h-1 bg-green-500 mb-4"></div>
+              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+                {payloadGlobalHomePage.nutrition?.heading}
+              </h2>
+              <p className="text-black/80 leading-relaxed mb-4 text-base md:text-lg">
+                {payloadGlobalHomePage.nutrition?.paragraph1}
+              </p>
+              <p className="text-black/80 leading-relaxed mb-6">
+                {payloadGlobalHomePage.nutrition?.paragraph2}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {payloadGlobalHomePage.nutrition?.cards?.map((card) => (
+                <Card key={card.id} className="border-none shadow-md bg-white">
+                  <CardHeader>
+                    <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600 mb-4">
+                      <Leaf className="w-6 h-6" />
+                    </div>
+                    <CardTitle className="text-xl font-medium font-heading text-black mb-2">{card.title}</CardTitle>
+                    <CardDescription className="text-sm text-black/70 leading-relaxed">{card.description}</CardDescription>
+                  </CardHeader>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-15 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>

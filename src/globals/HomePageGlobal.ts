@@ -91,6 +91,79 @@ export const HomePageGlobal: GlobalConfig = {
       ],
     },
     {
+      name: 'nutrition',
+      type: 'group',
+      label: 'Секция "Про питание"',
+      fields: [
+        {
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            
+            
+
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Почему питание — основа здоровья',
+            },
+            {
+              name: 'paragraph1',
+              type: 'textarea',
+              label: 'Первый абзац',
+              defaultValue:
+                'Правильно подобранный рацион — это не просто топливо для организма, а мощный терапевтический инструмент. Наше самочувствие, уровень энергии и даже хронические процессы напрямую зависят от того, что оказывается в нашей тарелке.',
+            },
+            {
+              name: 'paragraph2',
+              type: 'textarea',
+              label: 'Второй абзац',
+              defaultValue:
+                'Коррекция питания позволяет не просто маскировать симптомы, а работать с первопричиной недомоганий, мягко восстанавливая баланс и возвращая организму его естественную силу.',
+            },
+            {
+              name: 'cards',
+              type: 'array',
+              label: 'Карточки',
+              labels: {
+                singular: 'Карточка',
+                plural: 'Карточки',
+              },
+              fields: [
+                {
+                  name: 'title',
+                  type: 'text',
+                  label: 'Заголовок',
+                  required: true,
+                },
+                {
+                  name: 'description',
+                  type: 'textarea',
+                  label: 'Описание',
+                  required: true,
+                },
+              ],
+              defaultValue: [
+                {
+                  title: 'Борьба с дефицитами',
+                  description:
+                    'Восполнение нехватки витаминов и минералов из качественных цельных продуктов для стабильной работы всех систем.',
+                },
+                {
+                  title: 'Здоровье ЖКТ',
+                  description: 'Мягкое восстановление процессов пищеварения, избавление от тяжести, вздутий и дискомфорта навсегда.'
+                }
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'about',
       type: 'group',
       label: 'Секция "Обо мне"',
