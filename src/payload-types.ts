@@ -609,6 +609,21 @@ export interface HomePage {
       | null;
     ctaLabel?: string | null;
   };
+  clientStories?: {
+    heading?: string | null;
+    description?: string | null;
+    cards?:
+      | {
+          image?: (number | null) | Media;
+          badge: string;
+          name: string;
+          title: string;
+          description: string;
+          result: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   /**
    * Сами услуги настраиваются в отдельной категории
    */
@@ -1042,6 +1057,23 @@ export interface HomePageSelect<T extends boolean = true> {
               id?: T;
             };
         ctaLabel?: T;
+      };
+  clientStories?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        cards?:
+          | T
+          | {
+              image?: T;
+              badge?: T;
+              name?: T;
+              title?: T;
+              description?: T;
+              result?: T;
+              id?: T;
+            };
       };
   services?:
     | T
