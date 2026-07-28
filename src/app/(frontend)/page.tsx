@@ -10,6 +10,7 @@ import Portrait from './../../../public/images/portrait.jpg'
 import {
   ArrowRight,
   Award,
+  Camera,
   CheckCircle,
   ChevronDown,
   ImageIcon,
@@ -20,7 +21,7 @@ import {
   ShoppingBag,
   Stethoscope,
 } from 'lucide-react'
-import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import {
   Accordion,
@@ -219,12 +220,82 @@ export default async function HomePage() {
                     <div className="w-12 h-12 rounded-xl bg-green-500/10 flex items-center justify-center text-green-600 mb-4">
                       <Leaf className="w-6 h-6" />
                     </div>
-                    <CardTitle className="text-xl font-medium font-heading text-black mb-2">{card.title}</CardTitle>
-                    <CardDescription className="text-sm text-black/70 leading-relaxed">{card.description}</CardDescription>
+                    <CardTitle className="text-xl font-medium font-heading text-black mb-2">
+                      {card.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm text-black/70 leading-relaxed">
+                      {card.description}
+                    </CardDescription>
                   </CardHeader>
                 </Card>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              {payloadGlobalHomePage.clientStories?.heading}
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              {payloadGlobalHomePage.clientStories?.description}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {payloadGlobalHomePage.clientStories?.cards?.map((card) => {
+              const cardImage = getMediaUrl(card.image)
+
+              return (
+                <Card
+                  key={card.id}
+                  className="flex flex-col h-full border border-gray-100 shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow"
+                >
+                  {cardImage ? (
+                    <Image
+                      src={cardImage}
+                      width={300}
+                      height={400}
+                      alt="Фотография тарелки"
+                      className="w-full h-full object-cover"
+                    />
+                  ) : (
+                    <div className="relative aspect-[4/3] bg-green-50/50 flex items-center justify-center border-b border-gray-100 group">
+                      <div className="text-center p-6">
+                        <Camera className="w-10 h-10 text-green-600/30 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                        <p className="text-sm font-heading font-medium text-green-800">
+                          Фото тарелки подопечного
+                        </p>
+                        <p className="text-xs text-black/50 mt-1">Здесь будет ваше фото рациона</p>
+                      </div>
+                    </div>
+                  )}
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center gap-2 mb-2">
+                      <Badge className="bg-green-100 text-green-800 border-none font-normal text-xs">
+                        {card.badge}
+                      </Badge>
+                      <span className="text-xs text-black/50">{card.name}</span>
+                    </div>
+                    <CardTitle className="text-lg font-medium font-heading text-black">
+                      {card.title}
+                    </CardTitle>
+                    <CardDescription className="text-sm text-black/80 leading-relaxed mt-2">
+                      «{card.description}»
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="pt-0 pb-6 mt-auto">
+                    <div className="text-xs font-semibold text-green-700 bg-green-50 px-3 py-2 rounded-lg">
+                      {card.result}
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
