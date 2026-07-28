@@ -255,25 +255,29 @@ export default async function HomePage() {
                   key={card.id}
                   className="flex flex-col h-full border border-gray-100 shadow-sm overflow-hidden bg-white hover:shadow-md transition-shadow"
                 >
-                  {cardImage ? (
-                    <Image
-                      src={cardImage}
-                      width={300}
-                      height={400}
-                      alt="Фотография тарелки"
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="relative aspect-[4/3] bg-green-50/50 flex items-center justify-center border-b border-gray-100 group">
-                      <div className="text-center p-6">
-                        <Camera className="w-10 h-10 text-green-600/30 mx-auto mb-3 group-hover:scale-110 transition-transform" />
-                        <p className="text-sm font-heading font-medium text-green-800">
-                          Фото тарелки подопечного
-                        </p>
-                        <p className="text-xs text-black/50 mt-1">Здесь будет ваше фото рациона</p>
+                  <div className="relative aspect-[4/3] w-full overflow-hidden bg-green-50/50 border-b border-gray-100 group">
+                    {cardImage ? (
+                      <Image
+                        src={cardImage}
+                        alt={card.title || 'Фотография тарелки'}
+                        fill
+                        className="object-cover"
+                      />
+                    ) : (
+                      <div className="flex items-center justify-center h-full p-6 text-center">
+                        <div>
+                          <Camera className="w-10 h-10 text-green-600/30 mx-auto mb-3 group-hover:scale-110 transition-transform" />
+                          <p className="text-sm font-heading font-medium text-green-800">
+                            Фото тарелки подопечного
+                          </p>
+                          <p className="text-xs text-black/50 mt-1">
+                            Здесь будет ваше фото рациона
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  )}
+                    )}
+                  </div>
+
                   <CardHeader className="pb-4">
                     <div className="flex items-center gap-2 mb-2">
                       <Badge className="bg-green-100 text-green-800 border-none font-normal text-xs">
