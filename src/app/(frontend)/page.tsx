@@ -10,16 +10,21 @@ import Portrait from './../../../public/images/portrait.jpg'
 import {
   ArrowRight,
   Award,
+  BookOpen,
   Camera,
   CheckCircle,
   ChevronDown,
+  FileText,
   ImageIcon,
   Leaf,
+  LockIcon,
   Mail,
   Phone,
   Send,
   ShoppingBag,
+  Sparkles,
   Stethoscope,
+  Utensils,
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -329,6 +334,170 @@ export default async function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              Рецепты и готовые меню
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              Сбалансированное питание может быть невероятно вкусным. Выберите бесплатные рецепты
+              или воспользуйтесь нашими специализированными меню-гайдами.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-7 space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <Utensils className="w-6 h-6 text-green-600" />
+                <h3 className="font-heading text-2xl font-light text-black">Бесплатные рецепты</h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <Card className="border border-gray-150 shadow-sm overflow-hidden bg-white">
+                  <div className="h-40 bg-green-50/30 flex items-center justify-center border-b border-gray-100">
+                    <Leaf className="w-8 h-8 text-green-500/40" />
+                  </div>
+                  <CardHeader className="p-4">
+                    <span className="text-[10px] uppercase tracking-wider text-green-600 font-semibold">
+                      Завтрак
+                    </span>
+                    <CardTitle className="text-base font-heading font-medium text-black mt-1">
+                      Зеленый смузи-боул с авокадо
+                    </CardTitle>
+                    <CardDescription className="text-xs text-black/70 leading-relaxed mt-2">
+                      Легкий, богатый полезными жирами и горечью укропа завтрак для мягкой
+                      стимуляции печени.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+
+                <Card className="border border-gray-150 shadow-sm overflow-hidden bg-white">
+                  <div className="h-40 bg-green-50/30 flex items-center justify-center border-b border-gray-100">
+                    <Sparkles className="w-8 h-8 text-green-500/40" />
+                  </div>
+                  <CardHeader className="p-4">
+                    <span className="text-[10px] uppercase tracking-wider text-green-600 font-semibold">
+                      Обед
+                    </span>
+                    <CardTitle className="text-base font-heading font-medium text-black mt-1">
+                      Теплый салат с киноа и индейкой
+                    </CardTitle>
+                    <CardDescription className="text-xs text-black/70 leading-relaxed mt-2">
+                      Отличный источник легкоусвояемого белка, сложных углеводов и микроэлементов.
+                    </CardDescription>
+                  </CardHeader>
+                </Card>
+              </div>
+
+              <div className="text-left mt-4">
+                <Button asChild variant="outline" size="xl">
+                  <Link href="/recipes" className="inline-flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    Перейти в библиотеку рецептов
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <FileText className="w-6 h-6 text-green-600" />
+                <h3 className="font-heading text-2xl font-light text-black">
+                  Терапевтические меню-гайды
+                </h3>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-green-50/30 transition-colors group">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-700">
+                      <Sparkles className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-black">
+                        Меню-гайд для снижения веса
+                      </h4>
+                      <p className="text-xs text-black/60">Сытно, сбалансировано, без срывов</p>
+                    </div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="group-hover:translate-x-1 transition-transform"
+                  >
+                    <ArrowRight className="w-4 h-4 text-green-700" />
+                  </Button>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-green-50/30 transition-colors group">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-700">
+                      <Leaf className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-black">
+                        Меню-гайд при нарушении желчеоттока
+                      </h4>
+                      <p className="text-xs text-black/60">Протокол поддержки печени и желчного</p>
+                    </div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="group-hover:translate-x-1 transition-transform"
+                  >
+                    <ArrowRight className="w-4 h-4 text-green-700" />
+                  </Button>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-green-50/30 transition-colors group">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-700">
+                      <CheckCircle className="w-5 h-5" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-black">
+                        Меню-гайд при низком ферритине
+                      </h4>
+                      <p className="text-xs text-black/60">Восполнение железа и синергисты</p>
+                    </div>
+                  </div>
+                  <Button
+                    size="sm"
+                    variant="ghost"
+                    className="group-hover:translate-x-1 transition-transform"
+                  >
+                    <ArrowRight className="w-4 h-4 text-green-700" />
+                  </Button>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
+                      <LockIcon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-700">
+                        Меню-гайд для здоровья ЖКТ
+                      </h4>
+                      <p className="text-xs text-gray-500">В перспективе / В разработке</p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
+                  >
+                    Скоро
+                  </Badge>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
