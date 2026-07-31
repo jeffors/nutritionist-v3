@@ -73,6 +73,7 @@ export interface Config {
     guides: Guide;
     reviews: Review;
     consultations: Consultation;
+    recipes: Recipe;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -86,6 +87,7 @@ export interface Config {
     guides: GuidesSelect<false> | GuidesSelect<true>;
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     consultations: ConsultationsSelect<false> | ConsultationsSelect<true>;
+    recipes: RecipesSelect<false> | RecipesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -294,6 +296,52 @@ export interface Consultation {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipes".
+ */
+export interface Recipe {
+  id: number;
+  title: string;
+  /**
+   * Уникальный идентификатор для URL (например, pasta-carbonara)
+   */
+  slug: string;
+  description?: string | null;
+  image?: (number | null) | Media;
+  category: 'breakfast' | 'lunch' | 'dinner' | 'dessert' | 'snacks' | 'drinks';
+  prepTime?: number | null;
+  cookTime?: number | null;
+  servings?: number | null;
+  difficulty?: ('easy' | 'medium' | 'hard') | null;
+  nutrition?: {
+    calories?: number | null;
+    protein?: number | null;
+    fat?: number | null;
+    carbs?: number | null;
+  };
+  ingredients: {
+    name: string;
+    amount: string;
+    unit?: string | null;
+    id?: string | null;
+  }[];
+  instructions: {
+    stepNumber?: number | null;
+    description: string;
+    image?: (number | null) | Media;
+    id?: string | null;
+  }[];
+  tags?:
+    | {
+        tag?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -339,6 +387,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'consultations';
         value: number | Consultation;
+      } | null)
+    | ({
+        relationTo: 'recipes';
+        value: number | Recipe;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -497,6 +549,54 @@ export interface ConsultationsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "recipes_select".
+ */
+export interface RecipesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  description?: T;
+  image?: T;
+  category?: T;
+  prepTime?: T;
+  cookTime?: T;
+  servings?: T;
+  difficulty?: T;
+  nutrition?:
+    | T
+    | {
+        calories?: T;
+        protein?: T;
+        fat?: T;
+        carbs?: T;
+      };
+  ingredients?:
+    | T
+    | {
+        name?: T;
+        amount?: T;
+        unit?: T;
+        id?: T;
+      };
+  instructions?:
+    | T
+    | {
+        stepNumber?: T;
+        description?: T;
+        image?: T;
+        id?: T;
+      };
+  tags?:
+    | T
+    | {
+        tag?: T;
+        id?: T;
+      };
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -636,6 +736,14 @@ export interface HomePage {
    * Сами гайды и лекции настраиваются в отдельной категории
    */
   guides?: {
+    heading?: string | null;
+    description?: string | null;
+    ctaLabel?: string | null;
+  };
+  /**
+   * Сами рецепты настраиваются в отдельной категории
+   */
+  recipes?: {
     heading?: string | null;
     description?: string | null;
     ctaLabel?: string | null;
@@ -1083,6 +1191,13 @@ export interface HomePageSelect<T extends boolean = true> {
         ctaLabel?: T;
       };
   guides?:
+    | T
+    | {
+        heading?: T;
+        description?: T;
+        ctaLabel?: T;
+      };
+  recipes?:
     | T
     | {
         heading?: T;

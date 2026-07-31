@@ -430,6 +430,44 @@ export const HomePageGlobal: GlobalConfig = {
       ],
     },
     {
+      name: 'recipes',
+      type: 'group',
+      label: 'Секция "Рецепты и готовые меню"',
+      admin: {
+        description: 'Сами рецепты настраиваются в отдельной категории',
+      },
+      fields: [
+        {
+          type: 'collapsible',
+          label: 'Поля секции',
+          admin: {
+            initCollapsed: true,
+          },
+          fields: [
+            {
+              name: 'heading',
+              type: 'text',
+              label: 'Заголовок',
+              defaultValue: 'Рецепты и готовые меню',
+            },
+            {
+              name: 'description',
+              type: 'textarea',
+              label: 'Описание',
+              defaultValue:
+                'Сбалансированное питание может быть невероятно вкусным. Выберите бесплатные рецепты или воспользуйтесь нашими специализированными меню-гайдами.',
+            },
+            {
+              name: 'ctaLabel',
+              type: 'text',
+              label: 'Текст кнопки',
+              defaultValue: 'Перейти в библиотеку результатов',
+            },
+          ],
+        },
+      ],
+    },
+    {
       name: 'howItWorks',
       type: 'group',
       label: 'Секция "Как проходит работа"',

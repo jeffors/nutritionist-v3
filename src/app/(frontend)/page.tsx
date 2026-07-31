@@ -10,16 +10,21 @@ import Portrait from './../../../public/images/portrait.jpg'
 import {
   ArrowRight,
   Award,
+  BookOpen,
   Camera,
   CheckCircle,
   ChevronDown,
+  FileText,
   ImageIcon,
   Leaf,
+  LockIcon,
   Mail,
   Phone,
   Send,
   ShoppingBag,
+  Sparkles,
   Stethoscope,
+  Utensils,
 } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -37,6 +42,7 @@ import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { getMediaUrl } from '@/lib/media'
 import { draftMode } from 'next/headers'
+import { RECIPE_CATEGORIES } from '@/lib/recipe-maps'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -59,6 +65,13 @@ export default async function HomePage() {
     collection: 'reviews',
     where: { isActive: { equals: true } },
     sort: 'id',
+    limit: 2,
+  })
+  const payloadRecipes = await payload.find({
+    collection: 'recipes',
+    where: { isActive: { equals: true } },
+    sort: '-createdAt',
+    draft: isDraftMode,
     limit: 2,
   })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
@@ -329,6 +342,159 @@ export default async function HomePage() {
                 <ArrowRight className="w-4 h-4" />
               </Link>
             </Button>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-white py-15">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
+            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
+              {payloadGlobalHomePage.recipes?.heading}
+            </h2>
+            <p className="text-black/80 max-w-xl mx-auto">
+              {payloadGlobalHomePage.recipes?.description}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+            <div className="lg:col-span-7 space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <Utensils className="w-6 h-6 text-green-600" />
+                <h3 className="font-heading text-2xl font-light text-black">Бесплатные рецепты</h3>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                {payloadRecipes.docs.map((recipe) => {
+                  const recipe_image = getMediaUrl(recipe.image)
+                  return (
+                    <Link href={`/recipes/${recipe.slug}`} key={recipe.id}>
+                      <Card className="border border-gray-150 shadow-sm hover:shadow-2xl transition-shadow duration-300 overflow-hidden bg-white">
+                        <div className="h-40 bg-green-50/30 flex items-center justify-center border-b border-gray-100 relative">
+                          {recipe_image ? (
+                            <Image src={recipe_image} alt={recipe.title} fill></Image>
+                          ) : (
+                            <Leaf className="w-8 h-8 text-green-500/40" />
+                          )}
+                        </div>
+                        <CardHeader className="p-4">
+                          <span className="text-[10px] uppercase tracking-wider text-green-600 font-semibold">
+                            {RECIPE_CATEGORIES[recipe.category]}
+                          </span>
+                          <CardTitle className="text-base font-heading font-medium text-black mt-1">
+                            {recipe.title}
+                          </CardTitle>
+                          <CardDescription className="text-xs text-black/70 leading-relaxed line-clamp-4 mt-2">
+                            {recipe.description}
+                          </CardDescription>
+                        </CardHeader>
+                      </Card>
+                    </Link>
+                  )
+                })}
+              </div>
+
+              <div className="text-left mt-4">
+                <Button asChild variant="outline" size="xl">
+                  <Link href="/recipes" className="inline-flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    {payloadGlobalHomePage.recipes?.ctaLabel}
+                  </Link>
+                </Button>
+              </div>
+            </div>
+
+            <div className="lg:col-span-5 space-y-6">
+              <div className="flex items-center gap-3 mb-6">
+                <FileText className="w-6 h-6 text-green-600" />
+                <h3 className="font-heading text-2xl font-light text-black">
+                  Терапевтические меню-гайды
+                </h3>
+              </div>
+
+              <div className="space-y-4">
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
+                      <LockIcon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-700">
+                        Меню-гайд для снижения веса
+                      </h4>
+                      <p className="text-xs text-black/60">Сытно, сбалансировано, без срывов</p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
+                  >
+                    Скоро
+                  </Badge>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
+                      <LockIcon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-700">
+                        Меню-гайд при нарушении желчеоттока
+                      </h4>
+                      <p className="text-xs text-black/60">Протокол поддержки печени и желчного</p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
+                  >
+                    Скоро
+                  </Badge>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
+                      <LockIcon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-700">
+                        Меню-гайд при низком ферритине
+                      </h4>
+                      <p className="text-xs text-black/60">Восполнение железа и синергисты</p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
+                  >
+                    Скоро
+                  </Badge>
+                </div>
+
+                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
+                  <div className="flex items-center gap-3">
+                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
+                      <LockIcon className="w-4 h-4" />
+                    </div>
+                    <div>
+                      <h4 className="text-sm font-semibold text-gray-700">
+                        Меню-гайд для здоровья ЖКТ
+                      </h4>
+                      <p className="text-xs text-gray-500">В перспективе / В разработке</p>
+                    </div>
+                  </div>
+                  <Badge
+                    variant="outline"
+                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
+                  >
+                    Скоро
+                  </Badge>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
