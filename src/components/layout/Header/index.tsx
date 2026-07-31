@@ -10,7 +10,7 @@ const navigation = [
   { name: 'Главная', href: '/' },
   { name: 'Обо мне', href: '/about' },
   { name: 'Услуги', href: '/services' },
-  // { name: 'Гайды и лекции', href: '/shop' },
+  { name: 'Рецепты', href: '/recipes' },
   { name: 'Отзывы', href: '/reviews' },
   { name: 'Контакты', href: '/contacts' },
 ]

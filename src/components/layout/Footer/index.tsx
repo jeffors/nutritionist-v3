@@ -61,16 +61,14 @@ export async function Footer() {
                   Услуги
                 </Link>
               </li>
-              {payloadGuides.docs.length !== 0 && (
-                <li>
-                  <Link
-                    href="/shop"
-                    className="text-gray-400 hover:text-white text-sm transition-colors"
-                  >
-                    Гайды и лекции
-                  </Link>
-                </li>
-              )}
+              <li>
+                <Link
+                  href="/recipes"
+                  className="text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  Рецепты
+                </Link>
+              </li>
               <li>
                 <Link
                   href="/reviews"

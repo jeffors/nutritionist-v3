@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache'
 import type { CollectionConfig } from 'payload'
 
 export const Recipes: CollectionConfig = {
@@ -13,6 +14,14 @@ export const Recipes: CollectionConfig = {
   },
   access: {
     read: () => true,
+  },
+  hooks: {
+    afterChange: [
+      () => {
+        revalidatePath('/reviews')
+        revalidatePath('/')
+      },
+    ],
   },
   fields: [
     {

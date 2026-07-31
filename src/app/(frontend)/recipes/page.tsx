@@ -10,8 +10,6 @@ import { Button } from '@/components/ui/button'
 import { ArrowRight, Clock, Utensils, Sparkles, BookOpen } from 'lucide-react'
 import { RECIPE_CATEGORIES } from '@/lib/recipe-maps'
 
-export const revalidate = 60
-
 export default async function RecipesPage() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
@@ -54,16 +52,11 @@ export default async function RecipesPage() {
               return (
                 <Card
                   key={recipe.id}
-                  className="flex flex-col border border-gray-100 bg-white overflow-hidden hover:shadow-lg transition-shadow group rounded-2xl"
+                  className="flex flex-col border border-gray-100 bg-white overflow-hidden group rounded-2xl"
                 >
                   <div className="relative aspect-[16/10] bg-green-50/40 overflow-hidden">
                     {coverUrl ? (
-                      <Image
-                        src={coverUrl}
-                        alt={recipe.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
+                      <Image src={coverUrl} alt={recipe.title} fill className="object-cover" />
                     ) : (
                       <div className="flex items-center justify-center h-full text-green-600/30">
                         <Utensils className="w-12 h-12" />
@@ -92,7 +85,7 @@ export default async function RecipesPage() {
                       )}
                     </div>
 
-                    <CardTitle className="font-heading text-xl font-medium text-black group-hover:text-green-700 transition-colors">
+                    <CardTitle className="font-heading text-xl font-medium text-black">
                       {recipe.title}
                     </CardTitle>
 
@@ -137,7 +130,7 @@ export default async function RecipesPage() {
                   </CardHeader>
 
                   <CardContent className="p-6 pt-4 mt-auto">
-                    <Button asChild variant="outline" className="w-full rounded-xl gap-2">
+                    <Button asChild variant="default" className="w-full" size={'xl'}>
                       <Link href={`/recipes/${recipe.slug}`}>
                         Читать рецепт
                         <ArrowRight className="w-4 h-4" />
