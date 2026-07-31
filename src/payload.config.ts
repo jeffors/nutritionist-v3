@@ -25,6 +25,7 @@ import { OfferPageGlobal } from './globals/OfferPageGlobal'
 import { PrivacyPageGlobal } from './globals/PrivacyPageGlobal'
 import { seoPlugin } from '@payloadcms/plugin-seo'
 import ConsultationsWidget from './components/admin/ConsultationsWidget'
+import { Recipes } from './collections/Recipes'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -91,7 +92,7 @@ export default buildConfig({
       ],
     },
   },
-  collections: [Users, Media, Services, Guides, Reviews, Consultations],
+  collections: [Users, Media, Services, Guides, Reviews, Consultations, Recipes],
   globals: [
     Contacts,
     HomePageGlobal,
