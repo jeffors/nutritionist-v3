@@ -4,12 +4,12 @@ import { CollectionConfig } from 'payload'
 export const Guides: CollectionConfig = {
   slug: 'guides',
   labels: {
-    singular: 'Гайды и лекции',
-    plural: 'Гайды и лекции',
+    singular: 'Гайды и лекции (устарело)',
+    plural: 'Гайды и лекции (устарело)',
   },
   admin: {
     useAsTitle: 'title',
-    group: 'Контент',
+    group: 'Устарело',
     defaultColumns: ['title', 'category', 'price', 'updatedAt'],
   },
   access: {
