@@ -43,6 +43,7 @@ import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import { getMediaUrl } from '@/lib/media'
 import { draftMode } from 'next/headers'
 import { RECIPE_CATEGORIES } from '@/lib/recipe-maps'
+import { iconMap } from '@/lib/service-maps'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -52,13 +53,6 @@ export default async function HomePage() {
     collection: 'services',
     where: { isActive: { equals: true } },
     sort: 'order',
-    limit: 3,
-  })
-  const payloadGuides = await payload.find({
-    collection: 'guides',
-    depth: 1,
-    sort: '-createdAt',
-    where: { isActive: { equals: true } },
     limit: 3,
   })
   const payloadReviews = await payload.find({
@@ -74,10 +68,18 @@ export default async function HomePage() {
     draft: isDraftMode,
     limit: 2,
   })
+  const payloadMenuGuides = await payload.find({
+    collection: 'menu-guides',
+    where: { isActive: { equals: true } },
+    sort: '-createdAt',
+    draft: isDraftMode,
+    limit: 4,
+  })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
   const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page', draft: isDraftMode })
   const imageAboutUrl = getMediaUrl(payloadGlobalHomePage.about?.image)
   const imageProctologUrl = getMediaUrl(payloadGlobalHomePage.proctolog?.image)
+
   return (
     <div className="overflow-x-hidden">
       <RefreshRouteOnSave />
@@ -317,7 +319,7 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="py-15 bg-white">
+      <section className="bg-gray-50 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
@@ -414,122 +416,82 @@ export default async function HomePage() {
               </div>
 
               <div className="space-y-4">
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
-                      <LockIcon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-700">
-                        Меню-гайд для снижения веса
-                      </h4>
-                      <p className="text-xs text-black/60">Сытно, сбалансировано, без срывов</p>
-                    </div>
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
-                  >
-                    Скоро
-                  </Badge>
-                </div>
+                {payloadMenuGuides.docs.map((guide) => {
+                  const isAvailable = !guide.isComingSoon
+                  const Icon = iconMap[guide.icon]
 
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
-                      <LockIcon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-700">
-                        Меню-гайд при нарушении желчеоттока
-                      </h4>
-                      <p className="text-xs text-black/60">Протокол поддержки печени и желчного</p>
-                    </div>
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
-                  >
-                    Скоро
-                  </Badge>
-                </div>
+                  if (!isAvailable) {
+                    return (
+                      <div
+                        key={guide.id}
+                        className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75"
+                      >
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
+                            <LockIcon className="w-4 h-4" />
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-gray-700">{guide.title}</h4>
+                            <p className="text-xs text-gray-500">
+                              {guide.description || 'В перспективе / В разработке'}
+                            </p>
+                          </div>
+                        </div>
+                        <Badge
+                          variant="outline"
+                          className="bg-white border-gray-300 text-gray-500 text-[10px]"
+                        >
+                          Скоро
+                        </Badge>
+                      </div>
+                    )
+                  }
 
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
-                      <LockIcon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-700">
-                        Меню-гайд при низком ферритине
-                      </h4>
-                      <p className="text-xs text-black/60">Восполнение железа и синергисты</p>
-                    </div>
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
-                  >
-                    Скоро
-                  </Badge>
-                </div>
+                  return (
+                    <Link key={guide.id} href={`/guides/${guide.slug}`} className="block">
+                      <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-50 border border-gray-100 hover:bg-green-50/30 transition-colors group">
+                        <div className="flex items-center gap-3">
+                          <div className="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center text-green-700">
+                            <Icon name={guide.icon} />
+                          </div>
+                          <div>
+                            <h4 className="text-sm font-semibold text-black">{guide.title}</h4>
+                            {guide.description && (
+                              <p className="text-xs text-black/60 line-clamp-1">
+                                {guide.description}
+                              </p>
+                            )}
+                          </div>
+                        </div>
 
-                <div className="flex items-center justify-between p-4 rounded-2xl bg-gray-100/50 border border-dashed border-gray-200 opacity-75">
-                  <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-gray-200 flex items-center justify-center text-gray-500">
-                      <LockIcon className="w-4 h-4" />
-                    </div>
-                    <div>
-                      <h4 className="text-sm font-semibold text-gray-700">
-                        Меню-гайд для здоровья ЖКТ
-                      </h4>
-                      <p className="text-xs text-gray-500">В перспективе / В разработке</p>
-                    </div>
-                  </div>
-                  <Badge
-                    variant="outline"
-                    className="bg-white border-gray-300 text-gray-500 text-[10px]"
-                  >
-                    Скоро
-                  </Badge>
-                </div>
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          className="group-hover:translate-x-1 transition-transform"
+                          asChild
+                        >
+                          <div>
+                            <ArrowRight className="w-4 h-4 text-green-700" />
+                          </div>
+                        </Button>
+                      </div>
+                    </Link>
+                  )
+                })}
               </div>
+
+              {/* <div className="text-left mt-4">
+                <Button asChild variant="outline" size="xl">
+                  <Link href="/guides" className="inline-flex items-center gap-2">
+                    <BookOpen className="w-4 h-4" />
+                    Все меню-гайды
+                  </Link>
+                </Button>
+              </div> */}
             </div>
           </div>
         </div>
       </section>
-
-      {payloadGuides.docs.length !== 0 && (
-        <section className="bg-white py-15">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-                {payloadGlobalHomePage.guides?.heading}
-              </h2>
-              <p className="text-black/80 max-w-xl mx-auto">
-                {payloadGlobalHomePage.guides?.description}
-              </p>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              {payloadGuides.docs.length === 1 && <div className=""></div>}
-
-              {payloadGuides.docs.map((guide) => (
-                <GuideHomeCard key={guide.id} guide={guide} />
-              ))}
-            </div>
-
-            <div className="text-center mt-8">
-              <Button asChild variant="outline" size="xl">
-                <Link href="/shop">
-                  <ShoppingBag className="w-4 h-4" />
-                  {payloadGlobalHomePage.guides?.ctaLabel}
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </section>
-      )}
 
       <section className="bg-gray-50 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

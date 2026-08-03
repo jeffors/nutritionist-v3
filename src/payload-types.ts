@@ -74,6 +74,7 @@ export interface Config {
     reviews: Review;
     consultations: Consultation;
     recipes: Recipe;
+    'menu-guides': MenuGuide;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -88,6 +89,7 @@ export interface Config {
     reviews: ReviewsSelect<false> | ReviewsSelect<true>;
     consultations: ConsultationsSelect<false> | ConsultationsSelect<true>;
     recipes: RecipesSelect<false> | RecipesSelect<true>;
+    'menu-guides': MenuGuidesSelect<false> | MenuGuidesSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -342,6 +344,42 @@ export interface Recipe {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-guides".
+ */
+export interface MenuGuide {
+  id: number;
+  title: string;
+  slug: string;
+  icon: 'Stethoscope' | 'Leaf' | 'Salad' | 'Pill' | 'Activity' | 'Dna' | 'Heart' | 'Brain' | 'Scale' | 'Microscope';
+  /**
+   * Например: "Нутрициология", "Железодефицит"
+   */
+  badge?: string | null;
+  readingTime?: string | null;
+  description?: string | null;
+  image?: (number | null) | Media;
+  content: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  };
+  isComingSoon?: boolean | null;
+  isActive?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
 export interface PayloadKv {
@@ -391,6 +429,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'recipes';
         value: number | Recipe;
+      } | null)
+    | ({
+        relationTo: 'menu-guides';
+        value: number | MenuGuide;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -591,6 +633,24 @@ export interface RecipesSelect<T extends boolean = true> {
         tag?: T;
         id?: T;
       };
+  isActive?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "menu-guides_select".
+ */
+export interface MenuGuidesSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  icon?: T;
+  badge?: T;
+  readingTime?: T;
+  description?: T;
+  image?: T;
+  content?: T;
+  isComingSoon?: T;
   isActive?: T;
   updatedAt?: T;
   createdAt?: T;
