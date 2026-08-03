@@ -71,9 +71,9 @@ export default async function HomePage() {
   const payloadMenuGuides = await payload.find({
     collection: 'menu-guides',
     where: { isActive: { equals: true } },
-    sort: '-createdAt',
+    sort: 'createdAt',
     draft: isDraftMode,
-    limit: 4,
+    limit: 5,
   })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
   const payloadGlobalHomePage = await payload.findGlobal({ slug: 'home-page', draft: isDraftMode })

@@ -1,25 +1,16 @@
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import { notFound } from 'next/navigation'
 import Image from 'next/image'
 import Link from 'next/link'
 import { draftMode } from 'next/headers'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import {
-  ArrowLeft,
-  Clock,
-  Calendar,
-  Share2,
-  Sparkles,
-  BookOpen,
-  AlertCircle,
-  CheckCircle2,
-} from 'lucide-react'
+import { ArrowLeft, Clock, Sparkles, AlertCircle } from 'lucide-react'
 import { getMediaUrl } from '@/lib/media'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import type { Metadata } from 'next'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import NotFound from '../../[...not-found]/page'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -75,15 +66,10 @@ export default async function MenuGuidePage({ params }: PageProps) {
   const guide = docs[0]
 
   if (!guide || (!guide.isActive && !isDraftMode)) {
-    notFound()
+    NotFound()
   }
 
   const imageUrl = getMediaUrl(guide.image)
-  const formattedDate = new Date(guide.createdAt).toLocaleDateString('ru-RU', {
-    day: 'numeric',
-    month: 'long',
-    year: 'numeric',
-  })
 
   return (
     <article className="min-h-screen bg-white py-20 pt-28">
@@ -107,10 +93,6 @@ export default async function MenuGuidePage({ params }: PageProps) {
               {guide.readingTime}
             </span>
           )}
-          <span className="inline-flex items-center text-xs text-black/50 gap-1">
-            <Calendar className="w-3.5 h-3.5" />
-            {formattedDate}
-          </span>
         </div>
 
         <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl text-black font-light leading-tight mb-6">
