@@ -21,6 +21,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { submitConsultation } from './actions'
 import { SmartCaptcha } from '@yandex/smart-captcha'
+import { redirect } from 'next/navigation'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать не менее 2 символов'),
@@ -39,10 +40,18 @@ const formSchema = z.object({
 
 export type FormData = z.infer<typeof formSchema>
 
-export default function ConsultationForm() {
+interface FormProps {
+  guideName?: string
+  compact?: boolean
+}
+
+export default function ConsultationForm({ guideName, compact }: FormProps) {
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [captchaResetKey, setCaptchaResetKey] = useState(0)
+
+  const requestText = guideName ? `Хочу получить полный гайд по "${guideName}"` : ''
+  const submitText = guideName ? 'Заказать гайд' : 'Записаться на консультацию'
 
   const {
     register,
@@ -57,7 +66,7 @@ export default function ConsultationForm() {
       phone: '',
       email: '',
       messenger: undefined,
-      request: '',
+      request: requestText,
       terms: false,
       captchaToken: '',
     },
@@ -80,6 +89,9 @@ export default function ConsultationForm() {
     setSubmitted(false)
     setError(null)
     setCaptchaResetKey((prev) => prev + 1)
+    if (guideName) {
+      redirect('/')
+    }
   }
 
   if (submitted) {
@@ -88,10 +100,12 @@ export default function ConsultationForm() {
         <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="w-8 h-8 text-green-500" />
         </div>
-        <h3 className="font-heading text-2xl mb-2">Заявка отправлена!</h3>
+        <h3 className="font-heading text-2xl mb-2">
+          {guideName ? 'Заявка на заказ отправлена!' : 'Заявка отправлена!'}
+        </h3>
         <p className="text-gray-700 mb-6">Спасибо! Я свяжусь с вами в ближайшее время.</p>
         <Button onClick={handleReset} variant={'outline'}>
-          Отправить ещё одну заявку
+          {guideName ? 'Вернуться на главную страницу' : 'Отправить ещё одну заявку'}
         </Button>
       </div>
     )
@@ -99,7 +113,9 @@ export default function ConsultationForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
-      <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+      <FieldGroup
+        className={compact ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-cols-2 gap-4'}
+      >
         <Field>
           <FieldLabel htmlFor="input-name">Имя</FieldLabel>
           <Input id="input-name" type="text" placeholder="Ваше имя" {...register('name')}></Input>
@@ -213,7 +229,7 @@ export default function ConsultationForm() {
             ) : (
               <Send className="w-4 h-4" />
             )}
-            {isSubmitting ? 'Отправляем...' : 'Записаться на консультацию'}
+            {isSubmitting ? 'Отправляем...' : submitText}
           </Button>
         </Field>
       </FieldGroup>
