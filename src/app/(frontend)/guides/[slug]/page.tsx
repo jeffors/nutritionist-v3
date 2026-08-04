@@ -5,12 +5,21 @@ import Link from 'next/link'
 import { draftMode } from 'next/headers'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Clock, Sparkles, AlertCircle } from 'lucide-react'
+import { ArrowLeft, Clock, Sparkles, AlertCircle, LockIcon } from 'lucide-react'
 import { getMediaUrl } from '@/lib/media'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
 import type { Metadata } from 'next'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import NotFound from '../../[...not-found]/page'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog'
+import ConsultationForm from '@/components/forms/ConsultationForm'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -124,24 +133,35 @@ export default async function MenuGuidePage({ params }: PageProps) {
           </div>
         </div>
 
-        <div className="prose prose-lg prose-green max-w-none text-black/80 leading-relaxed font-sans prose-headings:font-heading prose-headings:font-light prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-p:mb-6 prose-li:my-1">
+        <div className="relative prose prose-lg prose-green max-w-none text-black/80 leading-relaxed font-sans prose-headings:font-heading prose-headings:font-light prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4 prose-p:mb-6 prose-li:my-1">
           <RichText data={guide.content} />
+          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-white via-white/80 to-transparent pointer-events-none" />
         </div>
 
         <div className="mt-16 bg-gradient-to-br from-green-50 to-emerald-50 border border-green-200/60 rounded-3xl p-8 text-center">
           <div className="w-12 h-12 rounded-2xl bg-green-500/10 text-green-700 flex items-center justify-center mx-auto mb-4">
-            <Sparkles className="w-6 h-6" />
+            <LockIcon className="w-6 h-6" />
           </div>
           <h3 className="font-heading text-2xl text-black font-light mb-2">
-            Нужен индивидуальный протокол питания?
+            Доступ к полному материалу ограничен
           </h3>
           <p className="text-sm text-black/70 max-w-md mx-auto mb-6">
-            Если вам требуется персональный подбор рациона с учётом анализов и особенностей ЖКТ,
-            запишитесь на персональный разбор.
+            Оформите заказ, чтобы открыть остальную часть гайда
           </p>
-          <Button asChild size="xl">
-            <Link href="/#consultation">Записаться на консультацию</Link>
-          </Button>
+          <Dialog>
+            <DialogTrigger asChild>
+              <Button variant="default" size="xl">
+                Заказать полный гайд
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Заказать гайд</DialogTitle>
+                <DialogDescription>{guide.title}</DialogDescription>
+              </DialogHeader>
+              <ConsultationForm guideName={guide.title} compact />
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </article>
