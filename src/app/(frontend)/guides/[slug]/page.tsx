@@ -20,6 +20,7 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog'
 import ConsultationForm from '@/components/forms/ConsultationForm'
+import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -156,9 +157,17 @@ export default async function MenuGuidePage({ params }: PageProps) {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Заказать гайд</DialogTitle>
+                <DialogTitle>Заказать меню-гайд на месяц</DialogTitle>
                 <DialogDescription>{guide.title}</DialogDescription>
               </DialogHeader>
+              <Item variant={'outline'}>
+                <ItemContent>
+                  <ItemTitle className="text-sm font-medium">Оплата:</ItemTitle>
+                </ItemContent>
+                <ItemActions className="font-bold text-2xl">
+                  {guide.price ? `${guide.price} ₽` : 'Бесплатно'}
+                </ItemActions>
+              </Item>
               <ConsultationForm guideName={guide.title} compact />
             </DialogContent>
           </Dialog>

@@ -63,6 +63,16 @@ export const MenuGuides: CollectionConfig = {
       },
     },
     {
+      name: 'price',
+      type: 'number',
+      label: 'Цена (₽)',
+      min: 0,
+      defaultValue: 1700,
+      admin: {
+        position: 'sidebar',
+      },
+    },
+    {
       name: 'badge',
       type: 'text',
       label: 'Категория / Тэг',
