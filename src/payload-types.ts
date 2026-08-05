@@ -351,6 +351,7 @@ export interface MenuGuide {
   title: string;
   slug: string;
   icon: 'Stethoscope' | 'Leaf' | 'Salad' | 'Pill' | 'Activity' | 'Dna' | 'Heart' | 'Brain' | 'Scale' | 'Microscope';
+  price?: number | null;
   /**
    * Например: "Нутрициология", "Железодефицит"
    */
@@ -645,6 +646,7 @@ export interface MenuGuidesSelect<T extends boolean = true> {
   title?: T;
   slug?: T;
   icon?: T;
+  price?: T;
   badge?: T;
   readingTime?: T;
   description?: T;

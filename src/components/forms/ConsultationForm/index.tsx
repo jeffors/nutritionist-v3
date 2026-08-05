@@ -50,7 +50,7 @@ export default function ConsultationForm({ guideName, compact }: FormProps) {
   const [error, setError] = useState<string | null>(null)
   const [captchaResetKey, setCaptchaResetKey] = useState(0)
 
-  const requestText = guideName ? `Хочу получить полный гайд по "${guideName}"` : ''
+  const requestText = guideName ? `Хочу получить полный гайд по "${guideName}" на месяц` : ''
   const submitText = guideName ? 'Заказать гайд' : 'Записаться на консультацию'
 
   const {
