@@ -1,22 +1,15 @@
-import Logo from '@/components/sections/Logo'
+import Logo from '@/components/layout/Logo'
 import { Button } from '@/components/ui/button'
-import { Leaf, Send, Phone, Mail, MapPin } from 'lucide-react'
+import { Send, Phone, Mail, MapPin } from 'lucide-react'
 import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
-import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
+import { formatPhoneNumber } from '@/lib/formatContacts'
 
 export async function Footer() {
   const payloadConfig = await config
   const payload = await getPayload({ config: payloadConfig })
   const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
-  const payloadGuides = await payload.find({
-    collection: 'guides',
-    depth: 1,
-    sort: '-createdAt',
-    where: { isActive: { equals: true } },
-    limit: 3,
-  })
   const payloadServices = await payload.find({
     collection: 'services',
     where: { isActive: { equals: true } },

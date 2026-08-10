@@ -36,7 +36,6 @@ import {
 } from '@/components/ui/accordion'
 import ConsultationForm from '@/components/forms/ConsultationForm'
 import { ServiceHomeCard } from '@/components/cards/ServiceHomeCard'
-import { GuideHomeCard } from '@/components/cards/GuideHomeCard'
 import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'

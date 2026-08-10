@@ -1,5 +1,5 @@
 'use client'
-import Logo from '@/components/sections/Logo'
+import Logo from '@/components/layout/Logo'
 import { Button } from '@/components/ui/button'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
