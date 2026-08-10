@@ -10,26 +10,19 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card'
-import { Checkbox } from '@/components/ui/checkbox'
 import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
 import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
 import { Guide } from '@/payload-types'
 import { ShoppingCart, Star } from 'lucide-react'
-import Form from 'next/form'
-import Link from 'next/link'
 import Image from 'next/image'
 import { getMediaUrl } from '@/lib/media'
-import { CATEGORIES } from '@/lib/shop-maps'
 import GuideForm from '@/components/forms/GuideForm'
 
 const categoryLabels: Record<string, string> = {
