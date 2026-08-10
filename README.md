@@ -1,67 +1,122 @@
-# Payload Blank Template
+<h1 align="center">Сайт нутрициолога</h1>
+<p align="center">Современный веб-сайт и персональная платформа для практикующего нутрициолога. Проект сочетает высокопроизводительный клиентский интерфейс с гибкой панелью управления контентом на базе <strong>PayloadCMS</strong></p>
+<h2 align="center">
+<a target="_blank" href="https://galimova-larisa.ru/">Смотреть демо</a>
+</h2>
 
-This template comes configured with the bare minimum to get started on anything you need.
+![Превью проекта](./.github/assets/preview.png)
 
-## Quick start
+[![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
+[![React](https://img.shields.io/badge/React_19-61DBFB?style=for-the-badge&logo=react&logoColor=white)](https://nextjs.org/)
+[![PayloadCMS](https://img.shields.io/badge/Payload_CMS_3-000000?style=for-the-badge&logo=payload&logoColor=white)](https://payloadcms.com/)
+[![TypeScript](https://img.shields.io/badge/TypeScript_6-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_3-38B2AC?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![PostgreSQL](https://img.shields.io/badge/PostgreSQL_18-4169E1?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 
-This template can be deployed directly from our Cloud hosting and it will setup MongoDB and cloud S3 object storage for media.
+---
 
-## Quick Start - local setup
+## 📌 О проекте
 
-To spin up this template locally, follow these steps:
+Сайт разработан для автоматизации взаимодействия нутрициолога с клиентами, публикации экспертного контента и записи на консультации. 
 
-### Clone
+### Ключевые особенности
+* **⚡ Скорость и SEO:** Полный Incremental Static Regeneration (ISR) и оптимизация загрузки медиа-файлов.
+* **🔒 Безопасность и соблюдение ФЗ:** Валидация всех входящих данных и формы обратной связи с подтверждением согласия на обработку персональных данных.
+* **📱 Адаптиновсть и отзывчивость:** Адаптивный интерфейс, оптимизированный под mobile-first пользователей.
 
-After you click the `Deploy` button above, you'll want to have standalone copy of this repo on your machine. If you've already cloned this repo, skip to [Development](#development).
+---
 
-### Development
+## 🚀 Ключевой функционал
 
-1. First [clone the repo](#clone) if you have not done so already
-2. `cd my-project && cp .env.example .env` to copy the example environment variables. You'll need to add the `MONGODB_URL` from your Cloud project to your `.env` if you want to use S3 storage and the MongoDB database that was created for you.
+### Для посетителей и клиентов:
+* **Каталог услуг:** Просмотр программ сопровождения и первичных консультаций.
+* **Запись и обратная связь:** Интерактивные формы заявок с капчей и отправкой на Email.
+* **Рецепты / Меню-гайды:** Статьи по правильному питанию и рецепты с подробным описанием.
 
-3. `pnpm install && pnpm dev` to install dependencies and start the dev server
-4. open `http://localhost:3000` to open the app in your browser
+### Для владельца (Админ-панель PayloadCMS):
+* **Управление контентом:** Редактирование услуг, цен, отзывов и статей в удобном WYSIWYG-редакторе.
+* **Менеджмент заявок:** Централизованный сбор входящих заявок прямо в коллекции CMS.
 
-That's it! Changes made in `./src` will be reflected in your app. Follow the on-screen instructions to login and create your first admin user. Then check out [Production](#production) once you're ready to build and serve your app, and [Deployment](#deployment) when you're ready to go live.
+---
 
-#### Docker (Optional)
+## 🛠 Технологический стек
 
-If you prefer to use Docker for local development instead of a local MongoDB instance, the provided docker-compose.yml file can be used.
+| Категория | Технологии |
+| :--- | :--- |
+| **Frontend Framework** | [Next.js](https://nextjs.org/) (App Router, Server Components) |
+| **CMS / Headless Engine** | [PayloadCMS](https://payloadcms.com/) |
+| **Язык программирования** | [TypeScript](https://www.typescriptlang.org/) (Strict Type-Safety) |
+| **Стилизация** | [Tailwind CSS](https://tailwindcss.com/), Shadcn UI |
+| **База данных** | [PostgreSQL](https://www.postgresql.org/) + Drizzle ORM |
+| **Валидация данных** | Zod / React Hook Form |
+| **Деплой & Хостинг** | Selectel Cloud (Payload & Database) |
 
-To do so, follow these steps:
+---
 
-- Modify the `MONGODB_URL` in your `.env` file to `mongodb://127.0.0.1/<dbname>`
-- Modify the `docker-compose.yml` file's `MONGODB_URL` to match the above `<dbname>`
-- Run `docker-compose up` to start the database, optionally pass `-d` to run in the background.
+## 🏗 Архитектура и особенности разработки
 
-## How it works
+```text
+├── src/
+│   ├── app/                  # Next.js App Router (страницы и API роуты)
+│   │   ├── (app)/            # Публичная часть сайта
+│   │   └── (payload)/        # Эндпоинты и панель управления PayloadCMS
+│   ├── collections/          # Схемы коллекций PayloadCMS (Users, Posts, Services, Leads)
+│   ├── components/           # Переиспользуемые React-компоненты
+│   └── payload.config.ts     # Главный конфигурационный файл CMS
+```
 
-The Payload config is tailored specifically to the needs of most websites. It is pre-configured in the following ways:
+* **Type Generation:** Типы TypeScript автоматически генерируются напрямую из схем PayloadCMS (`npm run generate:types`), что обеспечивает полную строгость типов на клиентской стороне.
+* **Оптимизация изображений:** Автоматическая конвертация загружаемых медиа-файлов в формат `.webp` и генерация responsive-размеров на стороне серверной части CMS.
 
-### Collections
+---
 
-See the [Collections](https://payloadcms.com/docs/configuration/collections) docs for details on how to extend this functionality.
+## ⚙️ Локальный запуск
 
-- #### Users (Authentication)
+### Предварительные требования
 
-  Users are auth-enabled collections that have access to the admin panel.
+* **Node.js**: `22.x`
+* **PostgreSQL**
 
-  For additional help, see the official [Auth Example](https://github.com/payloadcms/payload/tree/3.x/examples/auth) or the [Authentication](https://payloadcms.com/docs/authentication/overview#authentication-overview) docs.
+### Шаги по установке
 
-- #### Media
+1. **Клонируйте репозиторий:**
 
-  This is the uploads enabled collection. It features pre-configured sizes, focal point and manual resizing to help you manage your pictures.
+2. **Установите зависимости:**
+```bash
+npm install
+```
 
-### Docker
 
-Alternatively, you can use [Docker](https://www.docker.com) to spin up this template locally. To do so, follow these steps:
+3. **Создайте файл переменных окружения `.env`:**
+```bash
+cp .env.example .env
+```
 
-1. Follow [steps 1 and 2 from above](#development), the docker-compose file will automatically use the `.env` file in your project root
-1. Next run `docker-compose up`
-1. Follow [steps 4 and 5 from above](#development) to login and create your first admin user
 
-That's it! The Docker instance will help you get up and running quickly while also standardizing the development environment across your teams.
+Укажите параметры подключения к базе данных и секретные ключи:
+```env
+DATABASE_URI=postgresql://user:password@localhost:5432/nutritionist_db
+PAYLOAD_SECRET=your_super_secret_payload_key
+NEXT_PUBLIC_PAYLOAD_URL=http://localhost:3000
+```
 
-## Questions
 
-If you have any issues or questions, reach out to us on [Discord](https://discord.com/invite/payload) or start a [GitHub discussion](https://github.com/payloadcms/payload/discussions).
+4. **Запустите проект в режиме разработки:**
+```bash
+npm run dev
+```
+
+
+5. **Доступ:**
+* **Сайт:** `http://localhost:3000`
+* **Админ-панель:** `http://localhost:3000/admin` (при первом входе потребуется зарегистрировать учетную запись администратора).
+
+
+
+---
+
+## 👨‍💻 Автор
+
+* **Разработчик:** [Азамат Сафин](https://github.com/jeffors)
+* **Telegram:** [@safizam](https://t.me/safizam)
+
