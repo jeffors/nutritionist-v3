@@ -1,4 +1,3 @@
-import UnprocessedCount from '@/components/admin/UnprocessedCount'
 import ConsultationEmail from 'emails/consultation'
 import { CollectionConfig } from 'payload'
 import { render } from 'react-email'
@@ -15,9 +14,6 @@ export const Consultations: CollectionConfig = {
     useAsTitle: 'name',
     group: 'Заявки',
     defaultColumns: ['name', 'phone', 'messenger', 'isActive'],
-    // components: {
-    //   beforeList: [UnprocessedCount],
-    // },
   },
   access: {
     create: () => true,
