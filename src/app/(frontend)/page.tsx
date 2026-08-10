@@ -6,7 +6,6 @@ import './styles.css'
 import Link from 'next/link'
 import Image from 'next/image'
 import BackgroundImage from './../../../public/images/hero-bg.png'
-import Portrait from './../../../public/images/portrait.jpg'
 import {
   ArrowRight,
   Award,
@@ -21,8 +20,6 @@ import {
   Mail,
   Phone,
   Send,
-  ShoppingBag,
-  Sparkles,
   Stethoscope,
   Utensils,
 } from 'lucide-react'
@@ -38,11 +35,13 @@ import ConsultationForm from '@/components/forms/ConsultationForm'
 import { ServiceHomeCard } from '@/components/cards/ServiceHomeCard'
 import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import { getMediaUrl } from '@/lib/media'
 import { draftMode } from 'next/headers'
 import { RECIPE_CATEGORIES } from '@/lib/recipe-maps'
 import { iconMap } from '@/lib/service-maps'
+import { Section } from 'react-email'
+import SectionHeading from '@/components/shared/SectionHeading'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -250,15 +249,10 @@ export default async function HomePage() {
 
       <section className="bg-white py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.clientStories?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.clientStories?.description}
-            </p>
-          </div>
+          <SectionHeading
+            title={payloadGlobalHomePage.clientStories?.heading}
+            description={payloadGlobalHomePage.clientStories?.description}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {payloadGlobalHomePage.clientStories?.cards?.map((card) => {
@@ -320,15 +314,10 @@ export default async function HomePage() {
 
       <section className="bg-gray-50 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.services?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.services?.description}
-            </p>
-          </div>
+          <SectionHeading
+            title={payloadGlobalHomePage.services?.heading}
+            description={payloadGlobalHomePage.services?.description}
+          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {payloadServices.docs.map((service) => (
@@ -349,15 +338,10 @@ export default async function HomePage() {
 
       <section className="bg-white py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.recipes?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.recipes?.description}
-            </p>
-          </div>
+          <SectionHeading
+            title={payloadGlobalHomePage.recipes?.heading}
+            description={payloadGlobalHomePage.recipes?.description}
+          />
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
             <div className="lg:col-span-7 space-y-6">
@@ -494,16 +478,10 @@ export default async function HomePage() {
 
       <section className="bg-gray-50 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.howItWorks?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.howItWorks?.description}
-            </p>
-          </div>
-
+          <SectionHeading
+            title={payloadGlobalHomePage.howItWorks?.heading}
+            description={payloadGlobalHomePage.howItWorks?.description}
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {payloadGlobalHomePage.howItWorks?.steps?.map((step) => (
               <Card key={step.id}>
@@ -521,15 +499,10 @@ export default async function HomePage() {
       </section>
       <section className="bg-white py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.reviews?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.reviews?.description}
-            </p>
-          </div>
+          <SectionHeading
+            title={payloadGlobalHomePage.reviews?.heading}
+            description={payloadGlobalHomePage.reviews?.description}
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {payloadReviews.docs.map((review) => {
               let short_review = {
@@ -631,12 +604,7 @@ export default async function HomePage() {
 
       <section className="bg-gray-50 py-15">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.faq?.heading}
-            </h2>
-          </div>
+          <SectionHeading title={payloadGlobalHomePage.faq?.heading} />
           <Accordion type="multiple">
             {payloadGlobalHomePage.faq?.items?.map((item) => (
               <AccordionItem key={item.id} value={item.id?.toString() ?? ''}>
@@ -650,30 +618,20 @@ export default async function HomePage() {
 
       <section id="consultation" className="bg-white py-15">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.consultation?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.consultation?.description}
-            </p>
-          </div>
+          <SectionHeading
+            title={payloadGlobalHomePage.consultation?.heading}
+            description={payloadGlobalHomePage.consultation?.description}
+          />
           <ConsultationForm></ConsultationForm>
         </div>
       </section>
 
       <section className="bg-gray-50 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-              {payloadGlobalHomePage.contacts?.heading}
-            </h2>
-            <p className="text-black/80 max-w-xl mx-auto">
-              {payloadGlobalHomePage.contacts?.description}
-            </p>
-          </div>
+          <SectionHeading
+            title={payloadGlobalHomePage.contacts?.heading}
+            description={payloadGlobalHomePage.contacts?.description}
+          />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
             <Card>
               <CardHeader className="">

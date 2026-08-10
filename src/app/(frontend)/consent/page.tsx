@@ -1,7 +1,7 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { RichText } from '@payloadcms/richtext-lexical/react'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import { draftMode } from 'next/headers'
 
 export default async function Consent() {

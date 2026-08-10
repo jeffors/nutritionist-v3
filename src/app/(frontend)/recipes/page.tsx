@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ArrowRight, Clock, Utensils, Sparkles, BookOpen } from 'lucide-react'
 import { RECIPE_CATEGORIES } from '@/lib/recipe-maps'
+import SectionHeading from '@/components/shared/SectionHeading'
 
 export default async function RecipesPage() {
   const payloadConfig = await config
@@ -25,18 +26,13 @@ export default async function RecipesPage() {
   return (
     <div className="min-h-screen bg-gray-50/50 pt-24 pb-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 bg-green-500/10 text-green-700 px-4 py-1.5 rounded-full text-sm font-medium mb-4">
-            <Utensils className="w-4 h-4" />
-            Здоровое питание
-          </div>
-          <h1 className="font-heading text-4xl md:text-5xl text-black font-light mb-4">
-            Библиотека рецептов
-          </h1>
-          <p className="text-black/70 leading-relaxed">
-            Вкусные, простые и сбалансированные блюда с точным расчетом КБЖУ, разработанные с
-            заботой о вашем здоровье.
-          </p>
+        <div className="text-center max-w-2xl mx-auto my-12">
+          <SectionHeading
+            title="Библиотека рецептов"
+            description="Вкусные, простые и сбалансированные блюда с точным расчетом КБЖУ, разработанные с
+            заботой о вашем здоровье."
+            hero
+          />
         </div>
 
         {recipes.docs.length === 0 ? (

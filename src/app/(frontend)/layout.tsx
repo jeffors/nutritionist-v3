@@ -4,8 +4,8 @@ import { Inter, Merriweather } from 'next/font/google'
 import { Footer } from '@/components/layout/Footer'
 import Header from '@/components/layout/Header'
 import { draftMode } from 'next/headers'
-import { PreviewBanner } from '@/components/PreviewBanner'
-import { CookieBanner } from '@/components/CookieBanner'
+import { PreviewBanner } from '@/components/chrome/PreviewBanner'
+import { CookieBanner } from '@/components/chrome/CookieBanner'
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'], variable: '--font-inter' })
 const merriweather = Merriweather({

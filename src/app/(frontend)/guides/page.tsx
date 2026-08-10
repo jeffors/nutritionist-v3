@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { LockIcon, ArrowRight, FileText, Clock, BookOpen } from 'lucide-react'
 import { getMediaUrl } from '@/lib/media'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import type { Metadata } from 'next'
 import { iconMap } from '@/lib/service-maps'
 

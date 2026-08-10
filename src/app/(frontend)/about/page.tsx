@@ -14,10 +14,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
+import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import { EducationCard } from '@/components/cards/EducationCard'
 import { draftMode } from 'next/headers'
 import { RichText } from '@payloadcms/richtext-lexical/react'
+import SectionHeading from '@/components/shared/SectionHeading'
 
 export default async function About() {
   const payloadConfig = await config
@@ -71,12 +72,7 @@ export default async function About() {
       </section>
       <section className="py-15 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"> </div>
-            <h2 className="font-heading text-4xl text-black font-light">
-              {payloadGlobalAboutPage.values?.heading}
-            </h2>
-          </div>
+          <SectionHeading title={payloadGlobalAboutPage.values?.heading} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {payloadGlobalAboutPage.values?.items?.map((item) => {
               const Icon = iconMap[item.icon]
@@ -95,12 +91,7 @@ export default async function About() {
       </section>
       <section className="py-15 bg-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <div className="w-60 h-1 bg-green-500 mx-auto mb-4"></div>
-            <h2 className="font-heading text-4xl text-black font-light">
-              {payloadGlobalAboutPage.education?.heading}
-            </h2>
-          </div>
+          <SectionHeading title={payloadGlobalAboutPage.education?.heading} />
           <div className="space-y-4">
             {payloadGlobalAboutPage.education?.items?.map((item) => {
               return <EducationCard key={item.id} item={item} />
