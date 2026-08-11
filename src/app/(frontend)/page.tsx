@@ -179,10 +179,7 @@ export default async function HomePage() {
             </div>
 
             <div>
-              <div className="w-60 h-1 bg-green-500 mb-4"></div>
-              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-                {payloadGlobalHomePage.about?.heading}
-              </h2>
+              <SectionHeading title={payloadGlobalHomePage.about?.heading} align="left" />
               <p className="text-black/80 leading-relaxed mb-4">
                 {payloadGlobalHomePage.about?.paragraph1}
               </p>
@@ -214,10 +211,7 @@ export default async function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
-              <div className="w-60 h-1 bg-green-500 mb-4"></div>
-              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-                {payloadGlobalHomePage.nutrition?.heading}
-              </h2>
+              <SectionHeading title={payloadGlobalHomePage.nutrition?.heading} align="left" />
               <p className="text-black/80 leading-relaxed mb-4 text-base md:text-lg">
                 {payloadGlobalHomePage.nutrition?.paragraph1}
               </p>
@@ -566,15 +560,13 @@ export default async function HomePage() {
             </div>
 
             <div>
-              <Badge className="mb-4 bg-indigo-100 text-indigo-700">
-                {payloadGlobalHomePage.proctolog?.badge}
-              </Badge>
-              <h2 className="font-heading text-4xl md:text-5xl text-black font-light mb-6">
-                {payloadGlobalHomePage.proctolog?.heading}
-                <div className="text-indigo-600">
-                  {payloadGlobalHomePage.proctolog?.headingAccent}
-                </div>
-              </h2>
+              <SectionHeading
+                badge={payloadGlobalHomePage.proctolog?.badge}
+                title={payloadGlobalHomePage.proctolog?.heading}
+                accentTitle={payloadGlobalHomePage.proctolog?.headingAccent}
+                accentColor="indigo"
+                align="left"
+              />
               <p className="text-black/80 leading-relaxed mb-4">
                 {payloadGlobalHomePage.proctolog?.paragraph1}
               </p>

@@ -32,6 +32,7 @@ export default async function RecipesPage() {
             description="Вкусные, простые и сбалансированные блюда с точным расчетом КБЖУ, разработанные с
             заботой о вашем здоровье."
             hero
+            as="h1"
           />
         </div>
 

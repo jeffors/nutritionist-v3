@@ -46,6 +46,7 @@ export default async function Services() {
             title={payloadGlobalServicesPage.hero?.heading}
             description={payloadGlobalServicesPage.hero?.description}
             hero
+            as="h1"
           />
         </div>
       </section>

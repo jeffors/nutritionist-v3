@@ -37,10 +37,12 @@ export default async function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="">
-              <div className="w-60 h-1 bg-green-500  mb-4"></div>
-              <h1 className="font-heading text-5xl md:text-6xl text-black font-light mb-6">
-                {payloadGlobalAboutPage.hero?.heading}
-              </h1>
+              <SectionHeading
+                title={payloadGlobalAboutPage.hero?.heading}
+                align="left"
+                hero
+                as="h1"
+              />
               <div className="text-xl text-black/80 leading-relaxed mb-6">
                 <RichText data={payloadGlobalAboutPage.hero?.paragraph1} />
               </div>

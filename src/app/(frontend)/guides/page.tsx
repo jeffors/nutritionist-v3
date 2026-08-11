@@ -11,6 +11,7 @@ import { getMediaUrl } from '@/lib/media'
 import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import type { Metadata } from 'next'
 import { iconMap } from '@/lib/service-maps'
+import SectionHeading from '@/components/shared/SectionHeading'
 
 export const metadata: Metadata = {
   title: 'Терапевтические меню-гайды и статьи по питанию',
@@ -34,14 +35,13 @@ export default async function MenuGuidesPage() {
       <RefreshRouteOnSave />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <div className="w-40 h-1 bg-green-500 mx-auto mb-4" />
-          <h1 className="font-heading text-4xl md:text-5xl font-light text-black mb-4">
-            Терапевтические меню-гайды
-          </h1>
-          <p className="text-black/70 leading-relaxed">
-            Практические статьи, сбалансированные схемы питания и рекомендации по рациону при
-            различных состояниях.
-          </p>
+          <SectionHeading
+            title="Терапевтические меню-гайды"
+            description="Практические статьи, сбалансированные схемы питания и рекомендации по рациону при
+            различных состояниях."
+            hero
+            as="h1"
+          />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

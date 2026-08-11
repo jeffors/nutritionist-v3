@@ -27,7 +27,7 @@ export default async function Contacts() {
           <SectionHeading
             title={payloadGlobalContactsPage.hero?.heading}
             description={payloadGlobalContactsPage.hero?.description}
-            hero
+            as="h1"
           />
         </div>
       </section>
