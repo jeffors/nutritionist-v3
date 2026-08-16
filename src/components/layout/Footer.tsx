@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { getPayload } from 'payload'
 import config from '@/payload.config'
 import { formatPhoneNumber } from '@/lib/formatContacts'
+import { NAVIGATION } from '@/lib/navigation'
 
 export async function Footer() {
   const payloadConfig = await config
@@ -32,52 +33,18 @@ export async function Footer() {
             <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
               Навигация
             </h3>
+
             <ul className="space-y-2.5">
-              <li>
-                <Link href="/" className="text-gray-400 hover:text-white text-sm transition-colors">
-                  Главная
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Обо мне
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Услуги
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/recipes"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Рецепты
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/reviews"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Отзывы
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/contacts"
-                  className="text-gray-400 hover:text-white text-sm transition-colors"
-                >
-                  Контакты
-                </Link>
-              </li>
+              {NAVIGATION.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           <div>

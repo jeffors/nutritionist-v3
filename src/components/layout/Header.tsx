@@ -1,19 +1,11 @@
 'use client'
 import Logo from '@/components/layout/Logo'
 import { Button } from '@/components/ui/button'
+import { NAVIGATION } from '@/lib/navigation'
 import { Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
-
-const navigation = [
-  { name: 'Главная', href: '/' },
-  { name: 'Обо мне', href: '/about' },
-  { name: 'Услуги', href: '/services' },
-  { name: 'Рецепты', href: '/recipes' },
-  { name: 'Отзывы', href: '/reviews' },
-  { name: 'Контакты', href: '/contacts' },
-]
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -42,7 +34,7 @@ export default function Header() {
           </Link>
 
           <div className="hidden lg:flex items-center gap-8">
-            {navigation.map((item) => (
+            {NAVIGATION.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -73,7 +65,7 @@ export default function Header() {
       {isOpen && (
         <div className="lg:hidden bg-white border-t border-gray-100 shadow-lg">
           <div className="px-4 py-4 space-y-1">
-            {navigation.map((item) => (
+            {NAVIGATION.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
