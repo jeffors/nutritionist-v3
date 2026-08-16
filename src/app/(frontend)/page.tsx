@@ -42,6 +42,7 @@ import { RECIPE_CATEGORIES } from '@/lib/recipe-maps'
 import { iconMap } from '@/lib/service-maps'
 import { Section } from 'react-email'
 import SectionHeading from '@/components/shared/SectionHeading'
+import PortraitBlock from '@/components/shared/PortraitBlock'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -137,46 +138,12 @@ export default async function HomePage() {
       <section className="bg-white py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              {imageAboutUrl ? (
-                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-lg mx-auto lg:mx-0">
-                  <Image
-                    src={imageAboutUrl}
-                    width={400}
-                    height={500}
-                    alt="Портрет"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-green-500/20 flex items-center justify-center">
-                        <Award className="w-5 h-5 text-green-500" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-sm text-black">
-                          {payloadGlobalHomePage.about?.imageTitle}
-                        </p>
-                        <p className="text-xs text-black/70">
-                          {payloadGlobalHomePage.about?.imageDescription}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0 bg-green-200 flex items-center justify-center">
-                  <div className="text-center">
-                    <ImageIcon className="w-24 h-24 text-green-600 mx-auto mb-4 opacity-30" />
-                    <p className="text-green-600 font-medium">
-                      {payloadGlobalHomePage.about?.imageTitle}
-                    </p>
-                    <p className="text-green-500">
-                      {payloadGlobalHomePage.about?.imageDescription}
-                    </p>
-                  </div>
-                </div>
-              )}
-            </div>
+            <PortraitBlock
+              icon={Award}
+              imageUrl={imageAboutUrl}
+              title={payloadGlobalHomePage.about?.imageTitle}
+              description={payloadGlobalHomePage.about?.imageDescription}
+            />
 
             <div>
               <SectionHeading title={payloadGlobalHomePage.about?.heading} align="left" />
@@ -520,44 +487,13 @@ export default async function HomePage() {
       <section className="bg-indigo-50 py-15">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative">
-              {imageProctologUrl ? (
-                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-lg mx-auto lg:mx-0">
-                  <Image
-                    src={imageProctologUrl}
-                    width={400}
-                    height={500}
-                    alt="Портрет"
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute bottom-6 left-6 right-6 bg-white/90 backdrop-blur-sm rounded-2xl p-4 shadow-lg">
-                    <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-indigo-500/20 flex items-center justify-center">
-                        <Stethoscope className="w-5 h-5 text-indigo-500" />
-                      </div>
-                      <div>
-                        <p className="font-semibold text-sm text-black">
-                          {payloadGlobalHomePage.proctolog?.headingAccent}
-                        </p>
-                        <p className="text-xs text-black/70">
-                          {payloadGlobalHomePage.proctolog?.heading}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="relative rounded-3xl overflow-hidden aspect-[4/5] max-w-sm mx-auto lg:mx-0 bg-indigo-200 flex items-center justify-center">
-                  <div className="text-center">
-                    <ImageIcon className="w-24 h-24 text-indigo-600 mx-auto mb-4 opacity-30" />
-                    <p className="text-indigo-600 font-medium">
-                      {payloadGlobalHomePage.proctolog?.headingAccent}
-                    </p>
-                    <p className="text-indigo-500">{payloadGlobalHomePage.proctolog?.heading}</p>
-                  </div>
-                </div>
-              )}
-            </div>
+            <PortraitBlock
+              icon={Stethoscope}
+              imageUrl={imageProctologUrl}
+              title={payloadGlobalHomePage.proctolog?.headingAccent}
+              description={payloadGlobalHomePage.proctolog?.heading}
+              accentColor="indigo"
+            />
 
             <div>
               <SectionHeading
