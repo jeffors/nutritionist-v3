@@ -43,6 +43,8 @@ import { iconMap } from '@/lib/service-maps'
 import { Section } from 'react-email'
 import SectionHeading from '@/components/shared/SectionHeading'
 import PortraitBlock from '@/components/shared/PortraitBlock'
+import { ContactsGlobal } from '@/payload-types'
+import ContactMethod from '@/components/shared/ContactMethod'
 
 export default async function HomePage() {
   const payloadConfig = await config
@@ -561,48 +563,27 @@ export default async function HomePage() {
             description={payloadGlobalHomePage.contacts?.description}
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-3xl mx-auto">
-            <Card>
-              <CardHeader className="">
-                <div className="flex justify-center">
-                  <div className="w-14 h-14 rounded-full bg-green-100 flex items-center justify-center text-green-600 mb-3">
-                    <Phone className="w-6 h-6 text-green-600" />
-                  </div>
-                </div>
-
-                <CardTitle className="flex font-sans justify-center">WhatsApp</CardTitle>
-                <CardDescription className="flex justify-center">
-                  {formatPhoneNumber(payloadGlobalContacts.whatsapp)}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-            <Card>
-              <CardHeader className="">
-                <div className="flex justify-center">
-                  <div className="w-14 h-14 rounded-full bg-blue-100 flex items-center justify-center text-green-600 mb-3">
-                    <Send className="w-6 h-6 text-blue-600" />
-                  </div>
-                </div>
-
-                <CardTitle className="flex font-sans justify-center">Telegram</CardTitle>
-                <CardDescription className="flex justify-center">
-                  {formatTelegram(payloadGlobalContacts.telegram)}
-                </CardDescription>
-              </CardHeader>
-            </Card>
-            <Card>
-              <CardHeader className="">
-                <div className="flex justify-center">
-                  <div className="w-14 h-14 rounded-full bg-gray-100 flex items-center justify-center text-green-600 mb-3">
-                    <Mail className="w-6 h-6 text-gray-600" />
-                  </div>
-                </div>
-
-                <CardTitle className="flex font-sans justify-center">Mail</CardTitle>
-                <CardDescription className="flex justify-center">
-                  {payloadGlobalContacts.email}
-                </CardDescription>
-              </CardHeader>
-            </Card>
+            <ContactMethod
+              colorScheme="green"
+              icon={Phone}
+              label="WhatsApp"
+              value={formatPhoneNumber(payloadGlobalContacts.whatsapp)}
+              href={`https://wa.me/${payloadGlobalContacts.whatsapp}`}
+            />
+            <ContactMethod
+              colorScheme="blue"
+              icon={Send}
+              label="Telegram"
+              value={formatTelegram(payloadGlobalContacts.telegram)}
+              href={`https://t.me/${payloadGlobalContacts.telegram}`}
+            />
+            <ContactMethod
+              colorScheme="gray"
+              icon={Mail}
+              label="WhatsApp"
+              value={payloadGlobalContacts.email}
+              href={`mailto:${payloadGlobalContacts.email}`}
+            />
           </div>
         </div>
       </section>
