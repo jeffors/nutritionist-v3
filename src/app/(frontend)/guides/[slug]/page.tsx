@@ -1,11 +1,8 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 import Image from 'next/image'
 import Link from 'next/link'
-import { draftMode } from 'next/headers'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { ArrowLeft, Clock, Sparkles, AlertCircle, LockIcon } from 'lucide-react'
+import { ArrowLeft, Clock, AlertCircle, LockIcon } from 'lucide-react'
 import { getMediaUrl } from '@/lib/media'
 import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import type { Metadata } from 'next'
@@ -21,37 +18,20 @@ import {
 } from '@/components/ui/dialog'
 import ConsultationForm from '@/components/forms/ConsultationForm'
 import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
+import { getMenuGuidesBySlug, getMenuGuidesSlugs } from '@/data/guides'
 
 interface PageProps {
   params: Promise<{ slug: string }>
 }
 
 export async function generateStaticParams() {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const guides = await payload.find({
-    collection: 'menu-guides',
-    limit: 100,
-    where: { isActive: { equals: true } },
-  })
-
-  return guides.docs.map((doc) => ({
-    slug: doc.slug,
-  }))
+  const slugs = await getMenuGuidesSlugs()
+  return slugs.map((slug) => ({ slug }))
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-
-  const { docs } = await payload.find({
-    collection: 'menu-guides',
-    where: { slug: { equals: slug } },
-    limit: 1,
-  })
-
-  const guide = docs[0]
+  const guide = await getMenuGuidesBySlug(slug)
   if (!guide) return {}
 
   return {
@@ -62,21 +42,10 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function MenuGuidePage({ params }: PageProps) {
   const { slug } = await params
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { isEnabled: isDraftMode } = await draftMode()
+  const guide = await getMenuGuidesBySlug(slug)
 
-  const { docs } = await payload.find({
-    collection: 'menu-guides',
-    where: { slug: { equals: slug } },
-    draft: isDraftMode,
-    limit: 1,
-  })
-
-  const guide = docs[0]
-
-  if (!guide || (!guide.isActive && !isDraftMode)) {
-    NotFound()
+  if (!guide) {
+    return NotFound()
   }
 
   const imageUrl = getMediaUrl(guide.image)

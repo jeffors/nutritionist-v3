@@ -1,34 +1,19 @@
 import { Button } from '@/components/ui/button'
-import { ArrowRight, Award, BookOpen, CheckCircle, GraduationCap, Heart } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 
 import Image from 'next/image'
-import { getPayload } from 'payload'
-import config from '@payload-config'
 import { getMediaUrl } from '@/lib/media'
 import { iconMap } from '@/lib/service-maps'
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog'
 import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import { EducationCard } from '@/components/cards/EducationCard'
-import { draftMode } from 'next/headers'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import SectionHeading from '@/components/shared/SectionHeading'
+import { getAboutPageData } from '@/data/about'
 
 export default async function About() {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { isEnabled: isDraftMode } = await draftMode()
-  const payloadGlobalAboutPage = await payload.findGlobal({
-    slug: 'about-page',
-    draft: isDraftMode,
-  })
-  const imageAboutUrl = getMediaUrl(payloadGlobalAboutPage.hero?.image)
+  const aboutPage = await getAboutPageData()
+  const imageAboutUrl = getMediaUrl(aboutPage.hero?.image)
 
   return (
     <div className="pt-20">
@@ -37,21 +22,14 @@ export default async function About() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div className="">
-              <SectionHeading
-                title={payloadGlobalAboutPage.hero?.heading}
-                align="left"
-                hero
-                as="h1"
-              />
+              <SectionHeading title={aboutPage.hero?.heading} align="left" hero as="h1" />
               <div className="text-xl text-black/80 leading-relaxed mb-6">
-                <RichText data={payloadGlobalAboutPage.hero?.paragraph1} />
+                <RichText data={aboutPage.hero?.paragraph1} />
               </div>
-              <p className="text-black/70 leading-relaxed mb-8">
-                {payloadGlobalAboutPage.hero?.paragraph2}
-              </p>
+              <p className="text-black/70 leading-relaxed mb-8">{aboutPage.hero?.paragraph2}</p>
               <Button asChild variant="default" size="xl">
                 <Link href="/contacts">
-                  {payloadGlobalAboutPage.hero?.ctaLabel}
+                  {aboutPage.hero?.ctaLabel}
                   <ArrowRight className="w-4 h-4" />
                 </Link>
               </Button>
@@ -74,9 +52,9 @@ export default async function About() {
       </section>
       <section className="py-15 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title={payloadGlobalAboutPage.values?.heading} />
+          <SectionHeading title={aboutPage.values?.heading} />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {payloadGlobalAboutPage.values?.items?.map((item) => {
+            {aboutPage.values?.items?.map((item) => {
               const Icon = iconMap[item.icon]
               return (
                 <div className="text-center p-6" key={item.id}>
@@ -93,9 +71,9 @@ export default async function About() {
       </section>
       <section className="py-15 bg-gray-100">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <SectionHeading title={payloadGlobalAboutPage.education?.heading} />
+          <SectionHeading title={aboutPage.education?.heading} />
           <div className="space-y-4">
-            {payloadGlobalAboutPage.education?.items?.map((item) => {
+            {aboutPage.education?.items?.map((item) => {
               return <EducationCard key={item.id} item={item} />
             })}
           </div>
@@ -103,15 +81,11 @@ export default async function About() {
       </section>
       <section className="py-15 bg-green-700 text-white">
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-4xl font-light mb-4">
-            {payloadGlobalAboutPage.cta?.heading}
-          </h2>
-          <p className="text-white/80 mb-8 leading-relaxed">
-            {payloadGlobalAboutPage.cta?.description}
-          </p>
+          <h2 className="font-heading text-4xl font-light mb-4">{aboutPage.cta?.heading}</h2>
+          <p className="text-white/80 mb-8 leading-relaxed">{aboutPage.cta?.description}</p>
           <Button asChild variant="secondary" size="xl">
             <Link href="/contacts">
-              {payloadGlobalAboutPage.cta?.button}
+              {aboutPage.cta?.button}
               <ArrowRight className="w-4 h-4" />
             </Link>
           </Button>

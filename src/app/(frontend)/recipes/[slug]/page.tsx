@@ -1,13 +1,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import { getPayload } from 'payload'
-import config from '@/payload.config'
-import { draftMode } from 'next/headers'
 import { getMediaUrl } from '@/lib/media'
 import { Badge } from '@/components/ui/badge'
-import { ArrowLeft, Clock, Utensils, CheckCircle2, Flame, Scale } from 'lucide-react'
+import { ArrowLeft, Clock, Utensils, CheckCircle2 } from 'lucide-react'
 import { RECIPE_CATEGORIES } from '@/lib/recipe-maps'
 import NotFound from '../../[...not-found]/page'
+import { getRecipesBySlug } from '@/data/recipes'
 
 interface Props {
   params: Promise<{ slug: string }>
@@ -15,13 +13,7 @@ interface Props {
 
 export async function generateMetadata({ params }: Props) {
   const { slug } = await params
-  const payload = await getPayload({ config: await config })
-  const result = await payload.find({
-    collection: 'recipes',
-    where: { slug: { equals: slug } },
-  })
-
-  const recipe = result.docs[0]
+  const recipe = await getRecipesBySlug(slug)
   if (!recipe) return {}
 
   return {
@@ -32,17 +24,7 @@ export async function generateMetadata({ params }: Props) {
 
 export default async function RecipeDetailPage({ params }: Props) {
   const { slug } = await params
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const result = await payload.find({
-    collection: 'recipes',
-    where: { slug: { equals: slug } },
-    draft: isDraftMode,
-  })
-
-  const recipe = result.docs[0]
+  const recipe = await getRecipesBySlug(slug)
 
   if (!recipe) {
     return NotFound()

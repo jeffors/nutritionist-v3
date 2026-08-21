@@ -1,17 +1,15 @@
-import { getPayload } from 'payload'
-import config from '@/payload.config'
 import Link from 'next/link'
 import Image from 'next/image'
-import { draftMode } from 'next/headers'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { LockIcon, ArrowRight, FileText, Clock, BookOpen } from 'lucide-react'
+import { LockIcon, ArrowRight, Clock } from 'lucide-react'
 import { getMediaUrl } from '@/lib/media'
 import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
 import type { Metadata } from 'next'
 import { iconMap } from '@/lib/service-maps'
 import SectionHeading from '@/components/shared/SectionHeading'
+import { getMenuGuides } from '@/data/guides'
 
 export const metadata: Metadata = {
   title: 'Терапевтические меню-гайды и статьи по питанию',
@@ -19,16 +17,7 @@ export const metadata: Metadata = {
 }
 
 export default async function MenuGuidesPage() {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { isEnabled: isDraftMode } = await draftMode()
-
-  const { docs: guides } = await payload.find({
-    collection: 'menu-guides',
-    where: { isActive: { equals: true } },
-    sort: '-createdAt',
-    draft: isDraftMode,
-  })
+  const menuGuides = await getMenuGuides()
 
   return (
     <div className="min-h-screen bg-gray-50 py-20 pt-28">
@@ -45,7 +34,7 @@ export default async function MenuGuidesPage() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {guides.map((guide) => {
+          {menuGuides.map((guide) => {
             const imageUrl = getMediaUrl(guide.image)
             const isAvailable = !guide.isComingSoon
             const Icon = iconMap[guide.icon]
