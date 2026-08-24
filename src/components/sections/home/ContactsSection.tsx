@@ -24,6 +24,7 @@ export default function ContactsSection({ contactsHeading, contacts }: ContactsS
             label="WhatsApp"
             value={formatPhoneNumber(contacts.whatsapp)}
             href={`https://wa.me/${contacts.whatsapp}`}
+            variant="compact"
           />
           <ContactMethod
             colorScheme="blue"
@@ -31,6 +32,7 @@ export default function ContactsSection({ contactsHeading, contacts }: ContactsS
             label="Telegram"
             value={formatTelegram(contacts.telegram)}
             href={`https://t.me/${contacts.telegram}`}
+            variant="compact"
           />
           <ContactMethod
             colorScheme="gray"
@@ -38,6 +40,7 @@ export default function ContactsSection({ contactsHeading, contacts }: ContactsS
             label="WhatsApp"
             value={contacts.email}
             href={`mailto:${contacts.email}`}
+            variant="compact"
           />
         </div>
       </div>

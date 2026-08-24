@@ -1,9 +1,8 @@
-import { Button } from '@/components/ui/button'
-import Link from 'next/link'
-import { ReviewCard } from '@/components/cards/ReviewCard'
 import { RefreshRouteOnSave } from '@/components/chrome/RefreshRouteOnSave'
-import SectionHeading from '@/components/shared/SectionHeading'
 import { getReviewsPageData } from '@/data/reviews'
+import HeroSection from '@/components/sections/reviews/HeroSection'
+import ReviewsSection from '@/components/sections/reviews/ReviewsSection'
+import CTASection from '@/components/shared/CTASection'
 
 export default async function Reviews() {
   const { reviewsPage, reviews } = await getReviewsPageData()
@@ -11,42 +10,15 @@ export default async function Reviews() {
   return (
     <div className="pt-20">
       <RefreshRouteOnSave />
-      <section className="py-15 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <SectionHeading
-            title={reviewsPage.hero?.heading}
-            description={reviewsPage.hero?.description}
-            hero
-            as="h1"
-          />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-12 max-w-2xl mx-auto">
-            {reviewsPage.hero?.stats?.map((stat) => (
-              <div className="text-center" key={stat.id}>
-                <div className="font-heading text-4xl font-light text-black mb-1">{stat.value}</div>
-                <div className="text-xs text-black/80 uppercase tracking-wider">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="py-15 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 gap-6">
-            {reviews.docs.map((review) => (
-              <ReviewCard key={review.id} review={review} />
-            ))}
-          </div>
-        </div>
-      </section>
-      <section className="py-15 bg-green-100">
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="font-heading text-3xl font-light mb-4">{reviewsPage.cta?.heading}</h2>
-          <p className="text-black/80 mb-8 leading-relaxed">{reviewsPage.cta?.description}</p>
-          <Button asChild variant="default" size="xl">
-            <Link href="/contacts">{reviewsPage.cta?.button}</Link>
-          </Button>
-        </div>
-      </section>
+      <HeroSection hero={reviewsPage.hero} />
+      <ReviewsSection reviews={reviews.docs} />
+      <CTASection
+        backgroundColor="white"
+        heading={reviewsPage.cta?.heading}
+        description={reviewsPage.cta?.description}
+        ctaHref="/contacts"
+        ctaLabel={reviewsPage.cta?.button}
+      />
     </div>
   )
 }
