@@ -1,10 +1,5 @@
 import { Font } from 'react-email'
 
-/**
- * Inter variable family (weights 100–900) via Google CSS `@import`.
- * Many webmail clients strip `@import`; the `<Font>` entries below register 400 / 500 / 600
- * static files as a fallback when the import does not run.
- */
 export function EmailFonts() {
   return (
     <>

@@ -1,4 +1,4 @@
-import ConsultationForm from '@/components/forms/ConsultationForm'
+import ConsultationForm from '@/components/forms/ConsultationForm/ConsultationForm'
 import SectionHeading from '@/components/shared/SectionHeading'
 import { HomePage } from '@/payload-types'
 

@@ -1,6 +1,5 @@
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
-import { ServicesPage } from '@/payload-types'
 import { ArrowRight } from 'lucide-react'
 import Link from 'next/link'
 

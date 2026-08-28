@@ -26,7 +26,7 @@ export function EducationCard({ item }: { item: ItemProps }) {
       className="bg-white border border-gray-100 rounded-2xl hover:border-gray-300 transition"
     >
       <CollapsibleTrigger asChild className="w-full">
-        <div className="  p-6 flex items-start gap-4 ">
+        <div className="p-6 flex items-start gap-4">
           <div className="w-14 h-14 rounded-xl bg-green-500/10 flex flex-col items-center justify-center shrink-0">
             <GraduationCap className="w-5 h-5 text-green-900" />
             <span className="text-xs font-semibold text-green-900 mt-0.5">{item.year}</span>

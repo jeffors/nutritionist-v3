@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import ConsultationForm from '@/components/forms/ConsultationForm'
+import ConsultationForm from '@/components/forms/ConsultationForm/ConsultationForm'
 import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
 import { MenuGuide } from '@/payload-types'
 import { getMediaUrl } from '@/lib/media'

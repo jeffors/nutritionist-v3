@@ -1,4 +1,4 @@
-import { ReviewHomeCard } from '@/components/cards/ReviewHomeCard'
+import { ReviewCard } from '@/components/cards/ReviewCard'
 import SectionHeading from '@/components/shared/SectionHeading'
 import { Button } from '@/components/ui/button'
 import { HomePage, Review } from '@/payload-types'
@@ -21,7 +21,7 @@ export default function ReviewsSection({ reviewsHeading, reviews }: ReviewsSecti
               ...review,
               text: Array.from(review.text.split('.', 12)).join('.'),
             }
-            return <ReviewHomeCard key={review.id} review={short_review} />
+            return <ReviewCard key={review.id} review={short_review} variant="home" />
           })}
         </div>
         <div className="text-center mt-8">

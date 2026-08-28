@@ -23,8 +23,6 @@ import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import { ConsentPageGlobal } from './globals/ConsentPageGlobal'
 import { OfferPageGlobal } from './globals/OfferPageGlobal'
 import { PrivacyPageGlobal } from './globals/PrivacyPageGlobal'
-import { seoPlugin } from '@payloadcms/plugin-seo'
-import ConsultationsWidget from './components/admin/ConsultationsWidget'
 import { Recipes } from './collections/Recipes'
 import { MenuGuides } from './collections/MenuGuides'
 
@@ -53,8 +51,8 @@ export default buildConfig({
     },
     components: {
       graphics: {
-        Logo: '/components/admin/logo',
-        Icon: '/components/admin/icon',
+        Logo: '/components/admin/AdminLogo',
+        Icon: '/components/admin/AdminIcon',
       },
       beforeDashboard: ['/components/admin/ConsultationsWidget'],
     },

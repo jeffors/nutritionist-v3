@@ -17,7 +17,6 @@ import CTASection from '@/components/shared/CTASection'
 
 export default async function About() {
   const aboutPage = await getAboutPageData()
-  const imageAboutUrl = getMediaUrl(aboutPage.hero?.image)
 
   return (
     <div className="pt-20">

@@ -11,8 +11,15 @@ import { formatReview } from '@/lib/formatReview'
 import { Review } from '@/payload-types'
 import { Star } from 'lucide-react'
 
-export function ReviewHomeCard({ review }: { review: Review }) {
+export function ReviewCard({
+  review,
+  variant = 'full',
+}: {
+  review: Review
+  variant?: 'home' | 'full'
+}) {
   const formattedReview = formatReview(review)
+  const isFull = variant === 'full'
 
   return (
     <Card className="justify-between">
@@ -21,6 +28,7 @@ export function ReviewHomeCard({ review }: { review: Review }) {
           <div>
             <CardTitle>{formattedReview.name}</CardTitle>
             {formattedReview.age && <CardDescription>{formattedReview.age}</CardDescription>}
+            {isFull && formattedReview.location && ` · ${formattedReview.location}`}
           </div>
           <div className="flex gap-0.5">
             {Array.from({ length: 5 }, (_, i) => (
@@ -35,8 +43,9 @@ export function ReviewHomeCard({ review }: { review: Review }) {
       <CardContent>
         <p className="text-black/80">"{formattedReview.text}"</p>
       </CardContent>
-      <CardFooter>
+      <CardFooter className={isFull ? 'justify-between' : undefined}>
         <Badge variant={'secondary'}>{formattedReview.service}</Badge>
+        {isFull && <span className="text-xs text-black/80">{formattedReview.date}</span>}
       </CardFooter>
     </Card>
   )

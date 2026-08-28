@@ -23,13 +23,12 @@ export function ServiceCard({ service }: { service: Service }) {
         {service.tag && (
           <Badge className="absolute top-2 right-6 hidden lg:block">{service.tag}</Badge>
         )}
-
         <div
           className={`w-14 h-14 rounded-2xl flex items-center justify-center shrink-0 ${bg} ${text}`}
         >
           {Icon && <Icon className="w-8 h-8" />}
         </div>
-        <div className="">
+        <div>
           <CardTitle className="text-2xl">{service.title}</CardTitle>
           <CardDescription className="flex items-center gap-3">
             <span className="text-xl font-bold text-black">
@@ -44,10 +43,10 @@ export function ServiceCard({ service }: { service: Service }) {
         <div className="">
           <p className="font-semibold text-black/80 uppercase tracking-wider mb-3">Что включено:</p>
           <ul className="space-y-2">
-            {service.includes?.map(({ item }, i) => (
-              <li key={i} className="flex items-start gap-2">
+            {service.includes?.map((item) => (
+              <li key={item.id} className="flex items-start gap-2">
                 <CheckCircle className="w-4 h-4 text-green-600 shrink-0 mt-0.5" />
-                <span>{item}</span>
+                <span>{item.item}</span>
               </li>
             ))}
           </ul>
