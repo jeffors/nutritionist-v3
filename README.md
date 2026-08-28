@@ -79,6 +79,7 @@
 │   │   ├── layout/             # Header, Footer, Logo
 │   │   └── admin/              # кастомные компоненты админки Payload
 │   ├── lib/                    # утилиты (navigation.ts, media.ts, formatReview.ts...)
+│   ├── services/               # сервисы (notification.js...)
 │   └── payload.config.ts       # главный конфиг CMS
 ```
 
