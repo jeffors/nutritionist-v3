@@ -21,8 +21,8 @@ import { StrikethroughFeatureClient as StrikethroughFeatureClient_e70f5e05f09f93
 import { UnderlineFeatureClient as UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { BoldFeatureClient as BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
 import { ItalicFeatureClient as ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864 } from '@payloadcms/richtext-lexical/client'
-import { default as default_cac68a8c0a729bb34700c8ff6528a0de } from '../../../components/admin/icon'
-import { default as default_78cd0b14279b85aa0b253c7d344f5855 } from '../../../components/admin/logo'
+import { default as default_7be396d0766c6c490887ef074dd0ced4 } from '../../../components/admin/AdminIcon'
+import { default as default_27eed1898e8caadb2fd2266b54bb4509 } from '../../../components/admin/AdminLogo'
 import { default as default_753d56caa77c6fec035ab1e47fe0460d } from '../../../components/admin/ConsultationsWidget'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
@@ -51,8 +51,8 @@ export const importMap = {
   "@payloadcms/richtext-lexical/client#UnderlineFeatureClient": UnderlineFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#BoldFeatureClient": BoldFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
   "@payloadcms/richtext-lexical/client#ItalicFeatureClient": ItalicFeatureClient_e70f5e05f09f93e00b997edb1ef0c864,
-  "/components/admin/icon#default": default_cac68a8c0a729bb34700c8ff6528a0de,
-  "/components/admin/logo#default": default_78cd0b14279b85aa0b253c7d344f5855,
+  "/components/admin/AdminIcon#default": default_7be396d0766c6c490887ef074dd0ced4,
+  "/components/admin/AdminLogo#default": default_27eed1898e8caadb2fd2266b54bb4509,
   "/components/admin/ConsultationsWidget#default": default_753d56caa77c6fec035ab1e47fe0460d,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

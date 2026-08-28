@@ -57,12 +57,30 @@
 
 ```text
 ├── src/
-│   ├── app/                  # Next.js App Router (страницы и API роуты)
-│   │   ├── (app)/            # Публичная часть сайта
-│   │   └── (payload)/        # Эндпоинты и панель управления PayloadCMS
-│   ├── collections/          # Схемы коллекций PayloadCMS (Users, Posts, Services, Leads)
-│   ├── components/           # Переиспользуемые React-компоненты
-│   └── payload.config.ts     # Главный конфигурационный файл CMS
+│   ├── app/
+│   │   ├── (frontend)/         # Публичная часть сайта (Server Components)
+│   │   │   ├── recipes/
+│   │   │   │   └── [slug]/
+│   │   │   ├── guides/
+│   │   │   │   └── [slug]/
+│   │   │   ├── services/
+│   │   │   ├── ...
+│   │   │   └── page.tsx        # Главная
+│   │   └── (payload)/          # Админка и REST/GraphQL эндпоинты PayloadCMS
+│   ├── collections/            # Схемы коллекций (Users, Media, Services, Reviews, Recipes, MenuGuides, Consultations)
+│   ├── globals/                # Глобалы (HomePage, ContactsPage, ServicesPage, ConsentPage...)
+│   ├── data/                   # Слой доступа к данным — обёртки над Payload Local API
+│   ├── components/
+│   │   ├── ui/                 # shadcn-примитивы
+│   │   ├── cards/              # рендерят одну сущность (ServiceCard, RecipeCard...)
+│   │   ├── shared/             # переиспользуемые блоки на примитивных пропсах
+│   │   ├── sections/           # секции конкретных страниц (sections/home, sections/services...)
+│   │   ├── forms/              # формы + server actions
+│   │   ├── layout/             # Header, Footer, Logo
+│   │   └── admin/              # кастомные компоненты админки Payload
+│   ├── lib/                    # утилиты (navigation.ts, media.ts, formatReview.ts...)
+│   ├── services/               # сервисы (notification.js...)
+│   └── payload.config.ts       # главный конфиг CMS
 ```
 
 * **Type Generation:** Типы TypeScript автоматически генерируются напрямую из схем PayloadCMS (`npm run generate:types`), что обеспечивает полную строгость типов на клиентской стороне.

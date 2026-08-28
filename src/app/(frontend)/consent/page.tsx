@@ -1,53 +1,16 @@
-import { getPayload } from 'payload'
-import config from '@payload-config'
-import { RichText } from '@payloadcms/richtext-lexical/react'
-import { RefreshRouteOnSave } from '@/components/RefreshRouteOnSave'
-import { draftMode } from 'next/headers'
+import { getConsentPageData } from '@/data/consent'
+import LegalPageLayout from '@/components/shared/LegalPageLayout'
 
 export default async function Consent() {
-  const payloadConfig = await config
-  const payload = await getPayload({ config: payloadConfig })
-  const { isEnabled: isDraftMode } = await draftMode()
-  const payloadGlobalConsentPage = await payload.findGlobal({
-    slug: 'consent-page',
-    draft: isDraftMode,
-  })
+  const consentPage = await getConsentPageData()
 
   return (
-    <>
-      <div className="pt-20 py-15 bg-white">
-        <RefreshRouteOnSave />
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="w-60 h-1 bg-green-500 mb-4"></div>
-          <h1 className="font-heading text-4xl text-black font-light mb-8">
-            {payloadGlobalConsentPage.hero.heading}
-          </h1>
-          <div className="text-gray-500 text-sm mb-8">
-            {payloadGlobalConsentPage.hero.lastUpdated}
-          </div>
-
-          <div className="bg-green-50 border border-green-200 rounded-2xl p-6 mb-8">
-            <div className="text-black/80 text-sm leading-relaxed">
-              {payloadGlobalConsentPage.hero.intro}
-            </div>
-          </div>
-
-          {payloadGlobalConsentPage.sections?.items?.map((item) => (
-            <div key={item.id} className="mb-8">
-              <h2 className="font-serif text-2xl text-black font-light mb-3">{item.title}</h2>
-              <div className="text-text/80 text-sm leading-relaxed whitespace-pre-line">
-                <RichText data={item.description} />
-              </div>
-            </div>
-          ))}
-
-          <div className="bg-amber-50 rounded-2xl p-6 mt-8">
-            <p className="text-black/70 text-sm leading-relaxed">
-              <strong>Обратите внимание:</strong> {payloadGlobalConsentPage.notice.description}
-            </p>
-          </div>
-        </div>
-      </div>
-    </>
+    <LegalPageLayout
+      heading={consentPage.hero.heading}
+      intro={consentPage.hero.intro}
+      lastUpdated={consentPage.hero.lastUpdated}
+      items={consentPage.sections?.items}
+      notice={consentPage.notice.description}
+    />
   )
 }

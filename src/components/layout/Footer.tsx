@@ -1,0 +1,150 @@
+import Logo from '@/components/layout/Logo'
+import { Button } from '@/components/ui/button'
+import { Send, Phone, Mail, MapPin } from 'lucide-react'
+import Link from 'next/link'
+import { getPayload } from 'payload'
+import config from '@/payload.config'
+import { formatPhoneNumber } from '@/lib/formatContacts'
+import { NAVIGATION } from '@/lib/navigation'
+
+export async function Footer() {
+  const payloadConfig = await config
+  const payload = await getPayload({ config: payloadConfig })
+  const payloadGlobalContacts = await payload.findGlobal({ slug: 'contacts-global' })
+  const payloadServices = await payload.find({
+    collection: 'services',
+    where: { isActive: { equals: true } },
+    sort: 'order',
+  })
+  return (
+    <footer className="bg-black text-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+          <div className="lg:col-span-1">
+            <div className="flex items-center gap-2 mb-4">
+              <Logo />
+            </div>
+            <p className="text-gray-400 text-sm leading-relaxed mb-5">
+              Помогаю людям улучшить здоровье и качество жизни через правильное питание и образ
+              жизни.
+            </p>
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
+              Навигация
+            </h3>
+
+            <ul className="space-y-2.5">
+              {NAVIGATION.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
+                  >
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
+              Услуги
+            </h3>
+            <ul className="space-y-2.5">
+              {payloadServices.docs.map((service) => (
+                <li key={service.id}>
+                  <Link
+                    href="/services/"
+                    className="text-gray-400 hover:text-white text-sm transition-colors"
+                  >
+                    {service.title}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <h3 className="font-semibold text-sm uppercase tracking-widest text-gray-300 mb-4">
+              Контакты
+            </h3>
+            <ul className="space-y-3">
+              <li>
+                <Link
+                  href={`tel:+${payloadGlobalContacts.whatsapp}`}
+                  className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  <Phone className="w-4 h-4 text-gray-400 shrink-0" />
+                  {formatPhoneNumber(payloadGlobalContacts.whatsapp)}
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href={`mailto:${payloadGlobalContacts.email}`}
+                  className="flex items-center gap-2 text-gray-400 hover:text-white text-sm transition-colors"
+                >
+                  <Mail className="w-4 h-4 text-gray-400 shrink-0" />
+                  {payloadGlobalContacts.email}
+                </Link>
+              </li>
+              <li className="flex items-start gap-2.5 text-gray-400 text-sm">
+                <MapPin className="w-4 h-4 text-gray-400 shrink-0 mt-0.5" />
+                Магнитогорск, онлайн по всему миру
+              </li>
+            </ul>
+
+            <div className="mt-5 flex gap-2">
+              <Button asChild size="sm" className="bg-blue-500 hover:bg-blue-600 text-xs">
+                <Link
+                  href={`https://t.me/${payloadGlobalContacts.telegram}`}
+                  target="_blank"
+                  aria-label="Telegram"
+                  rel="noopener noreferrer"
+                >
+                  <Send className="w-3.5 h-3.5" />
+                  Telegram
+                </Link>
+              </Button>
+              <Button asChild size="sm" className="bg-green-500 hover:bg-green-600 text-xs">
+                <Link
+                  href={`https://wa.me/${payloadGlobalContacts.whatsapp}`}
+                  target="_blank"
+                  aria-label="WhatsApp"
+                  rel="noopener noreferrer"
+                >
+                  <Phone className="w-3.5 h-3.5" />
+                  WhatsApp
+                </Link>
+              </Button>
+            </div>
+          </div>
+        </div>
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-500 text-xs">
+            © {new Date().getFullYear()} Лариса Галимова. Все права защищены.
+          </p>
+          <div className="flex items-center gap-5">
+            <Link
+              href="/privacy"
+              className="text-gray-500 hover:text-gray-300 text-xs transition-colors"
+            >
+              Политика конфиденциальности
+            </Link>
+            <Link
+              href="/offer"
+              className="text-gray-500 hover:text-gray-300 text-xs transition-colors"
+            >
+              Публичная оферта
+            </Link>
+            <Link
+              href="/consent"
+              className="text-gray-500 hover:text-gray-300 text-xs transition-colors"
+            >
+              Согласие на обработку данных
+            </Link>
+          </div>
+        </div>
+      </div>
+    </footer>
+  )
+}
