@@ -37,7 +37,7 @@ export default function ContactsSection({ contactsHeading, contacts }: ContactsS
           <ContactMethod
             colorScheme="gray"
             icon={Mail}
-            label="WhatsApp"
+            label="Email"
             value={contacts.email}
             href={`mailto:${contacts.email}`}
             variant="compact"
