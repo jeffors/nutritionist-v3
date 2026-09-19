@@ -30,7 +30,7 @@ const formSchema = z.object({
     .min(1, 'Введите номер телефона')
     .regex(/^\+?[\d\s\-()]{10,}$/, 'Введите корректный номер телефона'),
   email: z.email('Введите корректный email'),
-  messenger: z.enum(['whatsapp', 'telegram'], 'Выберите мессенджер'),
+  messenger: z.enum(['whatsapp', 'telegram', 'max'], 'Выберите мессенджер'),
   request: z.string().min(20, 'Запрос должен иметь больше 20 символов'),
   terms: z.boolean().refine((val) => val === true, {
     error: 'Необходимо принять условия политики конфиденциальности',
@@ -156,6 +156,7 @@ export default function ConsultationForm({ guideName, compact }: FormProps) {
                     <SelectLabel>Мессенджер</SelectLabel>
                     <SelectItem value="whatsapp">WhatsApp</SelectItem>
                     <SelectItem value="telegram">Telegram</SelectItem>
+                    <SelectItem value="max">Макс</SelectItem>
                   </SelectGroup>
                 </SelectContent>
               </Select>

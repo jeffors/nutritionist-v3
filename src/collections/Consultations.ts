@@ -58,7 +58,7 @@ export const Consultations: CollectionConfig = {
       type: 'select',
       label: 'Мессенджер',
       required: true,
-      options: ['whatsapp', 'telegram'],
+      options: ['whatsapp', 'telegram', 'max'],
     },
     {
       name: 'request',

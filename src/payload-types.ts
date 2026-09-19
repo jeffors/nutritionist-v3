@@ -290,7 +290,7 @@ export interface Consultation {
   name: string;
   phone: string;
   email: string;
-  messenger: 'whatsapp' | 'telegram';
+  messenger: 'whatsapp' | 'telegram' | 'max';
   request: string;
   isActive?: boolean | null;
   updatedAt: string;
