@@ -5,6 +5,7 @@ import { buildConfig } from 'payload'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
 import { ru } from '@payloadcms/translations/languages/ru'
+import nodemailer from 'nodemailer'
 
 import { Users } from './collections/Users'
 import { Media } from './collections/Media'
@@ -33,15 +34,15 @@ export default buildConfig({
   email: nodemailerAdapter({
     defaultFromAddress: process.env.EMAIL_DOMAIN ?? '',
     defaultFromName: 'Лариса Галимова | Нутрициолог',
-    transportOptions: {
+    transport: nodemailer.createTransport({
       host: process.env.SMTP_HOST,
-      port: process.env.SMTP_PORT,
+      port: Number(process.env.SMTP_PORT),
       secure: true,
       auth: {
         user: process.env.SMTP_USER,
         pass: process.env.SMTP_PASS,
       },
-    },
+    }),
   }),
   admin: {
     dateFormat: 'dd MMMM yyyy, HH:mm',
