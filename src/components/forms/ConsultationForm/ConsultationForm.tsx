@@ -15,13 +15,13 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { CheckCircle, Loader2, Send } from 'lucide-react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import z from 'zod'
 import { Controller, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { submitConsultation } from './actions'
 import { SmartCaptcha } from '@yandex/smart-captcha'
-import { redirect } from 'next/navigation'
+import { redirect, useSearchParams } from 'next/navigation'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать не менее 2 символов'),
@@ -42,15 +42,17 @@ export type FormData = z.infer<typeof formSchema>
 
 interface FormProps {
   guideName?: string
+  serviceName?: string
   compact?: boolean
 }
 
-export default function ConsultationForm({ guideName, compact }: FormProps) {
+export default function ConsultationForm({ guideName, serviceName, compact }: FormProps) {
+  const searchParams = useSearchParams()
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [captchaResetKey, setCaptchaResetKey] = useState(0)
 
-  const requestText = guideName ? `Хочу получить полный гайд по "${guideName}" на месяц` : ''
+  const activeService = serviceName || searchParams.get('service') || ''
   const submitText = guideName ? 'Заказать гайд' : 'Записаться на консультацию'
 
   const {
@@ -58,6 +60,7 @@ export default function ConsultationForm({ guideName, compact }: FormProps) {
     handleSubmit,
     control,
     reset,
+    setValue,
     formState: { errors, isSubmitting },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -66,11 +69,19 @@ export default function ConsultationForm({ guideName, compact }: FormProps) {
       phone: '',
       email: '',
       messenger: undefined,
-      request: requestText,
+      request: '',
       terms: false,
       captchaToken: '',
     },
   })
+
+  useEffect(() => {
+    if (activeService) {
+      setValue('request', `Здравствуйте! Хочу записаться на услугу "${activeService}".`)
+    } else if (guideName) {
+      setValue('request', `Хочу получить полный гайд по "${guideName}" на месяц`)
+    }
+  }, [activeService, guideName, setValue])
 
   const onSubmit = async (data: FormData) => {
     const result = await submitConsultation(data)
