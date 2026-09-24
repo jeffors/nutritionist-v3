@@ -54,7 +54,7 @@ export function ServiceCard({ service }: { service: Service }) {
       </CardContent>
       <CardFooter>
         <Button asChild size={'xl'} className="w-full">
-          <Link href="/contacts">Записаться</Link>
+          <Link href={`/contacts?service=${encodeURIComponent(service.title)}`}>Записаться</Link>
         </Button>
       </CardFooter>
     </Card>
