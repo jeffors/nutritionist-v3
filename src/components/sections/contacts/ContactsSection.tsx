@@ -6,6 +6,7 @@ import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
 import { ContactsGlobal, ContactsPage } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { Clock, Globe, Mail, Phone, Send } from 'lucide-react'
+import { Suspense } from 'react'
 
 type ContactsSectionProps = {
   contactsPage: ContactsPage
@@ -64,7 +65,9 @@ export default function ContactsSection({ contactsPage, contacts }: ContactsSect
               {contactsPage.form?.heading}
             </h2>
             <p className="text-black/80 text-sm mb-6">{contactsPage.form?.description}</p>
-            <ConsultationForm />
+            <Suspense fallback={<div className="py-8 text-center">Загрузка формы...</div>}>
+              <ConsultationForm />
+            </Suspense>
           </Card>
         </div>
       </div>

@@ -17,6 +17,7 @@ import ConsultationForm from '@/components/forms/ConsultationForm/ConsultationFo
 import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
 import { MenuGuide } from '@/payload-types'
 import { getMediaUrl } from '@/lib/media'
+import { Suspense } from 'react'
 
 export default function GuidesDetail({ guide }: { guide: MenuGuide }) {
   const imageUrl = getMediaUrl(guide.image)
@@ -108,7 +109,9 @@ export default function GuidesDetail({ guide }: { guide: MenuGuide }) {
                   {guide.price ? `${guide.price} ₽` : 'Бесплатно'}
                 </ItemActions>
               </Item>
-              <ConsultationForm guideName={guide.title} compact />
+              <Suspense fallback={<div className="py-8 text-center">Загрузка формы...</div>}>
+                <ConsultationForm guideName={guide.title} compact />
+              </Suspense>
             </DialogContent>
           </Dialog>
         </div>
