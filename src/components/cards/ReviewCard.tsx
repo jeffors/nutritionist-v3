@@ -10,6 +10,8 @@ import {
 import { formatReview } from '@/lib/formatReview'
 import { Review } from '@/payload-types'
 import { Star } from 'lucide-react'
+import Image from 'next/image'
+import { getMediaUrl } from 'src/lib/media'
 
 export function ReviewCard({
   review,
@@ -20,9 +22,16 @@ export function ReviewCard({
 }) {
   const formattedReview = formatReview(review)
   const isFull = variant === 'full'
+  const image = getMediaUrl(review?.photo)
+  if (!review.name)
+    return (
+      <Card className="p-0">
+        {image && <Image alt="Отзыв клиента" src={image} height={400} width={400} />}
+      </Card>
+    )
 
   return (
-    <Card className="justify-between">
+    <Card className="justify-between ">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>

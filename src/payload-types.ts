@@ -271,14 +271,19 @@ export interface Guide {
  */
 export interface Review {
   id: number;
-  name: string;
+  name?: string | null;
   age?: number | null;
   location?: string | null;
-  text: string;
+  text?: string | null;
+  photo?: (number | null) | Media;
   stars: number;
-  service: string;
+  service?: string | null;
   date: string;
   isActive?: boolean | null;
+  /**
+   * Меньше = выше. Верхние три карточки отображаются на главной странице
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -571,10 +576,12 @@ export interface ReviewsSelect<T extends boolean = true> {
   age?: T;
   location?: T;
   text?: T;
+  photo?: T;
   stars?: T;
   service?: T;
   date?: T;
   isActive?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }
