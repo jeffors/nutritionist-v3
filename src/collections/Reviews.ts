@@ -25,7 +25,7 @@ export const Reviews: CollectionConfig = {
       name: 'name',
       type: 'text',
       label: 'Имя',
-      required: false,
+      required: true,
     },
     {
       type: 'row',
@@ -86,7 +86,7 @@ export const Reviews: CollectionConfig = {
       name: 'isActive',
       label: 'Активна (показывать карточку на сайте)',
       type: 'checkbox',
-      defaultValue: 'true',
+      defaultValue: 'false',
     },
     {
       name: 'order',
@@ -94,7 +94,7 @@ export const Reviews: CollectionConfig = {
       label: 'Порядок сортировки',
       defaultValue: 100,
       admin: {
-        description: 'Меньше = выше. Верхние три карточки отображаются на главной странице',
+        description: 'Меньше = выше. Верхние четыре карточки отображаются на главной странице',
       },
     },
   ],

@@ -23,10 +23,10 @@ export function ReviewCard({
   const formattedReview = formatReview(review)
   const isFull = variant === 'full'
   const image = getMediaUrl(review?.photo)
-  if (!review.name)
+  if (!review.text)
     return (
       <Card className="p-0">
-        {image && <Image alt="Отзыв клиента" src={image} height={400} width={400} />}
+        {image && <Image alt="Отзыв клиента" src={image} height={600} width={600} />}
       </Card>
     )
 
@@ -53,11 +53,14 @@ export function ReviewCard({
           </div>
         </div>
       </CardHeader>
-      <CardContent>
+      <CardContent className="flex flex-col gap-4">
         <p className="text-black/80">"{formattedReview.text}"</p>
+        {image && (
+          <Image alt="Отзыв клиента" src={image} height={600} width={600} className="rounded-xl" />
+        )}
       </CardContent>
       <CardFooter className={isFull ? 'justify-between' : undefined}>
-        <Badge variant={'secondary'}>{formattedReview.service}</Badge>
+        {formattedReview.service && <Badge variant={'secondary'}>{formattedReview.service}</Badge>}
         {isFull && <span className="text-xs text-black/80">{formattedReview.date}</span>}
       </CardFooter>
     </Card>

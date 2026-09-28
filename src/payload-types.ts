@@ -271,7 +271,7 @@ export interface Guide {
  */
 export interface Review {
   id: number;
-  name?: string | null;
+  name: string;
   age?: number | null;
   location?: string | null;
   text?: string | null;
@@ -281,7 +281,7 @@ export interface Review {
   date: string;
   isActive?: boolean | null;
   /**
-   * Меньше = выше. Верхние три карточки отображаются на главной странице
+   * Меньше = выше. Верхние четыре карточки отображаются на главной странице
    */
   order?: number | null;
   updatedAt: string;
