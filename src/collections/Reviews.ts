@@ -48,7 +48,12 @@ export const Reviews: CollectionConfig = {
       name: 'text',
       type: 'textarea',
       label: 'Текст отзыва',
-      required: true,
+      required: false,
+    },
+    {
+      name: 'photo',
+      type: 'upload',
+      relationTo: 'media',
     },
     {
       name: 'stars',
@@ -63,7 +68,7 @@ export const Reviews: CollectionConfig = {
       name: 'service',
       label: 'Услуга / Программа',
       type: 'text',
-      required: true,
+      required: false,
     },
     {
       name: 'date',
@@ -81,7 +86,16 @@ export const Reviews: CollectionConfig = {
       name: 'isActive',
       label: 'Активна (показывать карточку на сайте)',
       type: 'checkbox',
-      defaultValue: 'true',
+      defaultValue: 'false',
+    },
+    {
+      name: 'order',
+      type: 'number',
+      label: 'Порядок сортировки',
+      defaultValue: 100,
+      admin: {
+        description: 'Меньше = выше. Верхние четыре карточки отображаются на главной странице',
+      },
     },
   ],
 }

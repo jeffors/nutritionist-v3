@@ -3,6 +3,7 @@ import { getReviewsPageData } from '@/data/reviews'
 import HeroSection from '@/components/sections/reviews/HeroSection'
 import ReviewsSection from '@/components/sections/reviews/ReviewsSection'
 import CTASection from '@/components/shared/CTASection'
+import ReviewFormSection from 'src/components/sections/reviews/ReviewsFormSection'
 
 export default async function Reviews() {
   const { reviewsPage, reviews } = await getReviewsPageData()
@@ -12,6 +13,7 @@ export default async function Reviews() {
       <RefreshRouteOnSave />
       <HeroSection hero={reviewsPage.hero} />
       <ReviewsSection reviews={reviews.docs} />
+      <ReviewFormSection />
       <CTASection
         backgroundColor="white"
         heading={reviewsPage.cta?.heading}

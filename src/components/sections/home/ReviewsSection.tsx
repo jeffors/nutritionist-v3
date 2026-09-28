@@ -15,13 +15,19 @@ export default function ReviewsSection({ reviewsHeading, reviews }: ReviewsSecti
     <section className="bg-white py-15">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <SectionHeading title={reviewsHeading?.heading} description={reviewsHeading?.description} />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
           {reviews.map((review) => {
-            let short_review = {
-              ...review,
-              text: Array.from(review.text.split('.', 12)).join('.'),
+            let home_review
+            if (review.name && review.text) {
+              home_review = {
+                ...review,
+                text: Array.from(review.text.split('.', 12)).join('.'),
+              }
+            } else {
+              home_review = review
             }
-            return <ReviewCard key={review.id} review={short_review} variant="home" />
+
+            return <ReviewCard key={review.id} review={home_review} variant="home" />
           })}
         </div>
         <div className="text-center mt-8">

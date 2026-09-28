@@ -15,6 +15,7 @@ export async function getReviewsPageData() {
       collection: 'reviews',
       where: { isActive: { equals: true } },
       sort: '-data',
+      limit: 25,
     }),
   ])
 

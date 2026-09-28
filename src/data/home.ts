@@ -18,8 +18,8 @@ export async function getHomePageData() {
     payload.find({
       collection: 'reviews',
       where: { isActive: { equals: true } },
-      sort: 'id',
-      limit: 2,
+      sort: 'order',
+      limit: 4,
     }),
     payload.find({
       collection: 'recipes',
