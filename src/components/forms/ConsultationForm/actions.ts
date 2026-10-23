@@ -33,12 +33,19 @@ async function validateCaptcha(token: string): Promise<Boolean> {
 
 export async function submitConsultation(data: FormData) {
   try {
-    const isCaptchaValid = await validateCaptcha(data.captchaToken)
-    if (!isCaptchaValid) {
-      return { success: false, error: 'Проверка на робота не пройдена. Попробуйте еще раз.' }
+    if (process.env.NODE_ENV !== 'development') {
+      const isCaptchaValid = await validateCaptcha(data.captchaToken)
+      if (!isCaptchaValid) {
+        return { success: false, error: 'Проверка на робота не пройдена. Попробуйте еще раз.' }
+      }
     }
 
     const payload = await getPayload({ config })
+
+    const service = await payload.findByID({
+      collection: 'services',
+      id: data.service,
+    })
 
     await payload.create({
       collection: 'consultations',
@@ -47,6 +54,7 @@ export async function submitConsultation(data: FormData) {
         phone: data.phone,
         email: data.email,
         messenger: data.messenger,
+        service: `Консультация "${service.title}"`,
         request: data.request,
         isActive: false,
       },

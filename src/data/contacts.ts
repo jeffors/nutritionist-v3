@@ -6,13 +6,18 @@ export async function getContactsPageData() {
   const payload = await getPayload({ config: await config })
   const { isEnabled: isDraftMode } = await draftMode()
 
-  const [contactsPage, contacts] = await Promise.all([
+  const [contactsPage, contacts, services] = await Promise.all([
     payload.findGlobal({
       slug: 'contacts-page',
       draft: isDraftMode,
     }),
     payload.findGlobal({ slug: 'contacts-global' }),
+    payload.find({
+      collection: 'services',
+      where: { isActive: { equals: true } },
+      sort: 'order',
+    }),
   ])
 
-  return { contactsPage, contacts }
+  return { contactsPage, contacts, services }
 }

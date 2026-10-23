@@ -22,6 +22,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { submitConsultation } from './actions'
 import { SmartCaptcha } from '@yandex/smart-captcha'
 import { redirect, useSearchParams } from 'next/navigation'
+import { Service } from 'src/payload-types'
 
 const formSchema = z.object({
   name: z.string().min(2, 'Имя должно содержать не менее 2 символов'),
@@ -31,6 +32,7 @@ const formSchema = z.object({
     .regex(/^\+?[\d\s\-()]{10,}$/, 'Введите корректный номер телефона'),
   email: z.email('Введите корректный email'),
   messenger: z.enum(['whatsapp', 'telegram', 'max'], 'Выберите мессенджер'),
+  service: z.string().min(1, 'Выберите услугу'),
   request: z.string().min(20, 'Запрос должен иметь больше 20 символов'),
   terms: z.boolean().refine((val) => val === true, {
     error: 'Необходимо принять условия политики конфиденциальности',
@@ -44,9 +46,11 @@ interface FormProps {
   guideName?: string
   serviceName?: string
   compact?: boolean
+  services?: Service[]
 }
 
-export default function ConsultationForm({ guideName, serviceName, compact }: FormProps) {
+export default function ConsultationForm({ guideName, serviceName, compact, services }: FormProps) {
+  const isDev = process.env.NODE_ENV === 'development'
   const searchParams = useSearchParams()
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -69,15 +73,16 @@ export default function ConsultationForm({ guideName, serviceName, compact }: Fo
       phone: '',
       email: '',
       messenger: undefined,
+      service: '',
       request: '',
       terms: false,
-      captchaToken: '',
+      captchaToken: isDev ? 'dev-bypass' : '',
     },
   })
 
   useEffect(() => {
     if (activeService) {
-      setValue('request', `Здравствуйте! Хочу записаться на услугу "${activeService}".`)
+      setValue('service', activeService)
     } else if (guideName) {
       setValue('request', `Хочу получить полный гайд по "${guideName}" на месяц`)
     }
@@ -178,6 +183,33 @@ export default function ConsultationForm({ guideName, serviceName, compact }: Fo
       </FieldGroup>
       <FieldGroup>
         <Field>
+          <FieldLabel>Услуга</FieldLabel>
+          <Controller
+            name="service"
+            control={control}
+            render={({ field }) => (
+              <Select value={field.value ?? ''} onValueChange={field.onChange}>
+                <SelectTrigger>
+                  <SelectValue placeholder="Выберите услугу"></SelectValue>
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Услуга</SelectLabel>
+                    {services?.map((service) => (
+                      <SelectItem key={service.id} value={service.id.toString()}>
+                        {service.title}
+                      </SelectItem>
+                    ))}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
+            )}
+          />
+          <FieldError errors={[errors.service]} />
+        </Field>
+      </FieldGroup>
+      <FieldGroup>
+        <Field>
           <FieldLabel htmlFor="request-input">Краткий запрос</FieldLabel>
           <Textarea
             id="request-input"
@@ -206,7 +238,7 @@ export default function ConsultationForm({ guideName, serviceName, compact }: Fo
                 href="/privacy"
                 className="text-green-600 underline transition-colors hover:text-green-500"
               >
-                Политикой конфидециальности
+                Политикой конфиндециальности
               </Link>{' '}
               и даю{' '}
               <Link
@@ -219,20 +251,22 @@ export default function ConsultationForm({ guideName, serviceName, compact }: Fo
           </FieldLabel>
         </Field>
         <FieldError errors={[errors.terms]} />
-        <Field>
-          <Controller
-            name="captchaToken"
-            control={control}
-            render={({ field }) => (
-              <SmartCaptcha
-                sitekey={process.env.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY || ''}
-                key={captchaResetKey}
-                onSuccess={(token) => field.onChange(token)}
-                onTokenExpired={() => field.onChange('')}
-              />
-            )}
-          ></Controller>
-        </Field>
+        {!isDev && (
+          <Field>
+            <Controller
+              name="captchaToken"
+              control={control}
+              render={({ field }) => (
+                <SmartCaptcha
+                  sitekey={process.env.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY || ''}
+                  key={captchaResetKey}
+                  onSuccess={(token) => field.onChange(token)}
+                  onTokenExpired={() => field.onChange('')}
+                />
+              )}
+            ></Controller>
+          </Field>
+        )}
         {error && <p className="text-red-500 text-sm">{error}</p>}
         <Field>
           <Button type="submit" size={'xl'}>

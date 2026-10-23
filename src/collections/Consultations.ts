@@ -10,7 +10,7 @@ export const Consultations: CollectionConfig = {
   admin: {
     useAsTitle: 'name',
     group: 'Заявки',
-    defaultColumns: ['name', 'phone', 'messenger', 'isActive'],
+    defaultColumns: ['name', 'phone', 'messenger', 'service', 'isActive'],
   },
   access: {
     create: () => true,
@@ -59,6 +59,12 @@ export const Consultations: CollectionConfig = {
       label: 'Мессенджер',
       required: true,
       options: ['whatsapp', 'telegram', 'max'],
+    },
+    {
+      name: 'service',
+      type: 'text',
+      label: 'Услуга/Гайд',
+      required: true,
     },
     {
       name: 'request',
