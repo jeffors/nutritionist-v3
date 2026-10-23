@@ -43,13 +43,12 @@ const formSchema = z.object({
 export type FormData = z.infer<typeof formSchema>
 
 interface FormProps {
-  guideName?: string
   serviceName?: string
   compact?: boolean
   services?: Service[]
 }
 
-export default function ConsultationForm({ guideName, serviceName, compact, services }: FormProps) {
+export default function ConsultationForm({ serviceName, compact, services }: FormProps) {
   const isDev = process.env.NODE_ENV === 'development'
   const searchParams = useSearchParams()
   const [submitted, setSubmitted] = useState(false)
@@ -57,7 +56,6 @@ export default function ConsultationForm({ guideName, serviceName, compact, serv
   const [captchaResetKey, setCaptchaResetKey] = useState(0)
 
   const activeService = serviceName || searchParams.get('service') || ''
-  const submitText = guideName ? 'Заказать гайд' : 'Записаться на консультацию'
 
   const {
     register,
@@ -83,10 +81,8 @@ export default function ConsultationForm({ guideName, serviceName, compact, serv
   useEffect(() => {
     if (activeService) {
       setValue('service', activeService)
-    } else if (guideName) {
-      setValue('request', `Хочу получить полный гайд по "${guideName}" на месяц`)
     }
-  }, [activeService, guideName, setValue])
+  }, [activeService, setValue])
 
   const onSubmit = async (data: FormData) => {
     const result = await submitConsultation(data)
@@ -105,9 +101,6 @@ export default function ConsultationForm({ guideName, serviceName, compact, serv
     setSubmitted(false)
     setError(null)
     setCaptchaResetKey((prev) => prev + 1)
-    if (guideName) {
-      redirect('/')
-    }
   }
 
   if (submitted) {
@@ -116,12 +109,10 @@ export default function ConsultationForm({ guideName, serviceName, compact, serv
         <div className="w-16 h-16 rounded-full bg-green-500/20 flex items-center justify-center mx-auto mb-4">
           <CheckCircle className="w-8 h-8 text-green-500" />
         </div>
-        <h3 className="font-heading text-2xl mb-2">
-          {guideName ? 'Заявка на заказ отправлена!' : 'Заявка отправлена!'}
-        </h3>
+        <h3 className="font-heading text-2xl mb-2">Заявка отправлена!</h3>
         <p className="text-gray-700 mb-6">Спасибо! Я свяжусь с вами в ближайшее время.</p>
         <Button onClick={handleReset} variant={'outline'}>
-          {guideName ? 'Вернуться на главную страницу' : 'Отправить ещё одну заявку'}
+          Отправить ещё одну заявку
         </Button>
       </div>
     )
@@ -275,7 +266,7 @@ export default function ConsultationForm({ guideName, serviceName, compact, serv
             ) : (
               <Send className="w-4 h-4" />
             )}
-            {isSubmitting ? 'Отправляем...' : submitText}
+            {isSubmitting ? 'Отправляем...' : 'Записаться на консультацию'}
           </Button>
         </Field>
       </FieldGroup>

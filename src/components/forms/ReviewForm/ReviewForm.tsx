@@ -35,11 +35,8 @@ const formSchema = z.object({
 
 export type ReviewFormData = z.infer<typeof formSchema>
 
-interface ReviewFormProps {
-  compact?: boolean
-}
-
-export default function ReviewForm({ compact }: ReviewFormProps) {
+export default function ReviewForm() {
+  const isDev = process.env.NODE_ENV === 'development'
   const [submitted, setSubmitted] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [captchaResetKey, setCaptchaResetKey] = useState(0)
@@ -63,7 +60,7 @@ export default function ReviewForm({ compact }: ReviewFormProps) {
       stars: 5,
       text: '',
       terms: false,
-      captchaToken: '',
+      captchaToken: isDev ? 'dev-bypass' : '',
     },
   })
 
@@ -163,9 +160,7 @@ export default function ReviewForm({ compact }: ReviewFormProps) {
         <FieldError errors={[errors.stars]} />
       </Field>
 
-      <FieldGroup
-        className={compact ? 'grid grid-cols-1 gap-4' : 'grid grid-cols-1 sm:grid-cols-2 gap-4'}
-      >
+      <FieldGroup className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <Field>
           <FieldLabel htmlFor="input-name">Имя *</FieldLabel>
           <Input id="input-name" type="text" placeholder="Ваше имя" {...register('name')} />
@@ -263,21 +258,23 @@ export default function ReviewForm({ compact }: ReviewFormProps) {
         </Field>
         <FieldError errors={[errors.terms]} />
 
-        <Field>
-          <Controller
-            name="captchaToken"
-            control={control}
-            render={({ field }) => (
-              <SmartCaptcha
-                sitekey={process.env.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY || ''}
-                key={captchaResetKey}
-                onSuccess={(token) => field.onChange(token)}
-                onTokenExpired={() => field.onChange('')}
-              />
-            )}
-          />
-          <FieldError errors={[errors.captchaToken]} />
-        </Field>
+        {!isDev && (
+          <Field>
+            <Controller
+              name="captchaToken"
+              control={control}
+              render={({ field }) => (
+                <SmartCaptcha
+                  sitekey={process.env.NEXT_PUBLIC_SMARTCAPTCHA_CLIENT_KEY || ''}
+                  key={captchaResetKey}
+                  onSuccess={(token) => field.onChange(token)}
+                  onTokenExpired={() => field.onChange('')}
+                />
+              )}
+            />
+            <FieldError errors={[errors.captchaToken]} />
+          </Field>
+        )}
 
         {error && <p className="text-red-500 text-sm">{error}</p>}
 

@@ -18,6 +18,7 @@ import { Item, ItemActions, ItemContent, ItemTitle } from '@/components/ui/item'
 import { MenuGuide } from '@/payload-types'
 import { getMediaUrl } from '@/lib/media'
 import { Suspense } from 'react'
+import GuideForm from 'src/components/forms/GuideForm/GuideForm'
 
 export default function GuidesDetail({ guide }: { guide: MenuGuide }) {
   const imageUrl = getMediaUrl(guide.image)
@@ -110,7 +111,7 @@ export default function GuidesDetail({ guide }: { guide: MenuGuide }) {
                 </ItemActions>
               </Item>
               <Suspense fallback={<div className="py-8 text-center">Загрузка формы...</div>}>
-                <ConsultationForm guideName={guide.title} compact />
+                <GuideForm guideName={guide.title} />
               </Suspense>
             </DialogContent>
           </Dialog>
