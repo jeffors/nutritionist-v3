@@ -297,6 +297,7 @@ export interface Consultation {
   phone: string;
   email: string;
   messenger: 'whatsapp' | 'telegram' | 'max';
+  service: string;
   request: string;
   isActive?: boolean | null;
   updatedAt: string;
@@ -594,6 +595,7 @@ export interface ConsultationsSelect<T extends boolean = true> {
   phone?: T;
   email?: T;
   messenger?: T;
+  service?: T;
   request?: T;
   isActive?: T;
   updatedAt?: T;

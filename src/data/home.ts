@@ -13,7 +13,6 @@ export async function getHomePageData() {
       collection: 'services',
       where: { isActive: { equals: true } },
       sort: 'order',
-      limit: 3,
     }),
     payload.find({
       collection: 'reviews',

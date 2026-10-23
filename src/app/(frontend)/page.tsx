@@ -25,7 +25,7 @@ export default async function HomePage() {
       <AboutSection about={homePage.about} />
       <NutritionSection nutrition={homePage.nutrition} />
       <ClientStoriesSection clientStories={homePage.clientStories} />
-      <ServicesSection servicesHeading={homePage.services} services={services.docs} />
+      <ServicesSection servicesHeading={homePage.services} services={services.docs.slice(0, 3)} />
       <RecipesAndGuidesSection
         recipesHeading={homePage.recipes}
         recipes={recipes.docs}
@@ -35,7 +35,7 @@ export default async function HomePage() {
       <ReviewsSection reviewsHeading={homePage.reviews} reviews={reviews.docs} />
       <ProctologSection proctolog={homePage.proctolog} />
       <FaqSection faq={homePage.faq} />
-      <ConsultationSection consultation={homePage.consultation} />
+      <ConsultationSection consultation={homePage.consultation} services={services.docs} />
       <ContactsSection contactsHeading={homePage.contacts} contacts={contacts} />
     </div>
   )

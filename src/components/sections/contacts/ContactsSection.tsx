@@ -3,7 +3,7 @@ import ContactMethod from '@/components/shared/ContactMethod'
 import InfoCard from '@/components/shared/InfoCard'
 import { Card } from '@/components/ui/card'
 import { formatPhoneNumber, formatTelegram } from '@/lib/formatContacts'
-import { ContactsGlobal, ContactsPage } from '@/payload-types'
+import { ContactsGlobal, ContactsPage, Service } from '@/payload-types'
 import { RichText } from '@payloadcms/richtext-lexical/react'
 import { Clock, Globe, Mail, Phone, Send } from 'lucide-react'
 import { Suspense } from 'react'
@@ -11,9 +11,14 @@ import { Suspense } from 'react'
 type ContactsSectionProps = {
   contactsPage: ContactsPage
   contacts: ContactsGlobal
+  services: Service[]
 }
 
-export default function ContactsSection({ contactsPage, contacts }: ContactsSectionProps) {
+export default function ContactsSection({
+  contactsPage,
+  contacts,
+  services,
+}: ContactsSectionProps) {
   return (
     <section className="py-15 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +71,7 @@ export default function ContactsSection({ contactsPage, contacts }: ContactsSect
             </h2>
             <p className="text-black/80 text-sm mb-6">{contactsPage.form?.description}</p>
             <Suspense fallback={<div className="py-8 text-center">Загрузка формы...</div>}>
-              <ConsultationForm />
+              <ConsultationForm services={services} />
             </Suspense>
           </Card>
         </div>

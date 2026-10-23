@@ -46,6 +46,7 @@ async function sendConsultationEmail({
         phone: consultation.phone,
         email: consultation.email,
         messenger: consultation.messenger,
+        service: consultation.service,
         request: consultation.request,
       }),
     )

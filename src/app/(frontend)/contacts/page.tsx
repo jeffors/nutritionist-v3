@@ -4,12 +4,12 @@ import HeroSection from '@/components/sections/contacts/HeroSection'
 import ContactsSection from '@/components/sections/contacts/ContactsSection'
 
 export default async function Contacts() {
-  const { contactsPage, contacts } = await getContactsPageData()
+  const { contactsPage, contacts, services } = await getContactsPageData()
   return (
     <div className="pt-20">
       <RefreshRouteOnSave />
       <HeroSection hero={contactsPage.hero} />
-      <ContactsSection contactsPage={contactsPage} contacts={contacts} />
+      <ContactsSection contactsPage={contactsPage} contacts={contacts} services={services.docs} />
     </div>
   )
 }

@@ -28,6 +28,7 @@ interface TextOnlyEmailProps {
   phone: string
   email: string
   messenger: string
+  service: string
   request: string
 }
 
@@ -37,6 +38,7 @@ export const ConsultationEmail = ({
   phone,
   email,
   messenger,
+  service,
   request,
 }: TextOnlyEmailProps) => (
   <Tailwind config={BoxedTailwindConfig}>
@@ -91,6 +93,9 @@ export const ConsultationEmail = ({
                 <Text className="font-16 text-fg-2 mt-0  max-w-[420px] text-left font-sans ">
                   <strong>Мессенджер:</strong> {messenger}
                 </Text>
+                <Text className="font-16 text-fg-2 mt-0  max-w-[420px] text-left font-sans ">
+                  <strong>Услуга:</strong> {service}
+                </Text>
                 <Text className="font-16 text-fg-2 mt-0 mb-6 max-w-[420px] text-left font-sans">
                   <strong>Запрос:</strong> {request}
                 </Text>
@@ -116,6 +121,7 @@ ConsultationEmail.PreviewProps = {
   email: 'anna@test.com',
   messenger: 'WhatsApp',
   phone: '+7 (900) 123-45-67',
+  service: 'Консультация "Снижение веса"',
   request: 'Здравствуйте, хочу записать на консультацию',
 } satisfies TextOnlyEmailProps
 

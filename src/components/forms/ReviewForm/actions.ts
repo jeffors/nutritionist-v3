@@ -39,9 +39,11 @@ export async function submitReview(formData: FormData) {
 
     const data = JSON.parse(rawData)
 
-    const isCaptchaValid = await validateCaptcha(data.captchaToken)
-    if (!isCaptchaValid) {
-      return { success: false, error: 'Проверка на робота не пройдена. Попробуйте еще раз.' }
+    if (process.env.NODE_ENV !== 'development') {
+      const isCaptchaValid = await validateCaptcha(data.captchaToken)
+      if (!isCaptchaValid) {
+        return { success: false, error: 'Проверка на робота не пройдена. Попробуйте еще раз.' }
+      }
     }
 
     const payload = await getPayload({ config })
